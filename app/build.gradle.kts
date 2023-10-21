@@ -1,5 +1,3 @@
-import com.android.build.api.dsl.BuildFeatures
-
 plugins {
     id("com.android.application")
 }
@@ -11,7 +9,7 @@ android {
     defaultConfig {
         applicationId = "com.example.j_kost"
         minSdk = 28
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -31,8 +29,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures{
+        viewBinding = true
+    }
 }
-
 dependencies {
 
     implementation("androidx.appcompat:appcompat:1.6.1")
