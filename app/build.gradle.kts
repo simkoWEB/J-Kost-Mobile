@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.BuildFeatures
+
 plugins {
     id("com.android.application")
 }

@@ -3,7 +3,7 @@
     <item
         android:id="@+id/homeId"
         android:title="Beranda"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_home_24"
         android:iconTint="@color/disableBtncolor"
         />
 
@@ -17,7 +17,7 @@
     <item
         android:id="@+id/cartId"
         android:title="Profile"
-        android:icon="@drawable/ic_person"
+        android:icon="@drawable/ic_person_24"
         android:iconTint="@color/disableBtncolor"
         />
 </menu>

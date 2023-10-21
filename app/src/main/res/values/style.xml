@@ -2,7 +2,7 @@
 <resources>
 <style name="JkostTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimary</item>
     <item name="colorAccent">@color/colorAccent</item>
-    <item name="android:background">@color/white</item>
 </style>
 </resources>

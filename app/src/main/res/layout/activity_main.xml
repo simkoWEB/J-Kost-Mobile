@@ -28,6 +28,7 @@
             app:menu="@menu/navbar"
             app:itemIconSize="28dp"
             style="@style/JkostTheme"
+            android:background="@color/white"
             />
 
     </FrameLayout>
