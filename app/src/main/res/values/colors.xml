@@ -4,5 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="disableBtncolor">#9f9f9f</color>
     <color name="colorPrimary">#134ba4</color>
+    <color name="colorPrimaryDark">#232D84</color>
     <color name="colorAccent">#3A86FF</color>
+    <color name="colorSecondary">#f8bb18</color>
 </resources>
