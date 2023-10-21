@@ -4,20 +4,20 @@
         android:id="@+id/homeId"
         android:title="@string/beranda"
         android:icon="@drawable/ic_home_24"
-        android:iconTint="@color/disableBtncolor"
+        android:iconTint="@color/disableColor"
         />
 
     <item
         android:id="@+id/transaksiId"
         android:title="@string/transaksi"
         android:icon="@drawable/ic_clipboard"
-        android:iconTint="@color/disableBtncolor"
+        android:iconTint="@color/disableColor"
         />
 
     <item
         android:id="@+id/profileId"
         android:title="@string/profile"
         android:icon="@drawable/ic_person_24"
-        android:iconTint="@color/disableBtncolor"
+        android:iconTint="@color/disableColor"
         />
 </menu>

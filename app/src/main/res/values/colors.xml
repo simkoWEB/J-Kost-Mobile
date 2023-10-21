@@ -2,7 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="disableBtncolor">#9f9f9f</color>
+    <color name="disableColor">#9f9f9f</color>
     <color name="colorPrimary">#134ba4</color>
     <color name="colorPrimaryDark">#232D84</color>
     <color name="colorAccent">#3A86FF</color>
