@@ -22,4 +22,9 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <style name="MyParentLayout">
+        <item name="android:layout_marginVertical">10dp</item>
+        <item name="android:layout_marginHorizontal">20dp</item>
+    </style>
+
 </resources>
