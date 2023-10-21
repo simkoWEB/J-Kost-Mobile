@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:text="Login"
             android:textColor="@color/white"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/button_primary"
             />
 
         <TextView
