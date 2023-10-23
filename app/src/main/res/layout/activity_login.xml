@@ -29,39 +29,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
-            android:text="Login to your account"
+            android:text="Lagin ke akun anda"
             android:textSize="15dp"
             android:textStyle="bold"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="15dp"
             />
 
         <EditText
-            android:inputType="textEmailAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/etEmail"
             android:hint="Email"
-            android:padding="12dp"
             android:drawableLeft="@drawable/ic_email"
-            android:drawableTint="@color/disableColor"
-            android:drawablePadding="10dp"
-            android:background="@drawable/edit_text_border"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="14sp"
+            android:inputType="textEmailAddress"
+            style="@style/etLogin"
             />
 
         <EditText
-            android:layout_marginTop="21dp"
+            android:id="@+id/etPass"
             android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:hint="Password"
             android:drawableLeft="@drawable/ic_lock"
-            android:drawableTint="@color/disableColor"
-            android:drawablePadding="10dp"
-            android:padding="12dp"
-            android:background="@drawable/edit_text_border"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="14sp"
+            android:layout_marginTop="21dp"
+            style="@style/etLogin"
             />
 
         <Button
@@ -76,6 +64,7 @@
             />
 
         <TextView
+            android:id="@+id/tvLupaPass"
             android:layout_marginTop="14dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
