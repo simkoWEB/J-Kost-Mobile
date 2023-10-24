@@ -50,30 +50,28 @@
             android:textSize="13sp"
             />
 
-        <LinearLayout
-            android:gravity="center"
-            android:id="@+id/etGroupVerif"
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
+        <com.chaos.view.PinView
+            android:id="@+id/firstPinView"
+            style="@style/PinWidget.PinView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/et1"
-                style="@style/etVerif"/>
-
-            <EditText
-                android:id="@+id/et2"
-                style="@style/etVerif"/>
-
-            <EditText
-                android:id="@+id/et3"
-                style="@style/etVerif"/>
-
-            <EditText
-                android:id="@+id/et4"
-                style="@style/etVerif"/>
-        </LinearLayout>
+            android:layout_marginTop="15dp"
+            app:itemWidth="60dp"
+            app:itemHeight="60dp"
+            android:textColor="@color/black"
+            android:cursorVisible="true"
+            android:inputType="number"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:lineColor="@color/disableColor"
+            app:cursorColor="@color/black"
+            app:cursorWidth="2dp"
+            app:itemCount="4"
+            app:itemRadius="4dp"
+            app:itemSpacing="17dp"
+            app:lineWidth="2dp"
+            app:hideLineWhenFilled="false"
+            app:viewType="rectangle"/>
 
 
         <Button
