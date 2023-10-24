@@ -15,10 +15,10 @@
         <activity
             android:name=".forget_pass.ResetPassActivity"
             android:exported="false"
-            android:theme="@style/LoginTheme" />
+            android:theme="@style/LoginTheme"/>
         <activity
             android:name=".forget_pass.VerificationActivity"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/LoginTheme"/>
         <activity
             android:name=".SplashScreen"

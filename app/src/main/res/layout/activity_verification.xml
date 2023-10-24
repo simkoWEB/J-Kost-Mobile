@@ -9,46 +9,46 @@
     style="@style/MyParentLayout">
 
     <ImageView
-        android:id="@+id/backBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_arrow_back_ios"
-        android:layout_marginTop="30dp"/>
+        android:id="@+id/btnBack"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:src="@drawable/ic_arrow_back_ios" />
 
     <LinearLayout
-        android:layout_marginTop="40dp"
-        android:paddingHorizontal="12dp"
-        android:layout_below="@+id/backBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="12dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="Masukkan 4 Digit Kode"
             android:fontFamily="@font/poppins_semibold"
-            android:textSize="20sp"
-            android:textColor="@color/black"/>
+            android:text="Masukkan 4 Digit Kode"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
         <ImageView
-            android:layout_marginTop="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/email_send"
-            />
+            android:layout_marginTop="30dp"
+            android:src="@drawable/email_send" />
 
         <TextView
-            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="Masukkan digit 4 kode yang anda terima dari email yang anda daftarkan sebelumnya"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/poppins_regular"
-            android:textSize="13sp"
-            />
+            android:text="Masukkan digit 4 kode yang anda terima dari email yang anda daftarkan sebelumnya"
+            android:textAlignment="center"
+            android:textSize="13sp" />
 
         <com.chaos.view.PinView
             android:id="@+id/firstPinView"
@@ -56,32 +56,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            app:itemWidth="60dp"
-            app:itemHeight="60dp"
-            android:textColor="@color/black"
             android:cursorVisible="true"
             android:inputType="number"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:lineColor="@color/disableColor"
             app:cursorColor="@color/black"
             app:cursorWidth="2dp"
-            app:itemCount="4"
-            app:itemRadius="4dp"
-            app:itemSpacing="17dp"
-            app:lineWidth="2dp"
             app:hideLineWhenFilled="false"
-            app:viewType="rectangle"/>
+            app:itemCount="4"
+            app:itemHeight="60dp"
+            app:itemRadius="4dp"
+            app:itemSpacing="20dp"
+            app:itemWidth="60dp"
+            app:lineColor="@color/disableColor"
+            app:lineWidth="2dp"
+            app:viewType="rectangle" />
 
 
         <Button
             android:id="@+id/continueBtn"
-            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/button_primary"
             android:text="Selanjutnya"
-            android:background="@drawable/button_primary"/>
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

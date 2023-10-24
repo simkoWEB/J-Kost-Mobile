@@ -2,6 +2,7 @@ package com.example.j_kost.forget_pass;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,12 +19,15 @@ import com.example.j_kost.R;
 public class VerificationActivity extends AppCompatActivity {
     Button continueBtn;
     ImageView backBtn;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verification);
 
-        backBtn = findViewById(R.id.backBtn);
+        continueBtn = findViewById(R.id.continueBtn);
+        backBtn = findViewById(R.id.btnBack);
+
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,7 +37,6 @@ public class VerificationActivity extends AppCompatActivity {
             }
         });
 
-        continueBtn = findViewById(R.id.continueBtn);
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

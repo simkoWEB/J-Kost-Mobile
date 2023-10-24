@@ -10,4 +10,5 @@
     <string name="komplain">Komplain</string>
     <string name="profil_saya">Profile Saya</string>
     <string name="profil_kost">Profile Kost</string>
+    <string name="descResetPass">Tetapkan kata sandi baru untuk akun anda agar anda dapat masuk dan mengakses semua fitur</string>
 </resources>
