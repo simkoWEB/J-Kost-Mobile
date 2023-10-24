@@ -23,13 +23,12 @@
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navBar"
+            style="@style/JkostTheme"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            app:menu="@menu/navbar"
-            app:itemIconSize="28dp"
-            style="@style/JkostTheme"
             android:background="@color/white"
-            />
+            app:itemIconSize="28dp"
+            app:menu="@menu/navbar" />
 
     </FrameLayout>
 

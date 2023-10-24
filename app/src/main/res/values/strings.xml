@@ -8,6 +8,6 @@
     <string name="pembayaran">Pembayaran</string>
     <string name="history">History</string>
     <string name="komplain">Komplain</string>
-    <string name="profil_saya">Profil Saya</string>
-    <string name="profil_kost">Profil Kost</string>
+    <string name="profil_saya">Profile Saya</string>
+    <string name="profil_kost">Profile Kost</string>
 </resources>
