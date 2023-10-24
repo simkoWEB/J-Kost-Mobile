@@ -4,23 +4,46 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.j_kost.ProfileFragment;
 import com.example.j_kost.TabHistory;
 import com.example.j_kost.TabPembayaran;
+import com.example.j_kost.TabProfilKost;
+import com.example.j_kost.TabProfilUser;
 import com.example.j_kost.TransaksiFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
-    public ViewPagerAdapter(@NonNull TransaksiFragment fragmentActivity) {
-        super(fragmentActivity);
+    private Fragment parentFragment;
+
+    public ViewPagerAdapter(Fragment parentFragment) {
+        super(parentFragment);
+        this.parentFragment = parentFragment;
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-      switch (position){
-          case 0 : return new TabPembayaran();
-          case 1 : return new TabHistory();
-          default: return new TabPembayaran();
-      }
+        if (parentFragment instanceof TransaksiFragment) {
+            // Ketika digunakan di TransaksiFragment
+            switch (position) {
+                case 0:
+                    return new TabPembayaran();
+                case 1:
+                    return new TabHistory();
+                default:
+                    return new TabPembayaran();
+            }
+        } else if (parentFragment instanceof ProfileFragment) {
+            // Ketika digunakan di ProfileFragment
+            switch (position) {
+                case 0:
+                    return new TabProfilUser();
+                case 1:
+                    return new TabProfilKost();
+                default:
+                    return new TabProfilUser();
+            }
+        }
+        return null;
     }
 
     @Override
@@ -28,3 +51,4 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
         return 2;
     }
 }
+

@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
         }else if(item.getItemId() == R.id.transaksiId){
             replaceFragment(new TransaksiFragment());
 
+        }else if(item.getItemId() == R.id.komplainId){
+            replaceFragment(new KomplainFragment());
+
         }else if(item.getItemId() == R.id.profileId){
             replaceFragment(new ProfileFragment());
         }

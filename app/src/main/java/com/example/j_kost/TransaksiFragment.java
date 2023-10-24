@@ -24,6 +24,13 @@ public class TransaksiFragment extends Fragment {
         viewPagerAdapter = new ViewPagerAdapter(this);
         viewPager2.setAdapter(viewPagerAdapter);
 
+        return view;  // Kode untuk mengembalikan tampilan harus ditempatkan di sini
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -46,7 +53,5 @@ public class TransaksiFragment extends Fragment {
                 tablayout.getTabAt(position).select();
             }
         });
-
-        return view;
     }
 }
