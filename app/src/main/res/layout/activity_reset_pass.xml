@@ -52,31 +52,39 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/etNewPass"
-            style="@style/etLogin"
-            android:layout_marginTop="4dp"
-            android:hint="Masukkan Kata Sandri Baru"
-            android:inputType="textPassword"
-            android:paddingStart="15dp" />
-
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="18dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Konfirmasi Kata Sandi"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            style="@style/OutlinedBoxEt"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:passwordToggleEnabled="true"
+            >
 
-        <EditText
-            android:id="@+id/etConfirmPass"
-            style="@style/etLogin"
-            android:layout_marginTop="4dp"
-            android:hint="Konfirmasi Kata Sandi"
-            android:inputType="textPassword"
-            android:paddingStart="15dp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan Kata Sandi"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/OutlinedBoxEt"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:passwordToggleEnabled="true"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Konfirmasi Kata Sandi"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/resetBtn"

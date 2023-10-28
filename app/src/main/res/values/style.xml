@@ -15,7 +15,7 @@
     </style>
 
     <style name="LoginTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
-        <item name="colorPrimary">#fafafa</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">#fafafa</item>
         <item name="colorAccent">#333333</item>
         <item name="android:windowLightStatusBar">true</item>
@@ -40,28 +40,11 @@
         <item name="android:fontFamily">@font/poppins_regular</item>
     </style>
 
-    <style name="etVerif">
-        <item name="android:layout_marginRight">15dp</item>
-        <item name="android:inputType">number</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:layout_weight">4</item>
-        <item name="android:fontFamily">@font/poppins_regular</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:layout_width">70dp</item>
-        <item name="android:layout_height">70dp</item>
-        <item name="android:background">@drawable/edit_text_border</item>
-    </style>
-
-    <style name="etLogin">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">12dp</item>
-        <item name="android:drawableTint">@color/disableColor</item>
-        <item name="android:drawablePadding">10dp</item>
-        <item name="android:background">@drawable/edit_text_border</item>
-        <item name="android:fontFamily">@font/poppins_regular</item>
-        <item name="android:textSize">14sp</item>
+    <style name="OutlinedBoxEt" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">8dp</item> <!-- Radius for top-left corner -->
+        <item name="boxCornerRadiusTopEnd">8dp</item> <!-- Radius for top-right corner -->
+        <item name="boxCornerRadiusBottomStart">8dp</item> <!-- Radius for bottom-left corner -->
+        <item name="boxCornerRadiusBottomEnd">8dp</item> <!-- Radius for bottom-right corner -->
     </style>
 
 </resources>

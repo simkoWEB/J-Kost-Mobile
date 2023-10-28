@@ -34,22 +34,38 @@
             android:textStyle="bold"
             />
 
-        <EditText
-            android:id="@+id/etEmail"
-            android:hint="Masukkan Email"
-            android:drawableLeft="@drawable/ic_email"
-            android:inputType="textEmailAddress"
-            style="@style/etLogin"
-            android:layout_marginTop="15dp"/>
+<com.google.android.material.textfield.TextInputLayout
+    android:layout_marginTop="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/OutlinedBoxEt"
+    app:boxStrokeColor="@color/colorPrimary"
+    >
 
-        <EditText
-            android:id="@+id/etPass"
-            android:inputType="textPassword"
-            android:hint="Masukkan Password"
-            android:drawableLeft="@drawable/ic_lock"
-            android:layout_marginTop="21dp"
-            style="@style/etLogin"
-            />
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Masukkan username"
+        android:inputType="textEmailAddress"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/OutlinedBoxEt"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:passwordToggleEnabled="true"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan Password"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/loginBtn"

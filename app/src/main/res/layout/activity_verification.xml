@@ -67,7 +67,7 @@
             app:itemCount="4"
             app:itemHeight="60dp"
             app:itemRadius="4dp"
-            app:itemSpacing="20dp"
+            app:itemSpacing="18dp"
             app:itemWidth="60dp"
             app:lineColor="@color/disableColor"
             app:lineWidth="2dp"
