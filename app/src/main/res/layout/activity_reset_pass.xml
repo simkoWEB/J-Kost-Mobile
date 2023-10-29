@@ -93,7 +93,8 @@
             android:layout_marginTop="40dp"
             android:background="@drawable/button_primary"
             android:text="Atur Ulang Kata Sandi"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textAllCaps="false"/>
 
     </LinearLayout>
 

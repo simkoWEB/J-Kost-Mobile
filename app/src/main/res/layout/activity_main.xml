@@ -15,11 +15,17 @@
         app:layout_constraintTop_toTopOf="parent">
     </FrameLayout>
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/navBarFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_alignParentBottom="true">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#36A4A4A4"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navBar"
@@ -30,6 +36,6 @@
             app:itemIconSize="28dp"
             app:menu="@menu/navbar" />
 
-    </FrameLayout>
+    </LinearLayout>
 
 </RelativeLayout>
