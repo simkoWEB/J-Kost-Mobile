@@ -10,4 +10,10 @@
     <string name="profil_kost">Profile Kost</string>
     <string name="descResetPass">Tetapkan kata sandi baru untuk akun anda agar anda dapat masuk dan mengakses semua fitur</string>
     <string name="keterangan_komplain">Pengajuan komplain berfungsi untuk mengevaluasi pemilik kos ketika terjadi ketidaknyamanan atau gangguan yang dialami oleh penghuni kos,</string>
+
+    <string-array name="Komplain">
+        <item>Keamanan</item>
+        <item>Fasilitas</item>
+        <item>Kegaduhan</item>
+    </string-array>
 </resources>

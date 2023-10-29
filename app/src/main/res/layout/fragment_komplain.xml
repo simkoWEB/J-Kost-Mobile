@@ -15,4 +15,101 @@
         style="@style/title_text"
         android:text="Komplain" />
 
+    <TextView
+        android:id="@+id/txt_tipeKomplain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tittleText"
+        android:layout_marginTop="20dp"
+        android:text="Tipe Komplain"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#000000"/>
+
+    <Spinner
+        android:id="@+id/jenis_komplain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_tipeKomplain"
+        android:background="@drawable/edit_text_border"
+        android:entries="@array/Komplain" />
+
+    <TextView
+        android:id="@+id/txt_jenisKomplain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/jenis_komplain"
+        android:layout_marginTop="20dp"
+        android:text="Jenis Komplain"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#000000"/>
+
+    <Spinner
+        android:id="@+id/masalah_komplain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_jenisKomplain"
+        android:background="@drawable/edit_text_border"
+        android:entries="@array/Komplain"/>
+
+    <TextView
+        android:id="@+id/txt_permasalahan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/masalah_komplain"
+        android:layout_marginTop="20dp"
+        android:text="Permasalahan"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#000000"/>
+
+    <ScrollView
+        android:id="@+id/scroll1"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_below="@+id/txt_permasalahan">
+
+        <EditText
+            android:id="@+id/editText_permasalahan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ketik masalah anda dikost ini"
+            android:inputType="textMultiLine"
+            android:lines="5"
+            android:background="@drawable/edit_text_border"/>
+
+    </ScrollView>
+
+    <TextView
+        android:id="@id/penjelan_fitur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scroll1"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:text="Penjelasan Fitur :"/>
+
+    <TextView
+        android:id="@+id/penjelasan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/penjelan_fitur"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:textSize="15dp"
+        android:textColor="#000000"
+        android:text="Pengajuan komplain berfungsi untuk mengevaluasi pemilik kos ketika terjadi ketidaknyamanan atau gangguan yang dialami oleh penghuni kos, "/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/penjelasan"
+        android:layout_marginTop="90dp"
+        android:text="Ajukan Komplain"
+        android:textColor="#ffffff"
+        android:background="#134BA4"/>
 </RelativeLayout>
