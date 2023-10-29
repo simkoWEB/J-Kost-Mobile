@@ -60,7 +60,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Masukan Metode Pembayaran"
+                android:hint="Masukan Nominal Pembayaran"
                 android:textSize="13dp"
                 android:background="@drawable/edit_text_border"
                 android:height="40dp"
@@ -85,14 +85,16 @@
                 android:textColor="@color/black"
                 android:layout_margin="4dp"/>
 
-            <EditText
+            <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Pilih File/Foto"
                 android:textSize="13dp"
                 android:background="@drawable/edit_text_border"
-                android:height="40dp"
+                android:drawableStart="@drawable/ic_image"
+                android:drawablePadding="8dp"
                 android:paddingHorizontal="10dp"
+                android:gravity="start|center_vertical"
                 />
         </LinearLayout>
     </LinearLayout>
