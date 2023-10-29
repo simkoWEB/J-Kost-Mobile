@@ -11,13 +11,13 @@
         android:id="@+id/form_pembayaran"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="2dp">
         <LinearLayout
             android:id="@+id/container_metode_pembayaran"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
             >
             <TextView
@@ -44,7 +44,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
             android:layout_below="@+id/container_metode_pembayaran"
             >
@@ -72,7 +71,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
             android:layout_below="@+id/container_nominal_pembayaran"
             >
