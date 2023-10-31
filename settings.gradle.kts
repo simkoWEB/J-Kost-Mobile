@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "J-Kost"
 include(":app")
-include(":myapplication")
+//include(":myapplication")
