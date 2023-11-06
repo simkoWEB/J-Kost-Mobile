@@ -2,111 +2,127 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:layout_marginStart="15dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".TabProfilUser">
+    tools:context=".TabProfilUser"
+    style="@style/MyParentLayout">
 
     <!-- TODO: Update blank fragment layout -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <ImageView
-    android:layout_marginTop="30dp"
+            android:layout_marginTop="30dp"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/rounded_profile"
-            android:backgroundTint="@color/black"/>
+            android:backgroundTint="@color/colorPrimary"/>
+
     <TextView
-        android:id="@+id/text1"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nama Lengkap"
-        android:layout_marginLeft="22dp"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:fontFamily="@font/poppins_bold"/>
+        android:fontFamily="@font/poppins_semibold"/>
+
     <androidx.cardview.widget.CardView
-        android:id="@+id/card1"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/text1"
         app:cardCornerRadius="10dp"
         app:cardElevation="6dp"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="8dp">
+
         <EditText
+            android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Siapa Nama Kamu"
             android:textColor="@color/colorPrimary"
-            android:textSize="20sp"/>
+            android:hint="Name"
+            android:textAlignment="textStart"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:textSize="18sp"/>
+
     </androidx.cardview.widget.CardView>
+
     <TextView
-        android:id="@+id/text2"
-        android:layout_marginLeft="22dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/card1"
         android:text="No Telepon"
         android:textSize="20sp"
-        android:fontFamily="@font/poppins_bold"
+        android:fontFamily="@font/poppins_semibold"
         android:textColor="@color/black"
         android:layout_marginTop="5dp"/>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/card2"
-        android:layout_width="350dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
         app:cardCornerRadius="10dp"
         app:cardElevation="6dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/text2"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="8dp">
+
+        <EditText
+            android:id="@+id/etNotelp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:hint="Nomor Telepon"
+            android:inputType="number"
+            android:textAlignment="textStart"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:textSize="18sp"/>
+
+    </androidx.cardview.widget.CardView>
     <TextView
-        android:id="@+id/text3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/card2"
         android:text="Alamat"
-        android:layout_marginLeft="22dp"
         android:textSize="20sp"
-        android:fontFamily="@font/poppins_bold"
+        android:fontFamily="@font/poppins_semibold"
         android:textColor="@color/black"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="8dp"/>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/card3"
         app:cardCornerRadius="10dp"
         app:cardElevation="6dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/text3"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <EditText
+            android:id="@+id/etAlamat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:hint="Alamat"
+            android:textAlignment="textStart"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:textSize="18sp"/>
+
+    </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/btn1"
-        android:layout_width="350dp"
+        android:id="@+id/btnEdit"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/card3"
         android:text="Edit Profile"
         android:textSize="15sp"
         android:layout_marginTop="45dp"
         android:fontFamily="@font/poppins_medium"
         android:textColor="@color/white"
         android:background="@drawable/button_edit_profile"
-        android:textAllCaps="false"
-
-        android:layout_gravity="center_horizontal"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:textAllCaps="false"/>
 
     <Button
-        android:layout_width="350dp"
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/button_logout"
@@ -115,8 +131,7 @@
         android:layout_marginTop="20dp"
         android:textAllCaps="false"
         android:textColor="#D32F2F"
-        android:textSize="15dp"
-        tools:ignore="TextSizeCheck" />
+        android:textSize="15sp"/>
     </LinearLayout>
     </ScrollView>
 </RelativeLayout>
