@@ -64,7 +64,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         tvForgetPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
             String password = params[1];
 
             OkHttpClient client = new OkHttpClient();
+//            jangan lupa ini sering diganti kalo masih pake localhost
             String apiUrl = "http://192.168.1.3/PHP-MVC/public/LoginApi/login";
 
             RequestBody formBody = new FormBody.Builder()
