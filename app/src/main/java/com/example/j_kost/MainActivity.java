@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
@@ -21,6 +22,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        String namaLengkap = getIntent().getStringExtra("namaLengkap");
+        Log.d("NamaLengkap Main Activity", namaLengkap);
+
+        if (namaLengkap != null) {
+            // Buat objek Bundle dan masukkan data ke dalamnya
+            Bundle bundle = new Bundle();
+            bundle.putString("namaLengkap", namaLengkap);
+
+            // Inisialisasi HomeFragment
+            HomeFragment homeFragment = new HomeFragment();
+            homeFragment.setArguments(bundle); // Mengatur argumen fragment
+
+            // Gantikan atau tambahkan HomeFragment ke container Anda
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.mainFrameLayout, homeFragment)
+                    .commit();
+        }
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

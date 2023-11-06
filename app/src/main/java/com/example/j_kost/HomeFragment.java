@@ -1,14 +1,20 @@
 package com.example.j_kost;
 
+import static android.content.Intent.getIntent;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.j_kost.Adapter.HistoryAdapter;
 
@@ -70,8 +76,19 @@ public class HomeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        // Ambil data dari argument
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            String namaLengkap = bundle.getString("namaLengkap");
+
+            if (namaLengkap != null) {
+                Log.d("NamaLengkap Home Fragment", namaLengkap); // Tambahkan baris ini
+                TextView tvName = view.findViewById(R.id.tvUsername);
+                tvName.setText(namaLengkap);
+            }
+        }
 
         // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.kumpulan_card_history);
