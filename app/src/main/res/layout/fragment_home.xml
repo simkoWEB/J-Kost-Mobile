@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:text="Muhammad Lutfi Hakim"
             android:textStyle="bold"
-            android:textSize="18dp"
+            android:textSize="20dp"
             android:textColor="@color/black"
             />
 
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:text="Kost Mentari Indah"
             android:textColor="@color/black"
-            android:textSize="10dp" />
+            android:textSize="13dp" />
 
     </LinearLayout>
     </LinearLayout>
@@ -161,6 +161,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textriwayat"
+        android:background="#fafafa"
         />
 
     <LinearLayout

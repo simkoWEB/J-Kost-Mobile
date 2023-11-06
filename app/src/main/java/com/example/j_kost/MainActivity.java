@@ -23,8 +23,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+//        Mengambil data dari login
         String namaLengkap = getIntent().getStringExtra("namaLengkap");
-        Log.d("NamaLengkap Main Activity", namaLengkap);
+        Log.d("NamaLengkap Main", namaLengkap);
 
         if (namaLengkap != null) {
             // Buat objek Bundle dan masukkan data ke dalamnya

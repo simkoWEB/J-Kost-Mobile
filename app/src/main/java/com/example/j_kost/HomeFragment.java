@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
             String namaLengkap = bundle.getString("namaLengkap");
 
             if (namaLengkap != null) {
-                Log.d("NamaLengkap Home Fragment", namaLengkap); // Tambahkan baris ini
+                Log.d("NamaLengkap Home", namaLengkap);
                 TextView tvName = view.findViewById(R.id.tvUsername);
                 tvName.setText(namaLengkap);
             }
