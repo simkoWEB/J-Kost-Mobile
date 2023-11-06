@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Metode Pembayaran"
-                android:textSize="18dp"
+                android:textSize="15dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_margin="4dp"/>
@@ -49,20 +49,21 @@
             android:layout_marginTop="20dp"
             android:layout_below="@+id/container_metode_pembayaran"
             >
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="4dp"
                 android:text="Nominal Pembayaran"
-                android:textSize="18dp"
-                android:textStyle="bold"
                 android:textColor="@color/black"
-                android:layout_margin="4dp"/>
+                android:textSize="15dp"
+                android:textStyle="bold" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Masukan Nominal Pembayaran"
-                android:textSize="13dp"
+                android:textSize="15dp"
                 android:background="@drawable/edit_text_border"
                 android:height="40dp"
                 android:paddingHorizontal="10dp"
@@ -80,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Masukan Bukti Pembayaran"
-                android:textSize="18dp"
+                android:textSize="15dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_margin="4dp"/>
@@ -89,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Pilih File/Foto"
-                android:textSize="13dp"
+                android:textSize="15dp"
                 android:background="@drawable/edit_text_border"
                 android:drawableStart="@drawable/ic_image"
                 android:drawablePadding="8dp"
@@ -124,7 +125,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Total"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:layout_margin="4dp"
@@ -133,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Rp 800,000"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:layout_margin="4dp"/>
