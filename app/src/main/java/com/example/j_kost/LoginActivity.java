@@ -2,7 +2,9 @@ package com.example.j_kost;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -97,8 +99,8 @@ public class LoginActivity extends AppCompatActivity {
             String password = params[1];
 
             OkHttpClient client = new OkHttpClient();
-//            jangan lupa ini sering diganti kalo masih pake localhost
-            String apiUrl = "http://192.168.1.3/PHP-MVC/public/LoginApi/login";
+//            jangan lupa ini seringki diganti kalo masih pake localhost
+            String apiUrl = "http://192.168.1.13/PHP-MVC/public/LoginApi/login";
 
             RequestBody formBody = new FormBody.Builder()
                     .add("email", email)
@@ -143,21 +145,31 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (code == 200) {
                             JSONObject dataUser = jsonResponse.getJSONObject("data_user");
-                            String idUser = dataUser.getString("id_user");
-                            String namaLengkap = dataUser.getString("nama_lengkap");
-                            String email = dataUser.getString("email");
-                            String tgglLahir = dataUser.getString("tggl_lahir");
-                            String jenisKelamin = dataUser.getString("jenis_kelamin");
-                            String alamat = dataUser.getString("alamat");
-                            String noHp = dataUser.getString("no_hp");
-                            String fotoUser = dataUser.getString("foto_user");
 
-//                           Membuat object dan isi atributnya
-                            UserData userData = new UserData(idUser, namaLengkap, email, tgglLahir, jenisKelamin, alamat, noHp, fotoUser);
+                            SharedPreferences userPref = getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = userPref.edit();
+
+                            editor.putString("idUser", dataUser.getString("id_user"));
+                            editor.putString("namaLengkap", dataUser.getString("nama_lengkap"));
+                            editor.putString("emailUser", dataUser.getString("email"));
+                            editor.putString("passwordUser", dataUser.getString("password"));
+                            editor.putString("tgglLahir", dataUser.getString("tggl_lahir"));
+                            editor.putString("jenisKelamin", dataUser.getString("jenis_kelamin"));
+                            editor.putString("alamatUser", dataUser.getString("alamat"));
+                            editor.putString("noHp", dataUser.getString("no_hp"));
+                            editor.putString("fotoUser", dataUser.getString("foto_user"));
+                            editor.apply();
+
+//                            String idUser = dataUser.getString("id_user");
+//                            String namaLengkap = dataUser.getString("nama_lengkap");
+//                            String email = dataUser.getString("email");
+//                            String tgglLahir = dataUser.getString("tggl_lahir");
+//                            String jenisKelamin = dataUser.getString("jenis_kelamin");
+//                            String alamat = dataUser.getString("alamat");
+//                            String noHp = dataUser.getString("no_hp");
+//                            String fotoUser = dataUser.getString("foto_user");
 
                             Intent i = new Intent(LoginActivity.this, MainActivity.class);
-//                            data yang diambil
-                            i.putExtra("namaLengkap", namaLengkap);
                             startActivity(i);
                             finish();
 

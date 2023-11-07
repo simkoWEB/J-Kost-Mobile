@@ -2,6 +2,6 @@
 <network-security-config xmlns:android="http://schemas.android.com/apk/res/android">
     <domain-config cleartextTrafficPermitted="true">
         <!--        ganti sesuai dengan IP local yang digunakan jika menggunakan localhost-->
-        <domain includeSubdomains="false">192.168.1.3</domain>
+        <domain includeSubdomains="false">192.168.1.13</domain>
     </domain-config>
 </network-security-config>

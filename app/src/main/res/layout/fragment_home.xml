@@ -133,53 +133,51 @@
       </LinearLayout>
       </LinearLayout>
     </LinearLayout>
-<RelativeLayout
+
+<LinearLayout
     android:id="@+id/scrollview_home"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/container_pembayaran"
+    android:layout_above="@+id/containerSelengkapnya"
+    android:orientation="vertical"
     android:layout_marginTop="15dp">
 
     <TextView
         android:id="@+id/textriwayat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Riwayat Pembayaran"
-        android:textSize="17dp"
-        android:textColor="@color/black"
         android:layout_marginStart="5dp"
-        android:paddingBottom="5dp"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/textriwayat"/>
+        android:paddingBottom="8dp"
+        android:text="Riwayat Pembayaran"
+        android:textColor="@color/black"
+        android:textSize="17dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/kumpulan_card_history"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textriwayat"
+        android:layout_height="match_parent"
         android:background="#fafafa"
         />
 
-    <LinearLayout
+</LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/containerSelengkapnya"
+        android:layout_marginVertical="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/kumpulan_card_history"
-        android:layout_marginTop="10dp"
-        >
+        android:layout_alignParentBottom="true">
 
         <TextView
+            android:id="@+id/selengkapnya"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Selengkapnya"
-            android:textColor="@color/black"
-            android:layout_marginStart="270dp"
+            android:text="Lihat Selengkapnya"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/colorPrimary"
             />
 
-    </LinearLayout>
-</RelativeLayout>
+    </RelativeLayout>
+
 </RelativeLayout>

@@ -23,25 +23,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        Mengambil data dari login
-        String namaLengkap = getIntent().getStringExtra("namaLengkap");
-        Log.d("NamaLengkap Main", namaLengkap);
-
-        if (namaLengkap != null) {
-            // Buat objek Bundle dan masukkan data ke dalamnya
-            Bundle bundle = new Bundle();
-            bundle.putString("namaLengkap", namaLengkap);
-
-            // Inisialisasi HomeFragment
-            HomeFragment homeFragment = new HomeFragment();
-            homeFragment.setArguments(bundle); // Mengatur argumen fragment
-
-            // Gantikan atau tambahkan HomeFragment ke container Anda
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.mainFrameLayout, homeFragment)
-                    .commit();
-        }
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         replaceFragment(new HomeFragment());
