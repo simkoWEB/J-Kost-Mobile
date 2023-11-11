@@ -23,13 +23,14 @@
             android:text="@string/profil_saya"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAllCaps="false"
             />
 
         <com.google.android.material.tabs.TabItem
             android:text="@string/profil_kost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:textAllCaps="false"
             />
     </com.google.android.material.tabs.TabLayout>
 

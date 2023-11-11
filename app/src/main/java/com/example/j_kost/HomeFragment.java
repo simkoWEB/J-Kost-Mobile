@@ -30,13 +30,14 @@ public class HomeFragment extends Fragment {
     private HistoryAdapter historyAdapter;
     private List<String> listData;
     private SharedPreferences sharedPreferences;
-    public TextView namaUser;
+    public TextView namaUser, namaKost;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         namaUser = view.findViewById(R.id.tvUsername);
+        namaKost = view.findViewById(R.id.tvKost);
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
         getDataUser();
 
@@ -64,7 +65,10 @@ public class HomeFragment extends Fragment {
 
     private void getDataUser(){
         String userName = sharedPreferences.getString("namaLengkap", "-");
+        String userKost = sharedPreferences.getString("namaKost", "-");
+
         namaUser.setText(userName);
+        namaKost.setText(userKost);
     }
 
 }

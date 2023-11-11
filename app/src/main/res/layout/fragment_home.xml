@@ -45,23 +45,23 @@
         android:layout_marginStart="15dp"
         android:layout_gravity="center">
 
-        <TextView
-            android:id="@+id/tvUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Muhammad Lutfi Hakim"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            />
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                />
 
         <TextView
             android:id="@+id/tvKost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kost Mentari Indah"
+            android:text="Nama Kost"
             android:textColor="@color/black"
-            android:textSize="13dp" />
+            android:textSize="14dp" />
 
     </LinearLayout>
     </LinearLayout>
