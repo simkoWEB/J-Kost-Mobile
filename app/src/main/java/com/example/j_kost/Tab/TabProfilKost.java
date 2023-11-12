@@ -1,4 +1,4 @@
-package com.example.j_kost;
+package com.example.j_kost.Tab;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.j_kost.R;
 
 public class TabProfilKost extends Fragment {
 

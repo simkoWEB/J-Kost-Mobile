@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".forget_pass.VerificationActivity"
+    tools:context=".ForgetPass.VerificationActivity"
     style="@style/MyParentLayout">
 
     <ImageView

@@ -18,11 +18,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.j_kost.forget_pass.VerificationActivity;
+import com.example.j_kost.ForgetPass.VerificationActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;

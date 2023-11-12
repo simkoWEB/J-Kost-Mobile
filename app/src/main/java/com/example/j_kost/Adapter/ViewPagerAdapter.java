@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.j_kost.ProfileFragment;
-import com.example.j_kost.TabHistory;
-import com.example.j_kost.TabPembayaran;
-import com.example.j_kost.TabProfilKost;
-import com.example.j_kost.TabProfilUser;
+import com.example.j_kost.Tab.TabHistory;
+import com.example.j_kost.Tab.TabPembayaran;
+import com.example.j_kost.Tab.TabProfilKost;
+import com.example.j_kost.Tab.TabProfilUser;
 import com.example.j_kost.TransaksiFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {

@@ -1,4 +1,4 @@
-package com.example.j_kost.forget_pass;
+package com.example.j_kost.ForgetPass;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,40 +9,39 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.example.j_kost.LoginActivity;
+import com.chaos.view.PinView;
 import com.example.j_kost.R;
 
-public class ResetPassActivity extends AppCompatActivity {
-
-    Button resetPassBtn;
+public class VerificationActivity extends AppCompatActivity {
+    Button continueBtn;
     ImageView backBtn;
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reset_pass);
+        setContentView(R.layout.activity_verification);
 
-        resetPassBtn = findViewById(R.id.resetBtn);
+        continueBtn = findViewById(R.id.continueBtn);
         backBtn = findViewById(R.id.btnBack);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ResetPassActivity.this, VerificationActivity.class);
+                finish();
+            }
+        });
+
+        continueBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(VerificationActivity.this, ResetPassActivity.class);
                 startActivity(i);
                 finish();
             }
         });
 
-        resetPassBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(ResetPassActivity.this, LoginActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
+        final PinView pinView = findViewById(R.id.firstPinView);
+        pinView.setAnimationEnable(true);
 
     }
 }

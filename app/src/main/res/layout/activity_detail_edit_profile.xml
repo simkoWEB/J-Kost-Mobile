@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailEditProfile"
+    style="@style/MyParentLayout">
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:src="@drawable/ic_arrow_back_ios" />
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="40dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                app:cardCornerRadius="500dp">
+
+                <ImageView
+                    android:id="@+id/profile"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/pp"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                app:cardCornerRadius="10dp"
+                android:backgroundTint="#FFFFFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Nama"
+                                            android:textSize="15sp"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/black"/>
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editNama"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/edit_text_border"
+                            android:padding="10dp"
+                            android:textSize="15sp"
+                            android:hint="Nama"/>
+
+                                        <TextView
+                                            android:layout_marginTop="20dp"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Nomor Telepon"
+                                            android:textSize="15dp"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/black"/>
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editNotelp"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/edit_text_border"
+                            android:padding="10dp"
+                            android:textSize="15sp"
+                            android:hint="Nomor Telepon"/>
+
+
+                                        <TextView
+                                            android:layout_marginTop="20dp"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Email"
+                                            android:textSize="15sp"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/black"/>
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editEmail"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/edit_text_border"
+                            android:padding="10dp"
+                            android:textSize="15sp"
+                            android:hint="Email"/>
+
+
+                                        <TextView
+                                            android:layout_marginTop="20dp"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Alamat"
+                                            android:textSize="15sp"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/black"/>
+
+                        <EditText
+                            android:id="@+id/editAlamat"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/edit_text_border"
+                            android:padding="10dp"
+                            android:textSize="15sp"
+                            android:hint="Alamat"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/btnEdit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Edit Profile"
+                android:layout_marginTop="45dp"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/white"
+                android:background="@drawable/button_edit_profile"
+                android:textAllCaps="false"/>
+
+            <!--    <Button-->
+            <!--        android:id="@+id/btnLogout"-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="50dp"-->
+            <!--        android:layout_gravity="center_horizontal"-->
+            <!--        android:background="@drawable/button_logout"-->
+            <!--        android:fontFamily="@font/poppins_medium"-->
+            <!--        android:text="Logout"-->
+            <!--        android:layout_marginTop="10dp"-->
+            <!--        android:textAllCaps="false"-->
+            <!--        android:textColor="#D32F2F"/>-->
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

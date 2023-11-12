@@ -1,4 +1,4 @@
-package com.example.j_kost;
+package com.example.j_kost.Tab;
 
 import android.os.Bundle;
 
@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.j_kost.Adapter.HistoryAdapter;
+import com.example.j_kost.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -16,19 +16,22 @@
         android:theme="@style/JkostTheme"
         tools:targetApi="31">
         <activity
-            android:name=".forget_pass.ResetPassActivity"
-            android:exported="false"
-            android:theme="@style/LoginTheme"/>
+            android:name=".DetailEditProfile"
+            android:exported="false"/>
         <activity
-            android:name=".forget_pass.VerificationActivity"
+            android:name=".ForgetPass.ResetPassActivity"
             android:exported="false"
-            android:theme="@style/LoginTheme"/>
+            android:theme="@style/LoginTheme" />
+        <activity
+            android:name=".ForgetPass.VerificationActivity"
+            android:exported="false"
+            android:theme="@style/LoginTheme" />
         <activity
             android:name=".SplashScreen"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -39,8 +42,8 @@
             android:theme="@style/LoginTheme" />
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>
