@@ -3,28 +3,28 @@
     <item
         android:id="@+id/homeId"
         android:title="@string/beranda"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_home_outline"
         android:iconTint="@color/disableColor"
         />
 
     <item
         android:id="@+id/transaksiId"
         android:title="@string/transaksi"
-        android:icon="@drawable/ic_clipboard"
+        android:icon="@drawable/ic_clipboard_outline"
         android:iconTint="@color/disableColor"
         />
 
     <item
         android:id="@+id/komplainId"
         android:title="@string/komplain"
-        android:icon="@drawable/ic_komplain"
+        android:icon="@drawable/ic_chat_outline"
         android:iconTint="@color/disableColor"
         />
 
     <item
         android:id="@+id/profileId"
         android:title="@string/profile"
-        android:icon="@drawable/ic_person_24"
+        android:icon="@drawable/ic_person_outline"
         android:iconTint="@color/disableColor"
         />
 </menu>

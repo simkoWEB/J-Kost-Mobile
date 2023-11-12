@@ -29,6 +29,8 @@ public class ResetPassActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(ResetPassActivity.this, VerificationActivity.class);
+                startActivity(i);
                 finish();
             }
         });
