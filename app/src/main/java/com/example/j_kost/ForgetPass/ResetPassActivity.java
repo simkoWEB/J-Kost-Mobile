@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.example.j_kost.LoginActivity;
+import com.example.j_kost.Activity.LoginActivity;
 import com.example.j_kost.R;
 
 public class ResetPassActivity extends AppCompatActivity {

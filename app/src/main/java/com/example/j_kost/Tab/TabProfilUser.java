@@ -14,8 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.j_kost.DetailEditProfile;
-import com.example.j_kost.ProfileFragment;
+import com.example.j_kost.Activity.DetailEditProfile;
 import com.example.j_kost.R;
 
 public class TabProfilUser extends Fragment {

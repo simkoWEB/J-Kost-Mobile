@@ -1,4 +1,4 @@
-package com.example.j_kost;
+package com.example.j_kost.Fragment;
 
 import android.os.Bundle;
 
@@ -10,13 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.j_kost.Adapter.ViewPagerAdapter;
+import com.example.j_kost.R;
 import com.google.android.material.tabs.TabLayout;
 
 
 public class ProfileFragment extends Fragment {
 
     TabLayout tablayout;
-    ViewPager2 viewPager2;
+    ViewPager2 viewPager;
     ViewPagerAdapter viewPagerAdapter;
 
     @Override
@@ -24,15 +25,15 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         tablayout = view.findViewById(R.id.tabLayout);
-        viewPager2 = view.findViewById(R.id.viewPager2);
+        viewPager = view.findViewById(R.id.viewPager2);
         viewPagerAdapter = new ViewPagerAdapter(this);
 
-        viewPager2.setAdapter(viewPagerAdapter);
+        viewPager.setAdapter(viewPagerAdapter);
 
         tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                viewPager2.setCurrentItem(tab.getPosition());
+                viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
@@ -44,7 +45,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);

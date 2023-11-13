@@ -1,4 +1,4 @@
-package com.example.j_kost;
+package com.example.j_kost.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.j_kost.ForgetPass.VerificationActivity;
+import com.example.j_kost.R;
 import com.google.android.material.textfield.TextInputEditText;
 import org.json.JSONException;
 import org.json.JSONObject;

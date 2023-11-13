@@ -1,4 +1,4 @@
-package com.example.j_kost;
+package com.example.j_kost.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.j_kost.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class DetailEditProfile extends AppCompatActivity {

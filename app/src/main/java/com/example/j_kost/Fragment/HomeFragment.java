@@ -1,4 +1,4 @@
-package com.example.j_kost;
+package com.example.j_kost.Fragment;
 
 import static android.content.Intent.getIntent;
 
@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,9 +21,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.j_kost.Adapter.HistoryAdapter;
+import com.example.j_kost.R;
+import com.example.j_kost.Tab.TabHistory;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 public class HomeFragment extends Fragment {
@@ -30,7 +38,7 @@ public class HomeFragment extends Fragment {
     private HistoryAdapter historyAdapter;
     private List<String> listData;
     private SharedPreferences sharedPreferences;
-    public TextView namaUser, namaKost;
+    public TextView namaUser, namaKost, selengkapnya, bulanPembayaran;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,8 +46,25 @@ public class HomeFragment extends Fragment {
 
         namaUser = view.findViewById(R.id.tvUsername);
         namaKost = view.findViewById(R.id.tvKost);
+        selengkapnya = view.findViewById(R.id.selengkapnya);
+        bulanPembayaran = view.findViewById(R.id.bulanPembayaran);
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
         getDataUser();
+
+        // Mendapatkan bulan saat ini
+        Calendar calendar = Calendar.getInstance();
+        int currentMonth = calendar.get(Calendar.MONTH);
+
+        // Konversi nomor bulan menjadi nama bulan
+        String monthName = getMonthName(currentMonth);
+        bulanPembayaran.setText(monthName);
+
+        selengkapnya.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            navigateToTabHistoryFragment();
+            }
+        });
 
         // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.kumpulan_card_history);
@@ -69,6 +94,32 @@ public class HomeFragment extends Fragment {
 
         namaUser.setText(userName);
         namaKost.setText(userKost);
+    }
+
+    private void navigateToTabHistoryFragment() {
+        // Buat objek FragmentManager
+        FragmentManager fragmentManager = getParentFragmentManager();
+
+        // Mulai transaksi fragment
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        // Ganti fragment saat ini dengan TabHistoryFragment
+        TabHistory tabHistoryFragment = new TabHistory();
+        fragmentTransaction.replace(R.id.mainFrameLayout, tabHistoryFragment);
+
+        // Tambahkan transaksi ke back stack agar dapat di-pop kembali
+        fragmentTransaction.addToBackStack(null);
+
+        // Lakukan commit transaksi
+        fragmentTransaction.commit();
+    }
+
+    private String getMonthName(int month) {
+        SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM", Locale.getDefault());
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.MONTH, month);
+        Date date = calendar.getTime();
+        return monthFormat.format(date);
     }
 
 }

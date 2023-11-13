@@ -1,4 +1,4 @@
-package com.example.j_kost;
+package com.example.j_kost.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -6,13 +6,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
-import com.example.j_kost.Adapter.ViewPagerAdapter;
+import com.example.j_kost.Fragment.HomeFragment;
+import com.example.j_kost.Fragment.KomplainFragment;
+import com.example.j_kost.Fragment.ProfileFragment;
+import com.example.j_kost.Fragment.TransaksiFragment;
+import com.example.j_kost.R;
 import com.example.j_kost.databinding.ActivityMainBinding;
-import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,19 +58,17 @@ public class MainActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (doubleBackToExitPressedOnce) {
-                moveTaskToBack(true);
-                android.os.Process.killProcess(android.os.Process.myPid());
-                System.exit(1);
-
+                finish();  // Close the current activity
             } else {
                 this.doubleBackToExitPressedOnce = true;
                 Toast.makeText(this, "Tekan sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
-                new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000); // Reset setelah 2 detik
+                new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000); // Reset after 2 seconds
                 return true;
             }
             return true;
         }
         return super.onKeyDown(keyCode, event);
     }
+
 
 }

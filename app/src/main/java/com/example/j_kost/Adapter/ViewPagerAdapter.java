@@ -4,12 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.j_kost.ProfileFragment;
+import com.example.j_kost.Fragment.ProfileFragment;
 import com.example.j_kost.Tab.TabHistory;
 import com.example.j_kost.Tab.TabPembayaran;
 import com.example.j_kost.Tab.TabProfilKost;
 import com.example.j_kost.Tab.TabProfilUser;
-import com.example.j_kost.TransaksiFragment;
+import com.example.j_kost.Fragment.TransaksiFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
     private Fragment parentFragment;

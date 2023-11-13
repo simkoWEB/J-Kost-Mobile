@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment"
+    tools:context=".Fragment.HomeFragment"
     android:orientation="vertical"
     style="@style/MyParentLayout">
 
@@ -97,10 +97,10 @@
           android:layout_weight="1"
           >
        <TextView
-           android:id="@+id/bulanpembayaran"
+           android:id="@+id/bulanPembayaran"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:text="November"
+           android:text="-"
            android:textSize="12dp"
            android:layout_weight="1"
            android:textColor="@color/white"
