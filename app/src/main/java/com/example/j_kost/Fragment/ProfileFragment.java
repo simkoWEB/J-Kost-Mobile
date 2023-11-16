@@ -1,5 +1,6 @@
 package com.example.j_kost.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,12 +21,13 @@ public class ProfileFragment extends Fragment {
     ViewPager2 viewPager;
     ViewPagerAdapter viewPagerAdapter;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         tablayout = view.findViewById(R.id.tabLayout);
-        viewPager = view.findViewById(R.id.viewPager2);
+        viewPager = view.findViewById(R.id.viewPager2Profile);
         viewPagerAdapter = new ViewPagerAdapter(this);
 
         viewPager.setAdapter(viewPagerAdapter);

@@ -67,6 +67,8 @@
                 android:background="@drawable/edit_text_border"
                 android:height="40dp"
                 android:paddingHorizontal="10dp"
+                android:paddingVertical="14dp"
+                android:inputType="number"
                 />
         </LinearLayout>
         <LinearLayout

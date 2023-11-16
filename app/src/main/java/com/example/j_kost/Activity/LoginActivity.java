@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.j_kost.ForgetPass.VerificationActivity;
 import com.example.j_kost.R;
+import com.example.j_kost.Session.SessionManager;
 import com.google.android.material.textfield.TextInputEditText;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,11 +28,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-//import okhttp3.FormBody;
-//import okhttp3.OkHttpClient;
-//import okhttp3.Request;
-//import okhttp3.RequestBody;
-//import okhttp3.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -145,25 +141,23 @@ public class LoginActivity extends AppCompatActivity {
                 if (code == 200) {
                     JSONObject dataUser = jsonResponse.getJSONObject("data_user");
 
-                    SharedPreferences userPref = getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = userPref.edit();
-
-                    editor.putString("idUser", dataUser.getString("id_user"));
-                    editor.putString("namaLengkap", dataUser.getString("Nama Penghuni"));
-                    editor.putString("emailUser", dataUser.getString("email"));
-                    editor.putString("passwordUser", dataUser.getString("password"));
-                    editor.putString("alamatUser", dataUser.getString("Alamat User"));
-                    editor.putString("noHp", dataUser.getString("Notelp User"));
-                    editor.putString("fotoUser", dataUser.getString("foto_user"));
-
-                    editor.putString("nomorKamar", dataUser.getString("Nomor Kamar"));
-                    editor.putString("fasilitasKamar", dataUser.getString("fasilitas"));
-                    editor.putString("kategoriKost", dataUser.getString("kategori"));
-                    editor.putString("ukuranKamar", dataUser.getString("Ukuran Kamar"));
-                    editor.putString("namaKost", dataUser.getString("nama_kost"));
-                    editor.putString("alamatKost", dataUser.getString("Alamat Kost"));
-
-                    editor.apply();
+                    // Save user data using SessionManager
+                    SessionManager.loginUser(
+                            this,
+                            dataUser.getString("id_user"),
+                            dataUser.getString("Nama Penghuni"),
+                            dataUser.getString("email"),
+                            dataUser.getString("password"),
+                            dataUser.getString("Alamat User"),
+                            dataUser.getString("Notelp User"),
+                            dataUser.getString("foto_user"),
+                            dataUser.getString("Nomor Kamar"),
+                            dataUser.getString("fasilitas"),
+                            dataUser.getString("kategori"),
+                            dataUser.getString("Ukuran Kamar"),
+                            dataUser.getString("nama_kost"),
+                            dataUser.getString("Alamat Kost")
+                    );
 
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(i);

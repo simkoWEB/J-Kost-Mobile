@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.j_kost.R;
+import com.example.j_kost.Session.SessionManager;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -18,12 +19,21 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Intent untuk pindah ke activity utama
-                Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
+                // Cek status login menggunakan SessionManager
+                boolean isLoggedIn = SessionManager.isLoggedIn(SplashScreen.this);
+
+                // Intent untuk pindah ke LoginActivity atau MainActivity sesuai dengan status login
+                Intent intent;
+                if (isLoggedIn) {
+                    intent = new Intent(SplashScreen.this, MainActivity.class);
+                } else {
+                    intent = new Intent(SplashScreen.this, LoginActivity.class);
+                }
+
                 startActivity(intent);
                 finish();
             }
-        }, 2000);
+        }, 2000); // Delay 2 detik sebelum berpindah layar
 
     }
 }
