@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
@@ -14,6 +17,7 @@ import com.example.j_kost.Fragment.KomplainFragment;
 import com.example.j_kost.Fragment.ProfileFragment;
 import com.example.j_kost.Fragment.TransaksiFragment;
 import com.example.j_kost.R;
+import com.example.j_kost.Utils.NetworkUtils;
 import com.example.j_kost.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!NetworkUtils.isNetworkConnected(this)) {
+            showNoInternetDialog();
+        }
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -70,5 +78,18 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    private void showNoInternetDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Tidak terhubung ke internet. Silakan cek koneksi Anda dan coba lagi.")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                        // Di sini, kamu dapat menambahkan tindakan lanjutan jika diperlukan
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 
 }

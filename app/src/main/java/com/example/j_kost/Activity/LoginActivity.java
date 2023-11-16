@@ -2,8 +2,10 @@ package com.example.j_kost.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.j_kost.ForgetPass.VerificationActivity;
 import com.example.j_kost.R;
 import com.example.j_kost.Session.SessionManager;
+import com.example.j_kost.Utils.NetworkUtils;
 import com.google.android.material.textfield.TextInputEditText;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,6 +46,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        if (!NetworkUtils.isNetworkConnected(this)) {
+            showNoInternetDialog();
+        }
 
         btnLogin = findViewById(R.id.loginBtn);
         tvForgetPass = findViewById(R.id.tvLupaPass);
@@ -174,5 +181,19 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             showToast("Gagal terhubung ke server.");
         }
+    }
+
+    private void showNoInternetDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Tidak terhubung ke internet. Silakan cek koneksi Anda dan coba lagi.")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                        // Di sini, kamu dapat menambahkan tindakan lanjutan jika diperlukan
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }
