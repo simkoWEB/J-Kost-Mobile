@@ -16,13 +16,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.j_kost.Activity.DetailEditProfile;
+import com.example.j_kost.DetailActivity.DetailEditProfile;
 import com.example.j_kost.Activity.LoginActivity;
+import com.example.j_kost.DetailActivity.DetailGantiPassword;
 import com.example.j_kost.R;
 
 public class TabProfilUser extends Fragment {
-    TextView nama, email, notelp, alamat;
-    Button btnEdit, btnLogout;
+    TextView nama, email, notelp;
+    Button btnDetailProfile, btnLogout, btnChangePass, btnAbout;
     SharedPreferences sharedPreferences;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -32,18 +33,27 @@ public class TabProfilUser extends Fragment {
         nama = view.findViewById(R.id.tvName);
         email = view.findViewById(R.id.tvEmail);
         notelp = view.findViewById(R.id.tvNumber);
-        alamat = view.findViewById(R.id.tvAddress);
 
-        btnEdit = view.findViewById(R.id.btnEdit);
+        btnDetailProfile = view.findViewById(R.id.btnEdit);
         btnLogout = view.findViewById(R.id.btnLogout);
+        btnChangePass = view.findViewById(R.id.btnGantiPass);
+        btnAbout = view.findViewById(R.id.btnTentangKami);
 
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
         getDataUser();
 
-        btnEdit.setOnClickListener(new View.OnClickListener() {
+        btnDetailProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), DetailEditProfile.class);
+                startActivity(i);
+            }
+        });
+
+        btnChangePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), DetailGantiPassword.class);
                 startActivity(i);
             }
         });
@@ -94,11 +104,9 @@ public class TabProfilUser extends Fragment {
         String userName = sharedPreferences.getString("namaLengkap", "-");
         String userEmail = sharedPreferences.getString("emailUser", "-");
         String userTelp = sharedPreferences.getString("noHp", "-");
-        String userAddress = sharedPreferences.getString("alamatUser", "-");
 
         nama.setText(userName);
         email.setText(userEmail);
         notelp.setText(userTelp);
-        alamat.setText(userAddress);
     }
 }

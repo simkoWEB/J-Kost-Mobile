@@ -1,7 +1,8 @@
-package com.example.j_kost.Activity;
+package com.example.j_kost.DetailActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ public class DetailEditProfile extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     Button Btnedit;
     ImageView btnBack;
-    EditText nama, email, noHp, alamat;
+    EditText nama, email, noHp, jenisKelamin, tglLahir, alamat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +28,12 @@ public class DetailEditProfile extends AppCompatActivity {
         email = findViewById(R.id.editEmail);
         noHp = findViewById(R.id.editNotelp);
         alamat = findViewById(R.id.editAlamat);
+        jenisKelamin = findViewById(R.id.editJk);
+        tglLahir = findViewById(R.id.editTglLahir);
 
         Btnedit = findViewById(R.id.btnEdit);
         btnBack = findViewById(R.id.btnBack);
+
 
         sharedPreferences = getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
         getDataUser();
@@ -48,10 +52,14 @@ public class DetailEditProfile extends AppCompatActivity {
         String userEmail = sharedPreferences.getString("emailUser", "-");
         String userNumber = sharedPreferences.getString("noHp", "-");
         String userAddress = sharedPreferences.getString("alamatUser", "-");
+        String userGender = sharedPreferences.getString("jenisKelamin", "-");
+        String userBirth = sharedPreferences.getString("tglLahir", "-");
 
         nama.setText(userName);
         email.setText(userEmail);
         noHp.setText(userNumber);
         alamat.setText(userAddress);
+        jenisKelamin.setText(userGender);
+        tglLahir.setText(userBirth);
     }
 }

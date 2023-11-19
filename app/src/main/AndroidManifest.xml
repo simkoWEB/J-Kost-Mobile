@@ -17,8 +17,14 @@
         android:theme="@style/JkostTheme"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.DetailEditProfile"
-            android:exported="false"/>
+            android:name=".DetailActivity.DetailGantiPassword"
+            android:exported="false" />
+        <activity
+            android:name=".DetailActivity.DetailProfileUser"
+            android:exported="false" />
+        <activity
+            android:name=".DetailActivity.DetailEditProfile"
+            android:exported="false" />
         <activity
             android:name=".ForgetPass.ResetPassActivity"
             android:exported="false"

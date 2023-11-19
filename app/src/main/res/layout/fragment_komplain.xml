@@ -83,13 +83,14 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText_permasalahan"
-            android:hint="Masukkan Keluhhan Anda"
+            android:hint="Masukkan Keluhhan Disini"
             android:textSize="15sp"
-            android:paddingHorizontal="10dp"
+            android:padding="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:lines="5"
+            android:gravity="top|start"
             android:background="@drawable/edit_text_border"/>
 
     </com.google.android.material.textfield.TextInputLayout>

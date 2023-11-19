@@ -15,6 +15,8 @@ public class SessionManager {
             String password,
             String alamatUser,
             String noHp,
+            String jenisKelamin,
+            String tglLahir,
             String fotoUser,
             String nomorKamar,
             String fasilitasKamar,
@@ -32,6 +34,8 @@ public class SessionManager {
         editor.putString("passwordUser", password);
         editor.putString("alamatUser", alamatUser);
         editor.putString("noHp", noHp);
+        editor.putString("jenisKelamin", jenisKelamin);
+        editor.putString("tglLahir", tglLahir);
         editor.putString("fotoUser", fotoUser);
         editor.putString("nomorKamar", nomorKamar);
         editor.putString("fasilitasKamar", fasilitasKamar);

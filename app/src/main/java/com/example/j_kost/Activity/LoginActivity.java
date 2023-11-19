@@ -157,6 +157,8 @@ public class LoginActivity extends AppCompatActivity {
                             dataUser.getString("password"),
                             dataUser.getString("Alamat User"),
                             dataUser.getString("Notelp User"),
+                            dataUser.getString("Jenis Kelamin"),
+                            dataUser.getString("Tanggal Lahir"),
                             dataUser.getString("foto_user"),
                             dataUser.getString("Nomor Kamar"),
                             dataUser.getString("fasilitas"),

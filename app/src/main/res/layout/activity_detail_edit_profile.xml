@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.DetailEditProfile"
+    tools:context=".DetailActivity.DetailEditProfile"
     style="@style/MyParentLayout">
 
     <ImageView
@@ -17,13 +17,9 @@
         android:layout_marginBottom="12dp"
         android:src="@drawable/ic_arrow_back_ios" />
 
-    <!-- TODO: Update blank fragment layout -->
-<!--    <ScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:scrollbars="none">-->
 
         <LinearLayout
+            android:id="@+id/containerProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -44,102 +40,182 @@
 
             </androidx.cardview.widget.CardView>
 
+            <Button
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:drawableLeft="@drawable/baseline_edit_24"
+                android:drawableTint="@color/colorPrimary"
+                android:drawablePadding="10dp"
+                android:text="Ubah Profile"/>
+
+        </LinearLayout>
+
+    <ScrollView
+        android:layout_above="@+id/btnEdit"
+        android:layout_below="@id/containerProfile"
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
             <androidx.cardview.widget.CardView
-                android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="8dp"
-                app:cardCornerRadius="10dp"
-                android:backgroundTint="#FFFFFF">
+                android:elevation="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="10dp"
-                    >
+                    android:padding="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nama"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
                         android:textStyle="bold"
-                        android:textColor="@color/black"/>
+                        android:fontFamily="@font/poppins_regular"/>
 
-                        <EditText
-                            android:id="@+id/editNama"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/edit_text_border"
-                            android:padding="10dp"
-                            android:textSize="15sp"
-                            android:hint="Nama"/>
+                    <EditText
+                        android:id="@+id/editNama"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/edit_text_border"
+                        android:hint="Nama"
+                        android:padding="10dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="15sp" />
 
                     <TextView
-                        android:layout_marginTop="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
                         android:text="Nomor Telepon"
+                        android:textColor="@color/black"
                         android:textSize="15dp"
                         android:textStyle="bold"
-                        android:textColor="@color/black"/>
+                        android:fontFamily="@font/poppins_regular"/>
 
-                        <EditText
-                            android:id="@+id/editNotelp"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/edit_text_border"
-                            android:padding="10dp"
-                            android:textSize="15sp"
-                            android:hint="Nomor Telepon"/>
-
+                    <EditText
+                        android:id="@+id/editNotelp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/edit_text_border"
+                        android:hint="Nomor Telepon"
+                        android:inputType="phone"
+                        android:padding="10dp"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/poppins_regular"/>
 
                     <TextView
-                        android:layout_marginTop="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Jenis Kelamin"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/poppins_regular"/>
+
+                    <EditText
+                        android:id="@+id/editJk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/edit_text_border"
+                        android:hint="Jenis Kelamin"
+                        android:padding="10dp"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/poppins_regular"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Tanggal Lahir"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/poppins_regular"/>
+
+                    <EditText
+                        android:id="@+id/editTglLahir"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/edit_text_border"
+                        android:hint="Tanggal Lahir"
+                        android:inputType="date"
+                        android:padding="10dp"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/poppins_regular"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
                         android:text="Email"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
                         android:textStyle="bold"
-                        android:textColor="@color/black"/>
+                        android:fontFamily="@font/poppins_regular"/>
 
-                        <EditText
-                            android:id="@+id/editEmail"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/edit_text_border"
-                            android:padding="10dp"
-                            android:textSize="15sp"
-                            android:hint="Email"/>
+                    <EditText
+                        android:id="@+id/editEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/edit_text_border"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:padding="10dp"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/poppins_regular"/>
 
                     <TextView
-                        android:layout_marginTop="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
                         android:text="Alamat"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
                         android:textStyle="bold"
-                        android:textColor="@color/black"/>
+                        android:fontFamily="@font/poppins_regular"/>
 
-                        <EditText
-                            android:id="@+id/editAlamat"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/edit_text_border"
-                            android:padding="10dp"
-                            android:textSize="15sp"
-                            android:hint="Alamat"/>
+                    <EditText
+                        android:id="@+id/editAlamat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/edit_text_border"
+                        android:hint="Alamat"
+                        android:padding="10dp"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/poppins_regular"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
-<!--    </ScrollView>-->
+
+    </ScrollView>
+
 
     <Button
         android:id="@+id/btnEdit"
@@ -147,7 +223,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="10dp"
         android:text="Simpan Perubahan"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_medium"
         android:textColor="@color/white"
         android:background="@drawable/button_edit_profile"
