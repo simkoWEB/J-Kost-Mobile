@@ -6,10 +6,11 @@
     <string name="transaksi">Transaksi</string>
     <string name="profile">Profile</string>
     <string name="komplain">Komplain</string>
-    <string name="profil_saya">Profile Saya</string>
-    <string name="profil_kost">Profile Kost</string>
+    <string name="profil_saya">Profil Saya</string>
+    <string name="profil_kost">Profil Kost</string>
     <string name="descResetPass">Tetapkan kata sandi baru untuk akun anda agar anda dapat masuk dan mengakses semua fitur</string>
     <string name="desc_komplain">Pengajuan komplain berfungsi untuk mengevaluasi pemilik kos ketika terjadi ketidaknyamanan atau gangguan yang dialami oleh penghuni kos.</string>
+    <string name="ket_ubah_password">Kata sandi anda harus lebih dari 8 karakter dan berisi kombinasi angka dan huruf</string>
 
     <string-array name="Komplain">
         <item>Keamanan</item>

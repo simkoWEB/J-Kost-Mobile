@@ -7,25 +7,43 @@
     tools:context=".DetailActivity.DetailEditProfile"
     style="@style/MyParentLayout">
 
-    <ImageView
-        android:id="@+id/btnBack"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
-        android:src="@drawable/ic_arrow_back_ios" />
+    <FrameLayout
+        android:id="@+id/containerHead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
 
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/ic_arrow_back_ios"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Edit Profil"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:fontFamily="@font/poppins_semibold"
+            tools:ignore="RtlCompat" />
+    </FrameLayout>
 
         <LinearLayout
+            android:layout_below="@+id/containerHead"
             android:id="@+id/containerProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="8dp"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
@@ -54,7 +72,7 @@
                 android:drawableLeft="@drawable/baseline_edit_24"
                 android:drawableTint="@color/colorPrimary"
                 android:drawablePadding="10dp"
-                android:text="Ubah Profile"/>
+                android:text="Ubah Profil"/>
 
         </LinearLayout>
 
