@@ -12,12 +12,40 @@
     <string name="desc_komplain">Pengajuan komplain berfungsi untuk mengevaluasi pemilik kos ketika terjadi ketidaknyamanan atau gangguan yang dialami oleh penghuni kos.</string>
     <string name="ket_ubah_password">Kata sandi anda harus lebih dari 8 karakter dan berisi kombinasi angka dan huruf</string>
 
-    <string-array name="Komplain">
+    <string-array name="defaultArray">
+        <item>Pilih tipe terlebih dahulu</item>
+    </string-array>
+
+    <string-array name="TipeKomplain">
+        <item>Pilih tipe komplain</item>
         <item>Keamanan</item>
         <item>Fasilitas</item>
         <item>Kegaduhan</item>
+        <item>Lainnya</item>
     </string-array>
+
+    <string-array name="komplainKeamanan">
+        <item>Barang</item>
+        <item>Kendaraan</item>
+        <item>Kamar</item>
+        <item>Lainnya</item>
+    </string-array>
+
+    <string-array name="komplainFasilitas">
+        <item>Listrik</item>
+        <item>Air Bersih</item>
+        <item>Kerusakan Fasilitas</item>
+        <item>Lainnya</item>
+    </string-array>
+
+    <string-array name="komplainKegaduhan">
+        <item>Penghuni Kost</item>
+        <item>Luar Kost</item>
+        <item>Lainnya</item>
+    </string-array>
+
     <string-array name="metodePembayaran">
+        <item>Pilih Metode Pembayaran</item>
         <item>Dana</item>
         <item>Bank BRI</item>
         <item>Bank Jatim</item>
