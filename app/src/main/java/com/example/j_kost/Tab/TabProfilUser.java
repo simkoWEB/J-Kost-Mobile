@@ -85,9 +85,27 @@ public class TabProfilUser extends Fragment {
                         dialog.dismiss();
                     }
                 });
+
         AlertDialog alert = builder.create();
+        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                // Mengubah teks tombol menjadi huruf kecil
+                Button positiveButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
+                if (positiveButton != null) {
+                    positiveButton.setAllCaps(false);
+                }
+
+                Button negativeButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
+                if (negativeButton != null) {
+                    negativeButton.setAllCaps(false);
+                }
+            }
+        });
+
         alert.show();
     }
+
 
     private void logoutUser() {
         // Lakukan proses logout di sini, misalnya dengan menghapus data dari SharedPreferences

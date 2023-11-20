@@ -1,10 +1,15 @@
 package com.example.j_kost.DetailActivity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,12 +17,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.j_kost.R;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class DetailEditProfile extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
-    Button Btnedit;
-    ImageView btnBack;
+    Button Btnedit, BtnUbah;
+    ImageView btnBack, profile;
     EditText nama, email, noHp, jenisKelamin, tglLahir, alamat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,18 +38,82 @@ public class DetailEditProfile extends AppCompatActivity {
         tglLahir = findViewById(R.id.editTglLahir);
 
         Btnedit = findViewById(R.id.btnEdit);
+        BtnUbah = findViewById(R.id.btnUbah);
         btnBack = findViewById(R.id.btnBack);
+        profile = findViewById(R.id.profile);
 
 
         sharedPreferences = getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
         getDataUser();
 
+        BtnUbah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImagePicker.with(DetailEditProfile.this)
+                        .cropSquare()
+                        .start();
+            }
+        });
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                showCancelConfirmation();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Uri url = data.getData();
+        profile.setImageURI(url);
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        showCancelConfirmation();
+    }
+
+    private void showCancelConfirmation() {
+        // Tampilkan alert dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Apakah Anda yakin ingin membatalkan perubahan?");
+
+        builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                finish(); // Kembali ke layar sebelumnya
+            }
+        });
+
+        builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                // Mengubah teks tombol menjadi huruf kecil
+                Button positiveButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
+                if (positiveButton != null) {
+                    positiveButton.setAllCaps(false);
+                }
+
+                Button negativeButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
+                if (negativeButton != null) {
+                    negativeButton.setAllCaps(false);
+                }
+            }
+        });
+
+        alert.show();
     }
 
 
@@ -62,4 +132,5 @@ public class DetailEditProfile extends AppCompatActivity {
         jenisKelamin.setText(userGender);
         tglLahir.setText(userBirth);
     }
+
 }
