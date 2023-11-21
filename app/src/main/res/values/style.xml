@@ -47,4 +47,10 @@
         <item name="boxCornerRadiusBottomEnd">8dp</item> <!-- Radius for bottom-right corner -->
     </style>
 
+    <style name="DialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/dialog_background</item> <!-- background pop-up dialog -->
+        <item name="android:windowMinWidthMajor">90%</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+    </style>
+
 </resources>

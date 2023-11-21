@@ -48,7 +48,8 @@ public class DetailGantiPassword extends AppCompatActivity {
 
     private void showCancelConfirmation() {
         // Tampilkan alert dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
+        builder.setTitle("Konfirmasi!");
         builder.setMessage("Apakah Anda yakin ingin membatalkan perubahan?");
 
         builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
@@ -74,11 +75,13 @@ public class DetailGantiPassword extends AppCompatActivity {
                 Button positiveButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
                 if (positiveButton != null) {
                     positiveButton.setAllCaps(false);
+                    positiveButton.setTextColor(getResources().getColor(android.R.color.holo_red_light)); // Mengubah warna teks
                 }
 
                 Button negativeButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
                 if (negativeButton != null) {
                     negativeButton.setAllCaps(false);
+                    negativeButton.setTextColor(getResources().getColor(R.color.black)); // Mengubah warna teks
                 }
             }
         });
