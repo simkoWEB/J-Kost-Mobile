@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config xmlns:android="http://schemas.android.com/apk/res/android">
     <domain-config cleartextTrafficPermitted="true">
-        <!--        ganti sesuai dengan IP local yang digunakan jika menggunakan localhost-->
-        <domain includeSubdomains="false">j-kost.000webhostapp.com</domain>
+<!--        Hosting-->
+<!--        <domain includeSubdomains="false">j-kost.000webhostapp.com</domain>-->
+
+<!--        local-->
+        <domain includeSubdomains="false">10.10.181.53</domain>
     </domain-config>
 </network-security-config>

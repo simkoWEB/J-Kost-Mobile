@@ -104,7 +104,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void performLoginRequest(String email, String password) {
-        String apiUrl = "https://j-kost.000webhostapp.com/PHP-MVC/public/LoginApi/login";
+//        String apiUrl = "https://j-kost.000webhostapp.com/PHP-MVC/public/LoginApi/login";
+        String apiUrl = "http://10.10.181.53/PHP-MVC/public/LoginApi/login";
 
         // Buat permintaan login menggunakan Volley
         StringRequest stringRequest = new StringRequest(Request.Method.POST, apiUrl,
