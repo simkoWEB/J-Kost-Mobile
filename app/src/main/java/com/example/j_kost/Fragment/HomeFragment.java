@@ -18,11 +18,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.j_kost.Adapter.HistoryAdapter;
 import com.example.j_kost.R;
 import com.example.j_kost.Tab.TabHistory;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,12 +40,14 @@ public class HomeFragment extends Fragment {
     private HistoryAdapter historyAdapter;
     private List<String> listData;
     private SharedPreferences sharedPreferences;
+    ImageView profilePhoto;
     public TextView namaUser, namaKost, selengkapnya, bulanPembayaran;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        profilePhoto = view.findViewById(R.id.profile);
         namaUser = view.findViewById(R.id.tvUsername);
         namaKost = view.findViewById(R.id.tvKost);
         selengkapnya = view.findViewById(R.id.selengkapnya);
@@ -91,9 +95,18 @@ public class HomeFragment extends Fragment {
     private void getDataUser(){
         String userName = sharedPreferences.getString("namaLengkap", "-");
         String userKost = sharedPreferences.getString("namaKost", "-");
+        String photoPath = sharedPreferences.getString("fotoUser", "");
 
         namaUser.setText(userName);
         namaKost.setText(userKost);
+
+        if (!photoPath.equals("")) {
+//            ini local
+            Picasso.get().load("http://10.10.181.53/PHP-MVC/public/foto/"+photoPath).into(profilePhoto);
+        } else {
+            // Jika tidak ada foto yang tersimpan, kamu bisa menampilkan foto placeholder atau pesan lainnya
+            profilePhoto.setImageResource(R.drawable.pp);
+        }
     }
 
     private void navigateToTabHistoryFragment() {

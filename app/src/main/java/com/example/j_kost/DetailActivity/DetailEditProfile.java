@@ -24,7 +24,7 @@ import com.squareup.picasso.Picasso;
 public class DetailEditProfile extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     Button Btnedit, BtnUbah;
-    ImageView btnBack, profile;
+    ImageView btnBack, profilePhoto;
     EditText nama, email, noHp, jenisKelamin, tglLahir, alamat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class DetailEditProfile extends AppCompatActivity {
         Btnedit = findViewById(R.id.btnEdit);
         BtnUbah = findViewById(R.id.btnUbah);
         btnBack = findViewById(R.id.btnBack);
-        profile = findViewById(R.id.profile);
+        profilePhoto = findViewById(R.id.profile);
 
 
         sharedPreferences = getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
@@ -74,7 +74,7 @@ public class DetailEditProfile extends AppCompatActivity {
             Uri uri = data.getData();
 
             // Menyetel foto ke ImageView menggunakan Picasso
-            Picasso.get().load(uri).into(profile); // profile adalah ImageView yang ingin ditampilkan foto di dalamnya
+            Picasso.get().load(uri).into(profilePhoto); // profile adalah ImageView yang ingin ditampilkan foto di dalamnya
         }
     }
 
@@ -135,6 +135,7 @@ public class DetailEditProfile extends AppCompatActivity {
         String userAddress = sharedPreferences.getString("alamatUser", "-");
         String userGender = sharedPreferences.getString("jenisKelamin", "-");
         String userBirth = sharedPreferences.getString("tglLahir", "-");
+        String photoPath = sharedPreferences.getString("fotoUser", "");
 
         nama.setText(userName);
         email.setText(userEmail);
@@ -142,6 +143,15 @@ public class DetailEditProfile extends AppCompatActivity {
         alamat.setText(userAddress);
         jenisKelamin.setText(userGender);
         tglLahir.setText(userBirth);
+
+
+        if (!photoPath.equals("")) {
+//            ini local
+            Picasso.get().load("http://10.10.181.53/PHP-MVC/public/foto/"+photoPath).into(profilePhoto);
+        } else {
+            // Jika tidak ada foto yang tersimpan, kamu bisa menampilkan foto placeholder atau pesan lainnya
+            profilePhoto.setImageResource(R.drawable.pp);
+        }
     }
 
 }

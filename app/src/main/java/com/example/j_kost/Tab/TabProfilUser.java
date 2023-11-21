@@ -137,13 +137,10 @@ public class TabProfilUser extends Fragment {
         notelp.setText(userTelp);
 
         if (!photoPath.equals("")) {
-            Picasso.get().load("file://" + photoPath).into(profilePhoto);
+//            ini local
+            Picasso.get().load("http://10.10.181.53/PHP-MVC/public/foto/"+photoPath).into(profilePhoto);
         } else {
             // Jika tidak ada foto yang tersimpan, kamu bisa menampilkan foto placeholder atau pesan lainnya
-            // Contoh:
-            // profilePhoto.setImageResource(R.drawable.placeholder_image);
-            // Atau:
-            // profilePhoto.setImageResource(R.drawable.default_user_image);
             profilePhoto.setImageResource(R.drawable.pp);
         }
     }
