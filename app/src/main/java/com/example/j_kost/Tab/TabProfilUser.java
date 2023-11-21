@@ -13,17 +13,21 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.j_kost.DetailActivity.DetailEditProfile;
 import com.example.j_kost.Activity.LoginActivity;
 import com.example.j_kost.DetailActivity.DetailGantiPassword;
 import com.example.j_kost.R;
+import com.squareup.picasso.Picasso;
 
 public class TabProfilUser extends Fragment {
     TextView nama, email, notelp;
     Button btnDetailProfile, btnLogout, btnChangePass, btnAbout;
+    ImageView profilePhoto;
     SharedPreferences sharedPreferences;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -33,6 +37,7 @@ public class TabProfilUser extends Fragment {
         nama = view.findViewById(R.id.tvName);
         email = view.findViewById(R.id.tvEmail);
         notelp = view.findViewById(R.id.tvNumber);
+        profilePhoto = view.findViewById(R.id.profile);
 
         btnDetailProfile = view.findViewById(R.id.btnEdit);
         btnLogout = view.findViewById(R.id.btnLogout);
@@ -70,7 +75,8 @@ public class TabProfilUser extends Fragment {
     }
 
     private void showLogoutConfirmationDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.DialogStyle);
+        builder.setTitle("Konfirmasi!");
         builder.setMessage("Apakah anda yakin ingin logout?")
                 .setCancelable(false)
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
@@ -94,11 +100,13 @@ public class TabProfilUser extends Fragment {
                 Button positiveButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
                 if (positiveButton != null) {
                     positiveButton.setAllCaps(false);
+                    positiveButton.setTextColor(getResources().getColor(android.R.color.holo_red_light)); // Mengubah warna teks
                 }
 
                 Button negativeButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
                 if (negativeButton != null) {
                     negativeButton.setAllCaps(false);
+                    negativeButton.setTextColor(getResources().getColor(R.color.black)); // Mengubah warna teks
                 }
             }
         });
@@ -122,9 +130,21 @@ public class TabProfilUser extends Fragment {
         String userName = sharedPreferences.getString("namaLengkap", "-");
         String userEmail = sharedPreferences.getString("emailUser", "-");
         String userTelp = sharedPreferences.getString("noHp", "-");
+        String photoPath = sharedPreferences.getString("fotoUser", "");
 
         nama.setText(userName);
         email.setText(userEmail);
         notelp.setText(userTelp);
+
+        if (!photoPath.equals("")) {
+            Picasso.get().load("file://" + photoPath).into(profilePhoto);
+        } else {
+            // Jika tidak ada foto yang tersimpan, kamu bisa menampilkan foto placeholder atau pesan lainnya
+            // Contoh:
+            // profilePhoto.setImageResource(R.drawable.placeholder_image);
+            // Atau:
+            // profilePhoto.setImageResource(R.drawable.default_user_image);
+            profilePhoto.setImageResource(R.drawable.pp);
+        }
     }
 }

@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import com.example.j_kost.R;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.textfield.TextInputEditText;
+import com.squareup.picasso.Picasso;
 
 public class DetailEditProfile extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
@@ -66,8 +67,15 @@ public class DetailEditProfile extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Uri url = data.getData();
-        profile.setImageURI(url);
+//        Uri url = data.getData();
+//        profile.setImageURI(url);
+
+        if (requestCode == ImagePicker.REQUEST_CODE && resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+
+            // Menyetel foto ke ImageView menggunakan Picasso
+            Picasso.get().load(uri).into(profile); // profile adalah ImageView yang ingin ditampilkan foto di dalamnya
+        }
     }
 
     @SuppressLint("MissingSuperCall")
@@ -78,7 +86,8 @@ public class DetailEditProfile extends AppCompatActivity {
 
     private void showCancelConfirmation() {
         // Tampilkan alert dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
+        builder.setTitle("Konfirmasi!");
         builder.setMessage("Apakah Anda yakin ingin membatalkan perubahan?");
 
         builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
@@ -104,11 +113,13 @@ public class DetailEditProfile extends AppCompatActivity {
                 Button positiveButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
                 if (positiveButton != null) {
                     positiveButton.setAllCaps(false);
+                    positiveButton.setTextColor(getResources().getColor(android.R.color.holo_red_light)); // Mengubah warna teks
                 }
 
                 Button negativeButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
                 if (negativeButton != null) {
                     negativeButton.setAllCaps(false);
+                    negativeButton.setTextColor(getResources().getColor(R.color.black)); // Mengubah warna teks
                 }
             }
         });
