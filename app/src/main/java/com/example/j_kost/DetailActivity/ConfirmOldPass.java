@@ -36,7 +36,8 @@ public class ConfirmOldPass extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showCancelConfirmation();
+//                showCancelConfirmation();
+                finish();
             }
         });
 
@@ -45,7 +46,8 @@ public class ConfirmOldPass extends AppCompatActivity {
     @SuppressLint("MissingSuperCall")
     @Override
     public void onBackPressed() {
-        showCancelConfirmation();
+//        showCancelConfirmation();
+        finish();
     }
 
     private void showCancelConfirmation() {
