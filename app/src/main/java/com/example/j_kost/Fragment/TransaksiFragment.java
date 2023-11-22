@@ -2,12 +2,17 @@ package com.example.j_kost.Fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import com.example.j_kost.Adapter.ViewPagerAdapter;
 import com.example.j_kost.R;
 import com.google.android.material.tabs.TabItem;
@@ -42,15 +47,21 @@ public class TransaksiFragment extends Fragment {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                TextView textView = (TextView)(((LinearLayout)((LinearLayout)tabLayout.getChildAt(0)).getChildAt(tab.getPosition())).getChildAt(1));
+                textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary)); // Ganti dengan warna yang diinginkan saat dipilih
                 viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+                TextView textView = (TextView)(((LinearLayout)((LinearLayout)tabLayout.getChildAt(0)).getChildAt(tab.getPosition())).getChildAt(1));
+                textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.disableColor)); // Ganti dengan warna yang diinginkan saat dipilih
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                TextView textView = (TextView)(((LinearLayout)((LinearLayout)tabLayout.getChildAt(0)).getChildAt(tab.getPosition())).getChildAt(1));
+                textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary)); // Ganti dengan warna yang diinginkan saat dipilih
             }
         });
 
