@@ -166,7 +166,7 @@
                 android:id="@+id/imageViewBuktiPembayaran"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginTop="10dp"
+                android:layout_margin="5dp"
                 android:src="@drawable/upload_image"/>
 
             </androidx.cardview.widget.CardView>
@@ -237,7 +237,7 @@
                     android:id="@+id/tvhragaTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="800,000"
+                    android:text="1300000"
                     android:textSize="18dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
@@ -329,7 +329,7 @@
         <Button
             android:id="@+id/konfirmasiPembayaran"
             android:layout_width="match_parent"
-            android:layout_marginVertical="20dp"
+            android:layout_marginVertical="13dp"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_button_green"
             android:text="Konfirmasi Pembayaran"

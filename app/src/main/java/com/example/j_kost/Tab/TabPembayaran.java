@@ -27,6 +27,9 @@ import com.example.j_kost.R;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class TabPembayaran extends Fragment {
 
     TextView tvBayar, tvKembali, tvHargaTotal;
@@ -51,7 +54,12 @@ public class TabPembayaran extends Fragment {
 
         tvBayar = view.findViewById(R.id.tvBayar);
         tvKembali = view.findViewById(R.id.tvKembali);
+
         tvHargaTotal = view.findViewById(R.id.tvhragaTotal);
+        int hargaTotal = Integer.parseInt(tvHargaTotal.getText().toString());
+        String formattedTotal = formatDec(hargaTotal);
+        tvHargaTotal.setText(formattedTotal);
+
 
         btnPilihFoto = view.findViewById(R.id.btnPilihFoto);
         buktiPembayaran = view.findViewById(R.id.imageViewBuktiPembayaran);
@@ -97,16 +105,16 @@ public class TabPembayaran extends Fragment {
                 nominalBayar.setSelection(formatted.length());
                 nominalBayar.addTextChangedListener(this);
 
-                int total = parsed; // Menggunakan nilai dari EditText
-                int bayar = total;
+                int total = Integer.parseInt(tvHargaTotal.getText().toString().replaceAll("[,.]", ""));
+                int bayar = parsed > total ? total : parsed;
                 tvBayar.setText(formatDec(bayar));
 
-                // Hitung dan atur nilai tvKembali
-                int hargaTotal = Integer.parseInt(tvHargaTotal.getText().toString().replaceAll("[,.]", ""));
-                int kembali = hargaTotal - bayar;
+                // Kondisi jika nilai pada EditText adalah 0
+                int kembali = parsed == 0 ? 0 : total - bayar;
                 tvKembali.setText(formatDec(kembali));
             }
         });
+
 
         return view;
     }
