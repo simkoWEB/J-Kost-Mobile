@@ -166,7 +166,8 @@ public class LoginActivity extends AppCompatActivity {
                             dataUser.getString("kategori"),
                             dataUser.getString("Ukuran Kamar"),
                             dataUser.getString("nama_kost"),
-                            dataUser.getString("Alamat Kost")
+                            dataUser.getString("Alamat Kost"),
+                            dataUser.getString("harga_bulanan")
                     );
 
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);

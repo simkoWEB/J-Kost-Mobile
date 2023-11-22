@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment {
     private List<String> listData;
     private SharedPreferences sharedPreferences;
     ImageView profilePhoto;
-    public TextView namaUser, namaKost, selengkapnya, bulanPembayaran;
+    public TextView namaUser, namaKost, selengkapnya, bulanPembayaran, tvHarga;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,6 +53,8 @@ public class HomeFragment extends Fragment {
         namaKost = view.findViewById(R.id.tvKost);
         selengkapnya = view.findViewById(R.id.selengkapnya);
         bulanPembayaran = view.findViewById(R.id.bulanPembayaran);
+        tvHarga = view.findViewById(R.id.hargaBulanan);
+
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
         getDataUser();
 
@@ -96,10 +98,15 @@ public class HomeFragment extends Fragment {
     private void getDataUser(){
         String userName = sharedPreferences.getString("namaLengkap", "-");
         String userKost = sharedPreferences.getString("namaKost", "-");
+        String hargaBulanan = sharedPreferences.getString("hargaBulanan", "-");
         String photoPath = sharedPreferences.getString("fotoUser", "");
 
         namaUser.setText(userName);
         namaKost.setText(userKost);
+
+        int harga = Integer.parseInt(hargaBulanan);
+        String formattedHarga = formatDecimal(harga);
+        tvHarga.setText("Rp. " + formattedHarga);
 
         if (!photoPath.equals("")) {
 //            ini local
@@ -133,6 +140,10 @@ public class HomeFragment extends Fragment {
         calendar.set(Calendar.MONTH, month);
         Date date = calendar.getTime();
         return monthFormat.format(date);
+    }
+
+    private String formatDecimal(int value) {
+        return String.format(Locale.getDefault(), "%,d", value).replace('.', ',');
     }
 
 }

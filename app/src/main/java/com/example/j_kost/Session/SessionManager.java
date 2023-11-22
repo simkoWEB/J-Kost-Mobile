@@ -23,7 +23,8 @@ public class SessionManager {
             String kategoriKost,
             String ukuranKamar,
             String namaKost,
-            String alamatKost
+            String alamatKost,
+            String hargaBulanan
     ) {
         SharedPreferences userPref = context.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = userPref.edit();
@@ -43,6 +44,7 @@ public class SessionManager {
         editor.putString("ukuranKamar", ukuranKamar);
         editor.putString("namaKost", namaKost);
         editor.putString("alamatKost", alamatKost);
+        editor.putString("hargaBulanan", hargaBulanan);
 
         editor.putBoolean(IS_LOGGED_IN, true); // Set logged-in state to true
         editor.apply();

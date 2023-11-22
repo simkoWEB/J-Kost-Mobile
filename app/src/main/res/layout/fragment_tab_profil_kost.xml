@@ -99,6 +99,7 @@
                                 android:background="@drawable/place"/>
 
                             <TextView
+                                android:id="@+id/alamatKost"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Jalan Sriwijaya IV No.45B"
