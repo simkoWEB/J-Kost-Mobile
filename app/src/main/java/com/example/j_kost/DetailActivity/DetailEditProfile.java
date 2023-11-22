@@ -32,7 +32,7 @@ public class DetailEditProfile extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     Button Btnedit, BtnUbah;
     ImageView btnBack, profilePhoto;
-    EditText nama, email, noHp, jenisKelamin, tglLahir, alamat;
+    EditText nama, noHp, jenisKelamin, tglLahir, alamat;
     RadioButton radioBtnMale, radioBtnFemale;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,6 @@ public class DetailEditProfile extends AppCompatActivity {
         setContentView(R.layout.activity_detail_edit_profile);
 
         nama = findViewById(R.id.editNama);
-        email = findViewById(R.id.editEmail);
 
         noHp = findViewById(R.id.editNotelp);
         InputFilter filter = new InputFilter.LengthFilter(12);
@@ -167,7 +166,6 @@ public class DetailEditProfile extends AppCompatActivity {
 
     private void getDataUser(){
         String userName = sharedPreferences.getString("namaLengkap", "-");
-        String userEmail = sharedPreferences.getString("emailUser", "-");
         String userNumber = sharedPreferences.getString("noHp", "-");
         String userAddress = sharedPreferences.getString("alamatUser", "-");
         String userGender = sharedPreferences.getString("jenisKelamin", "-");
@@ -175,7 +173,6 @@ public class DetailEditProfile extends AppCompatActivity {
         String photoPath = sharedPreferences.getString("fotoUser", "");
 
         nama.setText(userName);
-        email.setText(userEmail);
         noHp.setText(userNumber);
         alamat.setText(userAddress);
         tglLahir.setText(userBirth);

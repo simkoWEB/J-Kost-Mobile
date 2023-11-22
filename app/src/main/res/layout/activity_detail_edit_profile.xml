@@ -201,28 +201,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="Email"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/poppins_regular"/>
-
-                    <EditText
-                        android:id="@+id/editEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/edit_text_border"
-                        android:hint="Email"
-                        android:inputType="textEmailAddress"
-                        android:padding="10dp"
-                        android:textSize="15sp"
-                        android:fontFamily="@font/poppins_regular"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
                         android:text="Alamat"
                         android:textColor="@color/black"
                         android:textSize="15sp"
