@@ -5,50 +5,93 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Tab.TabPembayaran">
+    
 
-    <!-- TODO: Update blank fragment layout -->
+    
     <LinearLayout
         android:id="@+id/form_pembayaran"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="2dp">
+
         <LinearLayout
             android:id="@+id/container_metode_pembayaran"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            >
+            android:layout_marginTop="10dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Metode Pembayaran"
-                android:textSize="15dp"
+                android:textSize="13dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
+                android:fontFamily="@font/poppins_regular"
                 android:layout_margin="4dp"/>
 
-            <Spinner
-                android:id="@+id/metode_pembayaran"
+            <RadioGroup
+                android:id="@+id/radioGroupMetodePembayaran"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_spinner"
-                android:paddingVertical="10dp"
-                android:paddingHorizontal="5dp"
-                android:entries="@array/metodePembayaran"
-                android:spinnerMode="dropdown"
-                android:dropDownVerticalOffset="44dp"/>
+                android:orientation="vertical"
+                android:layout_marginTop="5dp">
+
+                <RadioButton
+                    android:id="@+id/danaRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dana"
+                    android:textSize="13dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_margin="4dp"/>
+
+                <RadioButton
+                    android:id="@+id/briRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bank BRI"
+                    android:textSize="13dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_margin="4dp"/>
+
+                <RadioButton
+                    android:id="@+id/jatimRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bank Jatim"
+                    android:textSize="13dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_margin="4dp"/>
+
+                <RadioButton
+                    android:id="@+id/bcaRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bank BCA"
+                    android:textSize="13dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_margin="4dp"/>
+            </RadioGroup>
+
+<!--            <Spinner-->
+<!--                android:id="@+id/metode_pembayaran"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/bg_spinner"-->
+<!--                android:paddingVertical="10dp"-->
+<!--                android:paddingHorizontal="5dp"-->
+<!--                android:entries="@array/metodePembayaran"-->
+<!--                android:spinnerMode="dropdown"-->
+<!--                android:dropDownVerticalOffset="44dp"/>-->
 
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/container_nominal_pembayaran"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/container_metode_pembayaran"
-            >
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -56,69 +99,55 @@
                 android:layout_margin="4dp"
                 android:text="Nominal Pembayaran"
                 android:textColor="@color/black"
-                android:textSize="15dp"
+                android:textSize="13dp"
+                android:fontFamily="@font/poppins_regular"
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/etNominal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Masukan Nominal Pembayaran"
-                android:textSize="15dp"
+                android:textSize="13dp"
                 android:background="@drawable/edit_text_border"
                 android:height="40dp"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="14dp"
                 android:inputType="number"
+                android:fontFamily="@font/poppins_regular"
                 />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/container_bukti_pembayaran"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/container_nominal_pembayaran"
-            >
+
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Masukan Bukti Pembayaran"
-                android:textSize="15dp"
+                android:textSize="13dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
+                android:fontFamily="@font/poppins_regular"
                 android:layout_margin="4dp"/>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Pilih File/Foto"
-                android:textSize="15dp"
+                android:textSize="14dp"
                 android:background="@drawable/edit_text_border"
                 android:drawableStart="@drawable/ic_image"
                 android:drawablePadding="8dp"
                 android:paddingHorizontal="10dp"
                 android:gravity="start|center_vertical"
+                android:fontFamily="@font/poppins_regular"
                 />
         </LinearLayout>
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/container_total_pembayaran"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/form_pembayaran"
-        android:layout_alignParentBottom="true"
-        android:gravity="bottom"
-        android:layout_marginBottom="10dp"
-        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp"
+            android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -131,6 +160,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:layout_margin="4dp"
+                    android:fontFamily="@font/poppins_regular"
                     android:layout_weight="1" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -139,8 +169,10 @@
                     android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_regular"
                     android:layout_margin="4dp"/>
             </LinearLayout>
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -148,10 +180,8 @@
                 android:layout_marginTop="10dp"
                 android:text="Konfirmasi Pembayaran"
                 android:textColor="@color/white"
+                android:fontFamily="@font/poppins_semibold"
                 android:textAllCaps="false"
                 />
         </LinearLayout>
-
-    </LinearLayout>
-
 </RelativeLayout>
