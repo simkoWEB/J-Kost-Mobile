@@ -106,8 +106,6 @@ public class DetailEditProfile extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        Uri url = data.getData();
-//        profile.setImageURI(url);
 
         if (requestCode == ImagePicker.REQUEST_CODE && resultCode == RESULT_OK) {
             Uri uri = data.getData();

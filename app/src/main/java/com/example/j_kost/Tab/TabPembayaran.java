@@ -1,8 +1,13 @@
 package com.example.j_kost.Tab;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -11,18 +16,28 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.j_kost.DetailActivity.DetailEditProfile;
+import com.example.j_kost.DetailActivity.MetodePembayaran;
 import com.example.j_kost.R;
+import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.squareup.picasso.Picasso;
+
 public class TabPembayaran extends Fragment {
 
-    EditText nominalBayar;
+    TextView tvBayar, tvKembali, tvHargaTotal;
+    EditText nominalBayar, btnMetodePembayaran;
+    ImageView buktiPembayaran;
+    Button btnPilihFoto;
 
     public static String formatDec(int val) {
         return String.format("%,d", val).replace('.', ',');
     }
 
-    //untuk menghilangkan titik
     public static String reFormat(String val) {
         return val.replaceAll("[,.]", ""); // Menghapus semua koma dan titik
     }
@@ -32,62 +47,87 @@ public class TabPembayaran extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_tab_pembayaran, container, false);
 
+        btnMetodePembayaran = view.findViewById(R.id.BtnMetodePembayaran);
+
+        tvBayar = view.findViewById(R.id.tvBayar);
+        tvKembali = view.findViewById(R.id.tvKembali);
+        tvHargaTotal = view.findViewById(R.id.tvhragaTotal);
+
+        btnPilihFoto = view.findViewById(R.id.btnPilihFoto);
+        buktiPembayaran = view.findViewById(R.id.imageViewBuktiPembayaran);
+
         nominalBayar = view.findViewById(R.id.etNominal);
         InputFilter filter = new InputFilter.LengthFilter(10);
         nominalBayar.setFilters(new InputFilter[]{filter});
 
+
+        btnPilihFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImagePicker.with(TabPembayaran.this)
+                        .crop()
+                        .compress(5120)
+                        .start();
+            }
+        });
+
+        btnMetodePembayaran.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), MetodePembayaran.class);
+                startActivityForResult(i, 1);
+            }
+        });
+
         nominalBayar.addTextChangedListener(new TextWatcher() {
-            boolean isFormatting;
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // Tambahkan validasi saat teks berubah
-                if (charSequence.length() > 10) {
-                    // Jika panjang input melebihi 8 karakter, maka batasi panjangnya
-                    String limitedInput = charSequence.toString().substring(0, 10);
-                    nominalBayar.setText(limitedInput); // Set ulang teks pada EditText
-                    nominalBayar.setSelection(limitedInput.length()); // Posisi kursor di akhir teks
-                }
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void afterTextChanged(Editable editable) {
-                // Cek apakah sedang dalam proses pemformatan untuk menghindari rekursi tak terbatas
-                if (isFormatting) return;
+                String cleanString = editable.toString().replaceAll("[,.]", "");
+                int parsed = cleanString.isEmpty() ? 0 : Integer.parseInt(cleanString);
+                String formatted = formatDec(parsed);
 
-                // Matikan pemformatan sementara agar tidak masuk ke dalam loop
-                isFormatting = true;
+                nominalBayar.removeTextChangedListener(this);
+                nominalBayar.setText(formatted);
+                nominalBayar.setSelection(formatted.length());
+                nominalBayar.addTextChangedListener(this);
 
-                // Ambil teks yang dimasukkan
-                String originalText = editable.toString();
+                int total = parsed; // Menggunakan nilai dari EditText
+                int bayar = total;
+                tvBayar.setText(formatDec(bayar));
 
-                // Hapus tanda pemisah ribuan
-                String cleanString = originalText.replaceAll("[,.]", "");
-
-                // Cek apakah string kosong atau tidak
-                if (!cleanString.isEmpty()) {
-                    try {
-                        // Parsing ke tipe data long (bisa juga menggunakan double atau int, sesuai kebutuhan)
-                        long parsed = Long.parseLong(cleanString);
-
-                        // Format angka ke dalam format desimal yang diinginkan
-                        String formatted = formatDec((int) parsed);
-
-                        // Set hasil format ke dalam EditText
-                        nominalBayar.setText(formatted);
-                        nominalBayar.setSelection(formatted.length()); // Pindahkan kursor ke akhir teks
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                    }
-                }
-                isFormatting = false;
+                // Hitung dan atur nilai tvKembali
+                int hargaTotal = Integer.parseInt(tvHargaTotal.getText().toString().replaceAll("[,.]", ""));
+                int kembali = hargaTotal - bayar;
+                tvKembali.setText(formatDec(kembali));
             }
         });
 
         return view;
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Mengatur teks pada EditText dengan nilai yang dipilih dari MetodePembayaran Activity
+        if (requestCode == 1) {
+            if(resultCode == getActivity().RESULT_OK){
+                String selectedValue = data.getStringExtra("selectedValue");
+                btnMetodePembayaran.setText(selectedValue);
+            }
+        }
+
+//        ini untuk set foto ketika milih bukti pembayaran
+        if (requestCode == ImagePicker.REQUEST_CODE && resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+
+            // Menyetel foto ke ImageView menggunakan Picasso
+            Picasso.get().load(uri).into(buktiPembayaran); // profile adalah ImageView yang ingin ditampilkan foto di dalamnya
+        }
     }
 }

@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Tab.TabPembayaran">
-    
 
-    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        >
+
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
         android:id="@+id/form_pembayaran"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="2dp">
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/container_metode_pembayaran"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -31,53 +34,70 @@
                 android:fontFamily="@font/poppins_regular"
                 android:layout_margin="4dp"/>
 
-            <RadioGroup
-                android:id="@+id/radioGroupMetodePembayaran"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="5dp">
+        <EditText
+            android:id="@+id/BtnMetodePembayaran"
+            android:layout_marginTop="5dp"
+            android:textAlignment="textStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pilih Metode Pembayaran"
+            android:textSize="13dp"
+            android:background="@drawable/edit_text_border"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="14dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:fontFamily="@font/poppins_regular"
+            />
 
-                <RadioButton
-                    android:id="@+id/danaRadioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dana"
-                    android:textSize="13dp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/poppins_regular"
-                    android:layout_margin="4dp"/>
+<!--            <RadioGroup-->
+<!--                android:id="@+id/radioGroupMetodePembayaran"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:layout_marginTop="5dp">-->
 
-                <RadioButton
-                    android:id="@+id/briRadioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bank BRI"
-                    android:textSize="13dp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/poppins_regular"
-                    android:layout_margin="4dp"/>
+<!--                <RadioButton-->
+<!--                    android:id="@+id/danaRadioButton"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Dana"-->
+<!--                    android:textSize="13dp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:fontFamily="@font/poppins_regular"-->
+<!--                    android:layout_margin="4dp"/>-->
 
-                <RadioButton
-                    android:id="@+id/jatimRadioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bank Jatim"
-                    android:textSize="13dp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/poppins_regular"
-                    android:layout_margin="4dp"/>
+<!--                <RadioButton-->
+<!--                    android:id="@+id/briRadioButton"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Bank BRI"-->
+<!--                    android:textSize="13dp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:fontFamily="@font/poppins_regular"-->
+<!--                    android:layout_margin="4dp"/>-->
 
-                <RadioButton
-                    android:id="@+id/bcaRadioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bank BCA"
-                    android:textSize="13dp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/poppins_regular"
-                    android:layout_margin="4dp"/>
-            </RadioGroup>
+<!--                <RadioButton-->
+<!--                    android:id="@+id/jatimRadioButton"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Bank Jatim"-->
+<!--                    android:textSize="13dp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:fontFamily="@font/poppins_regular"-->
+<!--                    android:layout_margin="4dp"/>-->
+
+<!--                <RadioButton-->
+<!--                    android:id="@+id/bcaRadioButton"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Bank BCA"-->
+<!--                    android:textSize="13dp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:fontFamily="@font/poppins_regular"-->
+<!--                    android:layout_margin="4dp"/>-->
+<!--            </RadioGroup>-->
 
 <!--            <Spinner-->
 <!--                android:id="@+id/metode_pembayaran"-->
@@ -90,21 +110,20 @@
 <!--                android:spinnerMode="dropdown"-->
 <!--                android:dropDownVerticalOffset="44dp"/>-->
 
-        </LinearLayout>
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="Nominal Pembayaran"
-                android:textColor="@color/black"
-                android:textSize="13dp"
-                android:fontFamily="@font/poppins_regular"
-                android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Nominal Pembayaran"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/etNominal"
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Masukan Nominal Pembayaran"
@@ -117,38 +136,79 @@
                 android:fontFamily="@font/poppins_regular"
                 />
 
+        <!-- Bagian Upload Bukti Pembayaran -->
+        <LinearLayout
+            android:id="@+id/container_bukti_pembayaran"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/container_nominal_pembayaran">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Masukan Bukti Pembayaran"
+                android:text="Upload Bukti Pembayaran"
                 android:textSize="13dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:fontFamily="@font/poppins_regular"
                 android:layout_margin="4dp"/>
 
-            <Button
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Pilih File/Foto"
+                app:cardCornerRadius="8dp"
+                android:background="@drawable/dashed_border"
+                >
+
+            <ImageView
+                android:id="@+id/imageViewBuktiPembayaran"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/upload_image"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/btnPilihFoto"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_primary"
+                android:text="Upload Foto"
                 android:textSize="14dp"
-                android:background="@drawable/edit_text_border"
-                android:drawableStart="@drawable/ic_image"
+                android:drawableStart="@drawable/baseline_upload_24"
+                android:drawableTint="@color/white"
+                android:textColor="@color/white"
                 android:drawablePadding="8dp"
-                android:paddingHorizontal="10dp"
+                android:paddingHorizontal="20dp"
                 android:gravity="start|center_vertical"
                 android:fontFamily="@font/poppins_regular"
-                />
+                android:textAllCaps="false"
+                android:layout_marginTop="12dp" />
+
         </LinearLayout>
 
+        </LinearLayout>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="8dp">
+
         <LinearLayout
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="15dp"
+            android:backgroundTint="#BDBDBD"
             android:orientation="vertical">
+
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -156,32 +216,129 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Total"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:layout_margin="4dp"
                     android:fontFamily="@font/poppins_regular"
                     android:layout_weight="1" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rp 800,000"
-                    android:textSize="20dp"
+                    android:text="Rp."
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_margin="4dp"/>
+
+                <TextView
+                    android:id="@+id/tvhragaTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="800,000"
+                    android:textSize="18dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins_regular"
                     android:layout_margin="4dp"/>
             </LinearLayout>
 
-            <Button
+            <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_button_green"
-                android:layout_marginTop="10dp"
-                android:text="Konfirmasi Pembayaran"
-                android:textColor="@color/white"
-                android:fontFamily="@font/poppins_semibold"
-                android:textAllCaps="false"
-                />
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bayar"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:layout_margin="4dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp."
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_margin="4dp"/>
+
+                <TextView
+                    android:id="@+id/tvBayar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_margin="4dp"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="7dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@android:color/darker_gray" />
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kembali"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:layout_margin="4dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp."
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_margin="4dp"/>
+
+                <TextView
+                    android:id="@+id/tvKembali"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_margin="4dp"/>
+            </LinearLayout>
+
+
+
         </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <Button
+            android:id="@+id/konfirmasiPembayaran"
+            android:layout_width="match_parent"
+            android:layout_marginVertical="20dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button_green"
+            android:text="Konfirmasi Pembayaran"
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppins_semibold"
+            android:textAllCaps="false"
+            />
+    </LinearLayout>
+    </ScrollView>
+
+
 </RelativeLayout>
