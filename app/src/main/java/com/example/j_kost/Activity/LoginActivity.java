@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void performLoginRequest(String email, String password) {
 //        String apiUrl = "https://j-kost.000webhostapp.com/PHP-MVC/public/LoginApi/login";
-        String apiUrl = "http://10.10.181.53/PHP-MVC/public/LoginApi/login";
+        String apiUrl = "http://"+NetworkUtils.BASE_URL+"/PHP-MVC/public/LoginApi/login";
 
         // Buat permintaan login menggunakan Volley
         StringRequest stringRequest = new StringRequest(Request.Method.POST, apiUrl,
@@ -187,13 +187,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void showNoInternetDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Tidak terhubung ke internet. Silakan cek koneksi Anda dan coba lagi.")
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
+        builder.setTitle("Peringatan!");
+        builder.setMessage("Anda Tidak terhubung ke internet. Silakan periksa koneksi Anda dan coba lagi.")
                 .setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
-                        // Di sini, kamu dapat menambahkan tindakan lanjutan jika diperlukan
+                        finish();
                     }
                 });
         AlertDialog alert = builder.create();

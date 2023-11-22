@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.j_kost.Fragment.HomeFragment;
@@ -79,16 +80,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showNoInternetDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Tidak terhubung ke internet. Silakan cek koneksi Anda dan coba lagi.")
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
+        builder.setTitle("Peringatan!");
+        builder.setMessage("Anda tidak terhubung ke internet. Silakan periksa koneksi Anda dan coba lagi.")
                 .setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
-                        // Di sini, kamu dapat menambahkan tindakan lanjutan jika diperlukan
+                        finish();
                     }
                 });
         AlertDialog alert = builder.create();
+        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                Button positiveButton = ((AlertDialog) dialogInterface).getButton(DialogInterface.BUTTON_POSITIVE);
+                if (positiveButton != null) {
+                    positiveButton.setTextColor(getResources().getColor(R.color.colorPrimary)); // Mengubah warna teks
+                }
+            }
+        });
         alert.show();
     }
 

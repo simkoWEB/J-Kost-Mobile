@@ -18,10 +18,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.j_kost.DetailActivity.ConfirmOldPass;
 import com.example.j_kost.DetailActivity.DetailEditProfile;
 import com.example.j_kost.Activity.LoginActivity;
 import com.example.j_kost.DetailActivity.DetailGantiPassword;
 import com.example.j_kost.R;
+import com.example.j_kost.Utils.NetworkUtils;
 import com.squareup.picasso.Picasso;
 
 public class TabProfilUser extends Fragment {
@@ -29,6 +31,7 @@ public class TabProfilUser extends Fragment {
     Button btnDetailProfile, btnLogout, btnChangePass, btnAbout;
     ImageView profilePhoto;
     SharedPreferences sharedPreferences;
+    public String ipLocal = "192.168.1.3";
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,7 +61,7 @@ public class TabProfilUser extends Fragment {
         btnChangePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), DetailGantiPassword.class);
+                Intent i = new Intent(getActivity(), ConfirmOldPass.class);
                 startActivity(i);
             }
         });
@@ -138,7 +141,7 @@ public class TabProfilUser extends Fragment {
 
         if (!photoPath.equals("")) {
 //            ini local
-            Picasso.get().load("http://10.10.181.53/PHP-MVC/public/foto/"+photoPath).into(profilePhoto);
+            Picasso.get().load("http://"+ NetworkUtils.BASE_URL +"/PHP-MVC/public/foto/"+photoPath).into(profilePhoto);
         } else {
             // Jika tidak ada foto yang tersimpan, kamu bisa menampilkan foto placeholder atau pesan lainnya
             profilePhoto.setImageResource(R.drawable.pp);
