@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.j_kost.DetailActivity.AboutApps;
 import com.example.j_kost.DetailActivity.ConfirmOldPass;
 import com.example.j_kost.DetailActivity.DetailEditProfile;
 import com.example.j_kost.Activity.LoginActivity;
@@ -45,10 +46,18 @@ public class TabProfilUser extends Fragment {
         btnDetailProfile = view.findViewById(R.id.btnEdit);
         btnLogout = view.findViewById(R.id.btnLogout);
         btnChangePass = view.findViewById(R.id.btnGantiPass);
-        btnAbout = view.findViewById(R.id.btnTentangKami);
+        btnAbout = view.findViewById(R.id.btnAbout);
 
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
         getDataUser();
+
+        btnAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), AboutApps.class);
+                startActivity(i);
+            }
+        });
 
         btnDetailProfile.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -15,6 +16,7 @@ import com.example.j_kost.R;
 public class MetodePembayaran extends AppCompatActivity {
 
     private ListView listViewMetodePembayaran;
+    ImageView btnBack;
     private ArrayAdapter<String> adapter;
     private SearchView searchView;
     private String[] metodePembayaran = {
@@ -33,11 +35,19 @@ public class MetodePembayaran extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_metode_pembayaran);
 
+        btnBack = findViewById(R.id.btnBack);
         listViewMetodePembayaran = findViewById(R.id.listViewMetodePembayaran);
         searchView = findViewById(R.id.searchView);
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, metodePembayaran);
         listViewMetodePembayaran.setAdapter(adapter);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         listViewMetodePembayaran.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -49,8 +59,6 @@ public class MetodePembayaran extends AppCompatActivity {
                 finish();
             }
         });
-
-
 
         // Mengatur fungsi pencarian
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

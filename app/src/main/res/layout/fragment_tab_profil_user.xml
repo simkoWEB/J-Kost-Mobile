@@ -116,7 +116,7 @@
                     />
 
                 <Button
-                    android:id="@+id/btnTentangKami"
+                    android:id="@+id/btnAbout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
