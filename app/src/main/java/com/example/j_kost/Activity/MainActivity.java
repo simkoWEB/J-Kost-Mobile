@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Cek koneksi internet sebelum tampilan utama dimuat
         if (!NetworkUtils.isNetworkConnected(this)) {
             showNoInternetDialog();
         }
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Metode untuk mengganti fragment
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -67,11 +69,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (doubleBackToExitPressedOnce) {
-                finish();  // Close the current activity
+                finish();
             } else {
                 this.doubleBackToExitPressedOnce = true;
                 Toast.makeText(this, "Tekan sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
-                new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000); // Reset after 2 seconds
+                new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000); // Reset setelah 2 detik
                 return true;
             }
             return true;
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    // Method untuk menampilkan dialog ketika tidak ada koneksi internet
     private void showNoInternetDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
         builder.setTitle("Peringatan!");
@@ -96,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             public void onShow(DialogInterface dialogInterface) {
                 Button positiveButton = ((AlertDialog) dialogInterface).getButton(DialogInterface.BUTTON_POSITIVE);
                 if (positiveButton != null) {
-                    positiveButton.setTextColor(getResources().getColor(R.color.colorPrimary)); // Mengubah warna teks
+                    positiveButton.setTextColor(getResources().getColor(R.color.colorPrimary));
                 }
             }
         });
