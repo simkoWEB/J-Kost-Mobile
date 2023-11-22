@@ -32,7 +32,7 @@ import java.util.Locale;
 
 public class TabPembayaran extends Fragment {
 
-    TextView tvBayar, tvKembali, tvHargaTotal;
+    TextView tvBayar, tvSisa, tvHargaTotal;
     EditText nominalBayar, btnMetodePembayaran;
     ImageView buktiPembayaran;
     Button btnPilihFoto;
@@ -53,7 +53,7 @@ public class TabPembayaran extends Fragment {
         btnMetodePembayaran = view.findViewById(R.id.BtnMetodePembayaran);
 
         tvBayar = view.findViewById(R.id.tvBayar);
-        tvKembali = view.findViewById(R.id.tvKembali);
+        tvSisa = view.findViewById(R.id.tvKembali);
 
         tvHargaTotal = view.findViewById(R.id.tvhragaTotal);
         int hargaTotal = Integer.parseInt(tvHargaTotal.getText().toString());
@@ -110,8 +110,8 @@ public class TabPembayaran extends Fragment {
                 tvBayar.setText(formatDec(bayar));
 
                 // Kondisi jika nilai pada EditText adalah 0
-                int kembali = parsed == 0 ? 0 : total - bayar;
-                tvKembali.setText(formatDec(kembali));
+                int sisa = parsed == 0 ? 0 : total - bayar;
+                tvSisa.setText(formatDec(sisa));
             }
         });
 

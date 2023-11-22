@@ -155,21 +155,12 @@
                 android:fontFamily="@font/poppins_regular"
                 android:layout_margin="4dp"/>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                android:background="@drawable/dashed_border"
-                >
-
             <ImageView
+                android:layout_marginTop="10dp"
                 android:id="@+id/imageViewBuktiPembayaran"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_margin="5dp"
-                android:src="@drawable/upload_image"/>
-
-            </androidx.cardview.widget.CardView>
+                android:src="@drawable/place_holder_img"/>
 
             <Button
                 android:id="@+id/btnPilihFoto"
@@ -295,7 +286,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kembali"
+                    android:text="Sisa"
                     android:textSize="16dp"
                     android:textColor="@color/black"
                     android:layout_margin="4dp"
