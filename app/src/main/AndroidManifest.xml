@@ -17,6 +17,12 @@
         android:theme="@style/JkostTheme"
         tools:targetApi="31">
         <activity
+            android:name=".DetailActivity.AboutApps"
+            android:exported="false" />
+        <activity
+            android:name=".DetailActivity.ConfirmOldPass"
+            android:exported="false" />
+        <activity
             android:name=".DetailActivity.DetailGantiPassword"
             android:exported="false" />
         <activity

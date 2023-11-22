@@ -4,28 +4,34 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.j_kost.R;
 
-public class DetailGantiPassword extends AppCompatActivity {
+public class ConfirmOldPass extends AppCompatActivity {
+    Button btnCofirm;
     ImageView btnBack;
-    Button btnSimpan;
-    TextView currentPass;
-
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_ganti_password);
+        setContentView(R.layout.activity_confirm_old_pass);
 
+        btnCofirm = findViewById(R.id.confirmBtn);
         btnBack = findViewById(R.id.btnBack);
+
+        btnCofirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ConfirmOldPass.this, DetailGantiPassword.class);
+                startActivity(i);
+            }
+        });
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,6 +39,7 @@ public class DetailGantiPassword extends AppCompatActivity {
                 showCancelConfirmation();
             }
         });
+
     }
 
     @SuppressLint("MissingSuperCall")
@@ -83,4 +90,5 @@ public class DetailGantiPassword extends AppCompatActivity {
 
         alert.show();
     }
+
 }
