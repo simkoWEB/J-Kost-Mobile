@@ -3,7 +3,9 @@ package com.example.j_kost.Tab;
 import static android.app.Activity.RESULT_OK;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -24,6 +26,7 @@ import android.widget.TextView;
 import com.example.j_kost.DetailActivity.DetailEditProfile;
 import com.example.j_kost.DetailActivity.MetodePembayaran;
 import com.example.j_kost.R;
+import com.example.j_kost.Session.SessionManager;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.squareup.picasso.Picasso;
 
@@ -36,6 +39,7 @@ public class TabPembayaran extends Fragment {
     EditText nominalBayar, btnMetodePembayaran;
     ImageView buktiPembayaran;
     Button btnPilihFoto;
+    SharedPreferences sharedPreferences;
 
     public static String formatDec(int val) {
         return String.format("%,d", val).replace('.', ',');
@@ -55,10 +59,19 @@ public class TabPembayaran extends Fragment {
         tvBayar = view.findViewById(R.id.tvBayar);
         tvSisa = view.findViewById(R.id.tvKembali);
 
+        String hargaBulanan = SessionManager.getHargaBulanan(getContext()); // Mengambil hargaBulanan dari SharedPreferences
         tvHargaTotal = view.findViewById(R.id.tvhragaTotal);
-        int hargaTotal = Integer.parseInt(tvHargaTotal.getText().toString());
-        String formattedTotal = formatDec(hargaTotal);
-        tvHargaTotal.setText(formattedTotal);
+
+        if (!hargaBulanan.isEmpty()) {
+            int hargaTotal = Integer.parseInt(hargaBulanan); // Konversi hargaBulanan ke integer
+            String formattedTotal = formatDec(hargaTotal); // Format nilai jika diperlukan
+            tvHargaTotal.setText(formattedTotal); // Mengatur nilai ke tvHargaTotal
+        } else {
+            // Lakukan sesuatu jika hargaBulanan kosong atau tidak ada
+            // Contoh:
+            tvHargaTotal.setText("Default Value");
+        }
+
 
 
         btnPilihFoto = view.findViewById(R.id.btnPilihFoto);

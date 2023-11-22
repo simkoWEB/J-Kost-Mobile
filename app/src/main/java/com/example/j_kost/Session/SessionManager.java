@@ -7,6 +7,11 @@ public class SessionManager {
     private static final String USER_DATA = "userData";
     private static final String IS_LOGGED_IN = "isLoggedIn";
 
+    public static String getHargaBulanan(Context context) {
+        SharedPreferences userPref = context.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE);
+        return userPref.getString("hargaBulanan", "default_value_jika_tidak_ada"); // Mengembalikan hargaBulanan dari SharedPreferences
+    }
+
     public static void loginUser(
             Context context,
             String idUser,

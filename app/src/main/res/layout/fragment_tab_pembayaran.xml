@@ -228,7 +228,7 @@
                     android:id="@+id/tvhragaTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1300000"
+                    android:text=""
                     android:textSize="18dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
