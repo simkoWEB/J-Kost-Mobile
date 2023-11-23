@@ -25,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.j_kost.ForgetPass.VerificationActivity;
 import com.example.j_kost.R;
 import com.example.j_kost.Session.SessionManager;
+import com.example.j_kost.Utils.MyPopUp;
 import com.example.j_kost.Utils.MyToast;
 import com.example.j_kost.Utils.NetworkUtils;
 import com.google.android.material.textfield.TextInputEditText;
@@ -78,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                     MyToast.showToastWarning(LoginActivity.this,"Harap masukkan email yang valid!");
                 } else {
                     progressDialog.show();
-                    // Lakukan permintaan login ke API menggunakan Volley
+//                     Lakukan permintaan login ke API menggunakan Volley
                     performLoginRequest(email, password);
                 }
             }

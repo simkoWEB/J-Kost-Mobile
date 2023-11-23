@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.example.j_kost.Activity.LoginActivity;
+import com.example.j_kost.Utils.MyPopUp;
 
 public class SessionManager {
     private static final String USER_DATA = "userData";
@@ -58,8 +59,8 @@ public class SessionManager {
         editor.putString("hargaBulanan", hargaBulanan);
 
         // Tambahkan waktu kedaluwarsa 1 hari dari sekarang
-//        long expiryTimeMillis = System.currentTimeMillis() + (1 * 24 * 60 * 60 * 1000); // 1 hari dalam milidetik
-        long expiryTimeMillis = System.currentTimeMillis() + (1 * 60 * 1000); // 1 menit dalam milidetik
+        long expiryTimeMillis = System.currentTimeMillis() + (1 * 24 * 60 * 60 * 1000); // 1 hari dalam milidetik
+//        long expiryTimeMillis = System.currentTimeMillis() + (1 * 60 * 1000); // 1 menit dalam milidetik
         editor.putLong(SESSION_EXPIRY, expiryTimeMillis);
 
         editor.putBoolean(IS_LOGGED_IN, true); // Set logged-in state to true
@@ -74,7 +75,8 @@ public class SessionManager {
         editor.putBoolean(IS_LOGGED_IN, false); // Set logged-in state to false
         editor.apply();
 
-        showSessionExpiredDialog(context);
+//        showSessionExpiredDialog(context);
+        MyPopUp.showFailedDialog(context);
     }
 
     public static boolean isLoggedIn(Context context) {

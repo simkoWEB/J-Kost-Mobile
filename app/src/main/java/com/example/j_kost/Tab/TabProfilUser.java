@@ -2,6 +2,7 @@ package com.example.j_kost.Tab;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,7 +25,9 @@ import com.example.j_kost.DetailActivity.DetailEditProfile;
 import com.example.j_kost.Activity.LoginActivity;
 import com.example.j_kost.DetailActivity.DetailGantiPassword;
 import com.example.j_kost.R;
+import com.example.j_kost.Utils.MyPopUp;
 import com.example.j_kost.Utils.NetworkUtils;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.squareup.picasso.Picasso;
 
 public class TabProfilUser extends Fragment {
@@ -78,52 +81,24 @@ public class TabProfilUser extends Fragment {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showLogoutConfirmationDialog();
+                MyPopUp.showConfirmDialog(getContext(), "Konfirmasi", "Apakah anda yakin ingin log out?", new OnDialogButtonClickListener() {
+                    @Override
+                    public void onPositiveClicked(Dialog dialog) {
+                        super.onPositiveClicked(dialog);
+                        logoutUser();
+                    }
+
+                    @Override
+                    public void onNegativeClicked(Dialog dialog) {
+                        super.onNegativeClicked(dialog);
+                        dialog.dismiss();
+                    }
+                });
             }
         });
 
 
         return view;
-    }
-
-    private void showLogoutConfirmationDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.DialogStyle);
-        builder.setTitle("Konfirmasi!");
-        builder.setMessage("Apakah anda yakin ingin logout?")
-                .setCancelable(false)
-                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // Lakukan proses logout
-                        logoutUser();
-                    }
-                })
-                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // Batal logout, tutup dialog
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog alert = builder.create();
-        alert.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                // Mengubah teks tombol menjadi huruf kecil
-                Button positiveButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
-                if (positiveButton != null) {
-                    positiveButton.setAllCaps(false);
-                    positiveButton.setTextColor(getResources().getColor(android.R.color.holo_red_light)); // Mengubah warna teks
-                }
-
-                Button negativeButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
-                if (negativeButton != null) {
-                    negativeButton.setAllCaps(false);
-                    negativeButton.setTextColor(getResources().getColor(R.color.black)); // Mengubah warna teks
-                }
-            }
-        });
-
-        alert.show();
     }
 
 

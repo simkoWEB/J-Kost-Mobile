@@ -5,6 +5,6 @@
 <!--        <domain includeSubdomains="false">j-kost.000webhostapp.com</domain>-->
 
 <!--        local-->
-        <domain includeSubdomains="false">10.10.4.181</domain>
+        <domain includeSubdomains="false">10.10.187.125</domain>
     </domain-config>
 </network-security-config>

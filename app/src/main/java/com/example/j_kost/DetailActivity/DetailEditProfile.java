@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,17 +21,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
+import com.example.j_kost.Activity.MainActivity;
 import com.example.j_kost.R;
+import com.example.j_kost.Utils.MyPopUp;
 import com.example.j_kost.Utils.NetworkUtils;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.textfield.TextInputEditText;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 
 public class DetailEditProfile extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
-    Button Btnedit, BtnUbah;
+    Button Btnedit, BtnUbahProfile;
     ImageView btnBack, profilePhoto;
     EditText nama, noHp, jenisKelamin, tglLahir, alamat;
     RadioButton radioBtnMale, radioBtnFemale;
@@ -51,7 +55,7 @@ public class DetailEditProfile extends AppCompatActivity {
         tglLahir = findViewById(R.id.editTglLahir);
 
         Btnedit = findViewById(R.id.btnEdit);
-        BtnUbah = findViewById(R.id.btnUbah);
+        BtnUbahProfile = findViewById(R.id.btnUbah);
         btnBack = findViewById(R.id.btnBack);
         profilePhoto = findViewById(R.id.profile);
 
@@ -85,7 +89,7 @@ public class DetailEditProfile extends AppCompatActivity {
         sharedPreferences = getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
         getDataUser();
 
-        BtnUbah.setOnClickListener(new View.OnClickListener() {
+        BtnUbahProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ImagePicker.with(DetailEditProfile.this)
@@ -98,6 +102,19 @@ public class DetailEditProfile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showCancelConfirmation();
+            }
+        });
+
+        Btnedit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyPopUp.showSuccessDialog(DetailEditProfile.this, new OnDialogButtonClickListener() {
+                    @Override
+                    public void onDismissClicked(Dialog dialog) {
+                        super.onDismissClicked(dialog);
+                        finish();
+                    }
+                });
             }
         });
     }
@@ -121,46 +138,20 @@ public class DetailEditProfile extends AppCompatActivity {
     }
 
     private void showCancelConfirmation() {
-        // Tampilkan alert dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
-        builder.setTitle("Konfirmasi!");
-        builder.setMessage("Apakah Anda yakin ingin membatalkan perubahan?");
-
-        builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+        MyPopUp.showConfirmDialog(DetailEditProfile.this, "Konfirmasi!", "Apakah anda yakin ingin membatalkan perubahan", new OnDialogButtonClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onPositiveClicked(Dialog dialog) {
+                super.onPositiveClicked(dialog);
                 dialog.dismiss();
-                finish(); // Kembali ke layar sebelumnya
+                finish();
             }
-        });
 
-        builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onNegativeClicked(Dialog dialog) {
+                super.onNegativeClicked(dialog);
                 dialog.dismiss();
             }
         });
-
-        AlertDialog alert = builder.create();
-        alert.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                // Mengubah teks tombol menjadi huruf kecil
-                Button positiveButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
-                if (positiveButton != null) {
-                    positiveButton.setAllCaps(false);
-                    positiveButton.setTextColor(getResources().getColor(android.R.color.holo_red_light)); // Mengubah warna teks
-                }
-
-                Button negativeButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
-                if (negativeButton != null) {
-                    negativeButton.setAllCaps(false);
-                    negativeButton.setTextColor(getResources().getColor(R.color.black)); // Mengubah warna teks
-                }
-            }
-        });
-
-        alert.show();
     }
 
 

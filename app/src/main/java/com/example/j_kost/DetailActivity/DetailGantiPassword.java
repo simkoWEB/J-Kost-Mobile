@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,6 +20,8 @@ import android.widget.TextView;
 import com.example.j_kost.Activity.MainActivity;
 import com.example.j_kost.Fragment.ProfileFragment;
 import com.example.j_kost.R;
+import com.example.j_kost.Utils.MyPopUp;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 
 public class DetailGantiPassword extends AppCompatActivity {
     ImageView btnBack;
@@ -35,7 +38,7 @@ public class DetailGantiPassword extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showCancelConfirmation();
+                showCancelConfirm();
             }
         });
     }
@@ -43,18 +46,14 @@ public class DetailGantiPassword extends AppCompatActivity {
     @SuppressLint("MissingSuperCall")
     @Override
     public void onBackPressed() {
-        showCancelConfirmation();
+        showCancelConfirm();
     }
 
-    private void showCancelConfirmation() {
-        // Tampilkan alert dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
-        builder.setTitle("Konfirmasi!");
-        builder.setMessage("Apakah Anda yakin ingin membatalkan perubahan?");
-
-        builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+    private void showCancelConfirm(){
+        MyPopUp.showConfirmDialog(DetailGantiPassword.this, "Konfirmasi!", "Apakah anda yakin ingin membatalkan ganti passwor?", new OnDialogButtonClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onPositiveClicked(Dialog dialog) {
+                super.onPositiveClicked(dialog);
                 dialog.dismiss();
                 // Kembali ke MainActivity (Activity yang meng-host ProfileFragment)
                 Intent intent = new Intent(DetailGantiPassword.this, MainActivity.class);
@@ -62,34 +61,13 @@ public class DetailGantiPassword extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        });
 
-        builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onNegativeClicked(Dialog dialog) {
+                super.onNegativeClicked(dialog);
                 dialog.dismiss();
             }
         });
-
-        AlertDialog alert = builder.create();
-        alert.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                // Mengubah teks tombol menjadi huruf kecil
-                Button positiveButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
-                if (positiveButton != null) {
-                    positiveButton.setAllCaps(false);
-                    positiveButton.setTextColor(getResources().getColor(android.R.color.holo_red_light)); // Mengubah warna teks
-                }
-
-                Button negativeButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
-                if (negativeButton != null) {
-                    negativeButton.setAllCaps(false);
-                    negativeButton.setTextColor(getResources().getColor(R.color.black)); // Mengubah warna teks
-                }
-            }
-        });
-
-        alert.show();
     }
+
 }
