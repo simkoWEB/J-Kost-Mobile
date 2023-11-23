@@ -46,6 +46,7 @@ dependencies {
     implementation ("com.squareup.okhttp3:okhttp:4.9.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation ("io.github.shashank02051997:FancyToast:2.0.2")
+    implementation ("com.saadahmedev.popup-dialog:popup-dialog:1.0.5")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
