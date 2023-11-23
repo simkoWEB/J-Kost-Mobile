@@ -37,15 +37,18 @@
 
     <SearchView
         android:id="@+id/searchView"
-        android:layout_marginTop="10dp"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/containerHead"
-        android:queryHint="Cari Metode Pembayaran"
-        android:iconifiedByDefault="false"/>
+        android:layout_marginTop="15dp"
+        android:background="@drawable/edit_text_border"
+        android:iconifiedByDefault="false"
+        android:queryHint="Cari Metode Pembayaran" />
 
     <ListView
         android:id="@+id/listViewMetodePembayaran"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/searchView"

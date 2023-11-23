@@ -1,5 +1,7 @@
 package com.example.j_kost.Activity;
 
+import static android.app.ProgressDialog.show;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -23,8 +25,11 @@ import com.android.volley.toolbox.Volley;
 import com.example.j_kost.ForgetPass.VerificationActivity;
 import com.example.j_kost.R;
 import com.example.j_kost.Session.SessionManager;
+import com.example.j_kost.Utils.MyToast;
 import com.example.j_kost.Utils.NetworkUtils;
 import com.google.android.material.textfield.TextInputEditText;
+import com.shashank.sony.fancytoastlib.FancyToast;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -66,9 +71,11 @@ public class LoginActivity extends AppCompatActivity {
                 String password = Objects.requireNonNull(passwordEditText.getText()).toString();
 
                 if (email.isEmpty() || password.isEmpty()) {
-                    showToast("Harap isi semua field!");
+//                    showToast("Harap isi semua field!");
+                    MyToast.showToastWarning(LoginActivity.this,"Harap isi semua field!");
                 } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    showToast("Harap masukkan email yang valid!");
+//                    showToast("Harap masukkan email yang valid!");
+                    MyToast.showToastWarning(LoginActivity.this,"Harap masukkan email yang valid!");
                 } else {
                     progressDialog.show();
                     // Lakukan permintaan login ke API menggunakan Volley
@@ -94,14 +101,11 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         this.doubleBackToExitPressedOnce = true;
-        showToast("Tekan sekali lagi untuk keluar");
+        MyToast.showToastInfo(LoginActivity.this, "Tekan sekali lagi untuk keluar");
 
         new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000); // Reset setelah 2 detik
     }
 
-    private void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
 
     private void performLoginRequest(String email, String password) {
 //        String apiUrl = "https://j-kost.000webhostapp.com/PHP-MVC/public/LoginApi/login";
@@ -122,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
 //                        menghilangkan loading
                         progressDialog.dismiss();
-                        showToast("Terjadi kesalahan jaringan.");
+                        MyToast.showToastError(LoginActivity.this, "Terjadi kesalahan jaringan");
                     }
                 }) {
             @Override
@@ -174,16 +178,16 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(i);
                     finish();
 
-                    showToast("Berhasil Login");
+                    MyToast.showToastSuccess(LoginActivity.this, "Berhasil Login");
                 } else {
-                    showToast(status);
+                    MyToast.showToastError(LoginActivity.this, status);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
-                showToast("Terjadi kesalahan dalam pemrosesan data.");
+                MyToast.showToastError(LoginActivity.this, "Terjadi kesalahan dalam pemrosesan data");
             }
         } else {
-            showToast("Gagal terhubung ke server.");
+            MyToast.showToastError(LoginActivity.this, "Gagal terhubung ke server");
         }
     }
 

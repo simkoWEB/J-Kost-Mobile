@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
@@ -18,6 +19,8 @@ import com.example.j_kost.Fragment.KomplainFragment;
 import com.example.j_kost.Fragment.ProfileFragment;
 import com.example.j_kost.Fragment.TransaksiFragment;
 import com.example.j_kost.R;
+import com.example.j_kost.Session.SessionManager;
+import com.example.j_kost.Utils.MyToast;
 import com.example.j_kost.Utils.NetworkUtils;
 import com.example.j_kost.databinding.ActivityMainBinding;
 
@@ -33,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
         // Cek koneksi internet sebelum tampilan utama dimuat
         if (!NetworkUtils.isNetworkConnected(this)) {
             showNoInternetDialog();
+        }
+
+        // Cek status login
+        if (!SessionManager.isLoggedIn(this)) {
+            redirectToLogin();
         }
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -72,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             } else {
                 this.doubleBackToExitPressedOnce = true;
-                Toast.makeText(this, "Tekan sekali lagi untuk keluar", Toast.LENGTH_SHORT).show();
+                MyToast.showToastInfo(MainActivity.this, "Tekan sekali lagi untuk keluar");
                 new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000); // Reset setelah 2 detik
                 return true;
             }
@@ -105,5 +113,14 @@ public class MainActivity extends AppCompatActivity {
         });
         alert.show();
     }
+
+    private void redirectToLogin() {
+        // Tambahkan intent ke LoginActivity
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
 
 }
