@@ -21,9 +21,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.j_kost.Activity.MainActivity;
 import com.example.j_kost.R;
+import com.example.j_kost.Session.SessionManager;
 import com.example.j_kost.Utils.MyPopUp;
+import com.example.j_kost.Utils.MyToast;
 import com.example.j_kost.Utils.NetworkUtils;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.textfield.TextInputEditText;
@@ -31,6 +38,8 @@ import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DetailEditProfile extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
@@ -44,7 +53,6 @@ public class DetailEditProfile extends AppCompatActivity {
         setContentView(R.layout.activity_detail_edit_profile);
 
         nama = findViewById(R.id.editNama);
-
         noHp = findViewById(R.id.editNotelp);
         InputFilter filter = new InputFilter.LengthFilter(12);
         noHp.setFilters(new InputFilter[]{filter});
@@ -108,13 +116,7 @@ public class DetailEditProfile extends AppCompatActivity {
         Btnedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyPopUp.showSuccessDialog(DetailEditProfile.this, new OnDialogButtonClickListener() {
-                    @Override
-                    public void onDismissClicked(Dialog dialog) {
-                        super.onDismissClicked(dialog);
-                        finish();
-                    }
-                });
+                updateUserData();
             }
         });
     }
@@ -182,5 +184,77 @@ public class DetailEditProfile extends AppCompatActivity {
             profilePhoto.setImageResource(R.drawable.pp);
         }
     }
+
+    private void updateUserData() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
+        String userId = sharedPreferences.getString("idUser", "");
+
+        if (!userId.isEmpty()) {
+            String apiUrl = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/EditDataApi/editUser/" + userId;
+
+            String userName = nama.getText().toString().trim();
+            String userNumber = noHp.getText().toString().trim();
+            String userAddress = alamat.getText().toString().trim();
+            String userGender = radioBtnMale.isChecked() ? "Laki-laki" : "Perempuan";
+            String userBirth = tglLahir.getText().toString().trim();
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, apiUrl,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            String responseMessage = "Data berhasil diubah";
+
+                            if (!response.isEmpty()) {
+                                responseMessage = response;
+                            }
+
+                            MyPopUp.showSuccessDialog(DetailEditProfile.this, "Sukses", responseMessage, new OnDialogButtonClickListener() {
+                                @Override
+                                public void onDismissClicked(Dialog dialog) {
+                                    super.onDismissClicked(dialog);
+                                    dialog.dismiss();
+                                    // Simpan perubahan ke SharedPreferences setelah berhasil mengubah data
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("nama_lengkap", userName);
+                                    editor.putString("noHp", userNumber);
+                                    editor.putString("alamatUser", userAddress);
+                                    editor.putString("jenisKelamin", userGender);
+                                    editor.putString("tglLahir", userBirth);
+                                    editor.apply();
+
+                                    SessionManager.fetchDataAndUpdateSession(DetailEditProfile.this, userId);
+
+                                    finish();
+                                }
+                            });
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            // ... kode penanganan error ...
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+
+                    params.put("nama_lengkap", userName);
+                    params.put("no_hp", userNumber);
+                    params.put("alamat", userAddress);
+                    params.put("jenis_kelamin", userGender);
+                    params.put("tggl_lahir", userBirth);
+                    params.put("id_user", userId);
+
+                    return params;
+                }
+            };
+
+            Volley.newRequestQueue(this).add(stringRequest);
+        } else {
+            MyToast.showToastError(DetailEditProfile.this, "Id tidak ditemukan");
+        }
+    }
+
 
 }
