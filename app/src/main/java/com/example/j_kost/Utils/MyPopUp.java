@@ -13,27 +13,34 @@ import com.saadahmedsoft.popupdialog.Styles;
 import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 
 public class MyPopUp {
-    private static PopupDialog progressDialog;
-    public static void showFailedDialog(Context context){
-        PopupDialog.getInstance(context)
-                .setStyle(Styles.FAILED)
-                .setHeading("Oops")
-                .setDescription("Sesi anda telah berakhir, silahkan login kembali")
-                .setCancelable(false)
-                .showDialog(new OnDialogButtonClickListener() {
-                    @Override
-                    public void onDismissClicked(Dialog dialog) {
-                        super.onDismissClicked(dialog);
-                    }
-                });
-    }
 
-    public static void showSuccessDialog(Context context, OnDialogButtonClickListener listener){
+    public static void showSuccessDialog(Context context, String title, String desc, OnDialogButtonClickListener listener){
         PopupDialog.getInstance(context)
                 .setStyle(Styles.SUCCESS)
-                .setHeading("Sukses")
-                .setDescription("Data berhasil ditambahkan")
+                .setHeading(title)
+                .setDescription(desc)
                 .setDismissButtonText("Oke")
+                .setCancelable(false)
+                .showDialog(listener);
+    }
+
+    public static void showErrorDialog(Context context, String title, String desc, OnDialogButtonClickListener listener){
+        PopupDialog.getInstance(context)
+                .setStyle(Styles.FAILED)
+                .setHeading(title)
+                .setDescription(desc)
+                .setDismissButtonText("Oke")
+                .setCancelable(false)
+                .showDialog(listener);
+    }
+
+    public static void showAlertDialog(Context context, String title, String desc, OnDialogButtonClickListener listener){
+        PopupDialog.getInstance(context)
+                .setStyle(Styles.ALERT)
+                .setHeading(title)
+                .setDescription(desc)
+                .setDismissButtonText("Oke")
+                .setDismissButtonTextColor(R.color.white)
                 .setCancelable(false)
                 .showDialog(listener);
     }
