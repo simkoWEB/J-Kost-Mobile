@@ -116,7 +116,25 @@ public class DetailEditProfile extends AppCompatActivity {
         Btnedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateUserData();
+
+                // Ambil nilai dari EditTexts
+                String enama = nama.getText().toString().trim();
+                String enotelp = noHp.getText().toString().trim();
+                String etglLahir = tglLahir.getText().toString().trim();
+                String ealamat = alamat.getText().toString().trim();
+
+                if (enama.isEmpty() || enotelp.isEmpty() || etglLahir.isEmpty() || ealamat.isEmpty()) {
+                    // Jika ada yang kosong, tampilkan pesan kesalahan
+                    MyPopUp.showErrorDialog(DetailEditProfile.this, "Gagal Update Data!", "Pastikan semua field sudah harus terisi", new OnDialogButtonClickListener() {
+                        @Override
+                        public void onDismissClicked(Dialog dialog) {
+                            super.onDismissClicked(dialog);
+                            dialog.dismiss();
+                        }
+                    });
+                } else {
+                    updateUserData();
+                }
             }
         });
     }
@@ -207,8 +225,8 @@ public class DetailEditProfile extends AppCompatActivity {
                             if (!response.isEmpty()) {
                                 responseMessage = response;
                             }
-
-                            MyPopUp.showSuccessDialog(DetailEditProfile.this, "Sukses", responseMessage, new OnDialogButtonClickListener() {
+//responnya masih error tapi berhasil ubah data
+                            MyPopUp.showSuccessDialog(DetailEditProfile.this, "Sukses", "Data berhasil di edit", new OnDialogButtonClickListener() {
                                 @Override
                                 public void onDismissClicked(Dialog dialog) {
                                     super.onDismissClicked(dialog);
@@ -223,7 +241,6 @@ public class DetailEditProfile extends AppCompatActivity {
                                     editor.apply();
 
                                     SessionManager.fetchDataAndUpdateSession(DetailEditProfile.this, userId);
-
                                     finish();
                                 }
                             });
@@ -232,7 +249,13 @@ public class DetailEditProfile extends AppCompatActivity {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            // ... kode penanganan error ...
+                            MyPopUp.showErrorDialog(DetailEditProfile.this, "Error", "Data gagal di edit", new OnDialogButtonClickListener() {
+                                @Override
+                                public void onDismissClicked(Dialog dialog) {
+                                    super.onDismissClicked(dialog);
+                                    dialog.dismiss();
+                                }
+                            });
                         }
                     }) {
                 @Override
