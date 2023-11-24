@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,9 +21,11 @@ import com.example.j_kost.Fragment.ProfileFragment;
 import com.example.j_kost.Fragment.TransaksiFragment;
 import com.example.j_kost.R;
 import com.example.j_kost.Session.SessionManager;
+import com.example.j_kost.Utils.MyPopUp;
 import com.example.j_kost.Utils.MyToast;
 import com.example.j_kost.Utils.NetworkUtils;
 import com.example.j_kost.databinding.ActivityMainBinding;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,11 +39,12 @@ public class MainActivity extends AppCompatActivity {
         // Cek koneksi internet sebelum tampilan utama dimuat
         if (!NetworkUtils.isNetworkConnected(this)) {
             showNoInternetDialog();
-        }
-
-        // Cek status login
-        if (!SessionManager.isLoggedIn(this)) {
-            redirectToLogin();
+        } else {
+            // Cek status login
+            if (!SessionManager.isLoggedIn(this)) {
+                popUpSessionEnd();
+                return; // untuk menghentikan eksekusi setelah menampilkan dialog
+            }
         }
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -91,27 +95,24 @@ public class MainActivity extends AppCompatActivity {
 
     // Method untuk menampilkan dialog ketika tidak ada koneksi internet
     private void showNoInternetDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
-        builder.setTitle("Peringatan!");
-        builder.setMessage("Anda tidak terhubung ke internet. Silakan periksa koneksi Anda dan coba lagi.")
-                .setCancelable(false)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                        finish();
-                    }
-                });
-        AlertDialog alert = builder.create();
-        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+        MyPopUp.showAlertDialog(MainActivity.this, "Peringatan!", "Perangkat anda tidak terhubung dengan internet, silahkan coba lagi", new OnDialogButtonClickListener() {
             @Override
-            public void onShow(DialogInterface dialogInterface) {
-                Button positiveButton = ((AlertDialog) dialogInterface).getButton(DialogInterface.BUTTON_POSITIVE);
-                if (positiveButton != null) {
-                    positiveButton.setTextColor(getResources().getColor(R.color.colorPrimary));
-                }
+            public void onDismissClicked(Dialog dialog) {
+                super.onDismissClicked(dialog);
+                finish();
             }
         });
-        alert.show();
+    }
+
+    private void popUpSessionEnd(){
+        MyPopUp.showAlertDialog(MainActivity.this, "Oops", "Sesi anda telah berakhir, silahkan login kembali", new OnDialogButtonClickListener() {
+            @Override
+            public void onDismissClicked(Dialog dialog) {
+                super.onDismissClicked(dialog);
+                dialog.dismiss();
+                redirectToLogin();
+            }
+        });
     }
 
     private void redirectToLogin() {
@@ -121,6 +122,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
 
 }

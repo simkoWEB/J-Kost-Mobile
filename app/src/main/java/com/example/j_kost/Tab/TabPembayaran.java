@@ -59,12 +59,11 @@ public class TabPembayaran extends Fragment {
         tvBayar = view.findViewById(R.id.tvBayar);
         tvSisa = view.findViewById(R.id.tvKembali);
 
-        String hargaBulanan = SessionManager.getHargaBulanan(getContext()); // Mengambil hargaBulanan dari SharedPreferences
+        int hargaBulanan = SessionManager.getHargaBulanan(getContext()); // Mengambil hargaBulanan dari SharedPreferences
         tvHargaTotal = view.findViewById(R.id.tvhragaTotal);
 
-        if (!hargaBulanan.isEmpty()) {
-            int hargaTotal = Integer.parseInt(hargaBulanan); // Konversi hargaBulanan ke integer
-            String formattedTotal = formatDec(hargaTotal); // Format nilai jika diperlukan
+        if (hargaBulanan != 0) {
+            String formattedTotal = formatDec(hargaBulanan); // Format nilai jika diperlukan
             tvHargaTotal.setText(formattedTotal); // Mengatur nilai ke tvHargaTotal
         } else {
             // Lakukan sesuatu jika hargaBulanan kosong atau tidak ada
@@ -73,14 +72,12 @@ public class TabPembayaran extends Fragment {
         }
 
 
-
         btnPilihFoto = view.findViewById(R.id.btnPilihFoto);
         buktiPembayaran = view.findViewById(R.id.imageViewBuktiPembayaran);
 
         nominalBayar = view.findViewById(R.id.etNominal);
         InputFilter filter = new InputFilter.LengthFilter(10);
         nominalBayar.setFilters(new InputFilter[]{filter});
-
 
         btnPilihFoto.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -98,14 +98,13 @@ public class HomeFragment extends Fragment {
     private void getDataUser(){
         String userName = sharedPreferences.getString("namaLengkap", "-");
         String userKost = sharedPreferences.getString("namaKost", "-");
-        String hargaBulanan = sharedPreferences.getString("hargaBulanan", "-");
+        int hargaBulanan = sharedPreferences.getInt("hargaBulanan",0);
         String photoPath = sharedPreferences.getString("fotoUser", "");
 
         namaUser.setText(userName);
         namaKost.setText(userKost);
 
-        int harga = Integer.parseInt(hargaBulanan);
-        String formattedHarga = formatDecimal(harga);
+        String formattedHarga = formatDecimal(hargaBulanan);
         tvHarga.setText("Rp. " + formattedHarga);
 
         if (!photoPath.equals("")) {

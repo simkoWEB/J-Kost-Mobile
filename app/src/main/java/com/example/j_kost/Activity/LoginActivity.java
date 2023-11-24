@@ -5,6 +5,7 @@ import static android.app.ProgressDialog.show;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,6 +30,7 @@ import com.example.j_kost.Utils.MyPopUp;
 import com.example.j_kost.Utils.MyToast;
 import com.example.j_kost.Utils.NetworkUtils;
 import com.google.android.material.textfield.TextInputEditText;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import org.json.JSONException;
@@ -172,14 +174,14 @@ public class LoginActivity extends AppCompatActivity {
                             dataUser.getString("Ukuran Kamar"),
                             dataUser.getString("nama_kost"),
                             dataUser.getString("Alamat Kost"),
-                            dataUser.getString("harga_bulanan")
+                            dataUser.getInt("harga_bulanan")
                     );
 
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(i);
                     finish();
 
-                    MyToast.showToastSuccess(LoginActivity.this, "Berhasil Login");
+                    MyToast.showToastSuccess(LoginActivity.this, "Login Berhasil");
                 } else {
                     MyToast.showToastError(LoginActivity.this, status);
                 }
@@ -193,17 +195,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void showNoInternetDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogStyle);
-        builder.setTitle("Peringatan!");
-        builder.setMessage("Anda Tidak terhubung ke internet. Silakan periksa koneksi Anda dan coba lagi.")
-                .setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                        finish();
-                    }
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
+        MyPopUp.showAlertDialog(LoginActivity.this, "Peringatan!", "Perangkat anda tidak terhubung dengan internet, silahkan coba lagi", new OnDialogButtonClickListener() {
+            @Override
+            public void onDismissClicked(Dialog dialog) {
+                super.onDismissClicked(dialog);
+                finish();
+            }
+        });
     }
 }
