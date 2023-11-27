@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -23,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.j_kost.R;
 import com.example.j_kost.Utils.MyPopUp;
+import com.example.j_kost.Utils.MyToast;
 import com.example.j_kost.Utils.NetworkUtils;
 import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 
@@ -60,11 +62,12 @@ public class KomplainFragment extends Fragment {
                 String deskripsiKomplain = textKomplain.getText().toString();
 
                 // Melakukan validasi jika userId tidak kosong
-                if (!userId.isEmpty()) {
+                if (!userId.isEmpty() && !selectedJenisKomplain.equals("Pilih tipe komplain") && !selectedMasalahKomplain.equals("Pilih tipe terlebih dahulu") && !deskripsiKomplain.isEmpty()) {
                     // Lakukan proses pengiriman data ke API
                     sendDataToAPI(userId, selectedJenisKomplain, selectedMasalahKomplain, deskripsiKomplain);
                 } else {
-                    // Jika userId kosong, lakukan penanganan sesuai kebutuhan aplikasi
+                    // Jika terdapat input yang masih kosong, tampilkan pesan kepada pengguna
+                    MyToast.showToastError(getContext(), "Silahkan lengkapi data sebelum komplain");
                 }
 
             }
