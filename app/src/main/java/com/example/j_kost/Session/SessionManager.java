@@ -43,7 +43,6 @@ public class SessionManager {
             String fotoUser,
             String nomorKamar,
             String fasilitasKamar,
-            String kategoriKost,
             String ukuranKamar,
             String namaKost,
             String alamatKost,
@@ -63,7 +62,6 @@ public class SessionManager {
         editor.putString("fotoUser", fotoUser);
         editor.putString("nomorKamar", nomorKamar);
         editor.putString("fasilitasKamar", fasilitasKamar);
-        editor.putString("kategoriKost", kategoriKost);
         editor.putString("ukuranKamar", ukuranKamar);
         editor.putString("namaKost", namaKost);
         editor.putString("alamatKost", alamatKost);
@@ -148,7 +146,6 @@ public class SessionManager {
                                 String fotoUser = dataObject.getString("foto_user");
                                 String nomorKamar = dataObject.getString("Nomor Kamar");
                                 String fasilitas = dataObject.getString("fasilitas");
-                                String kategori = dataObject.getString("kategori");
                                 String ukuranKamar = dataObject.getString("Ukuran Kamar");
                                 String namaKost = dataObject.getString("nama_kost");
                                 String alamatKost = dataObject.getString("Alamat Kost");
@@ -156,7 +153,7 @@ public class SessionManager {
 
 
                                 loginUser(context, idUser, namaPenghuni, email, password, alamatUser, notelpUser,
-                                        jk, tglLahir, fotoUser, nomorKamar, fasilitas, kategori, ukuranKamar, namaKost,
+                                        jk, tglLahir, fotoUser, nomorKamar, fasilitas, ukuranKamar, namaKost,
                                         alamatKost, hargaBulanan);
 
                                 // Pastikan untuk menyimpan data terbaru dalam sesi

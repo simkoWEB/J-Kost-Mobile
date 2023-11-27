@@ -170,7 +170,6 @@ public class LoginActivity extends AppCompatActivity {
                             dataUser.getString("foto_user"),
                             dataUser.getString("Nomor Kamar"),
                             dataUser.getString("fasilitas"),
-                            dataUser.getString("kategori"),
                             dataUser.getString("Ukuran Kamar"),
                             dataUser.getString("nama_kost"),
                             dataUser.getString("Alamat Kost"),

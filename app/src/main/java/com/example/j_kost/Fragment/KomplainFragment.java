@@ -1,5 +1,8 @@
 package com.example.j_kost.Fragment;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,19 +12,63 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.j_kost.R;
+import com.example.j_kost.Utils.MyPopUp;
+import com.example.j_kost.Utils.NetworkUtils;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class KomplainFragment extends Fragment {
 
+    Button btnKomplain;
+    EditText textKomplain;
+    Spinner jenisKomplainSpinner, masalahKomplainSpinner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_komplain, container, false);
 
-        final Spinner jenisKomplainSpinner = view.findViewById(R.id.jenis_komplain);
-        final Spinner masalahKomplainSpinner = view.findViewById(R.id.masalah_komplain);
+        jenisKomplainSpinner = view.findViewById(R.id.jenis_komplain);
+        masalahKomplainSpinner = view.findViewById(R.id.masalah_komplain);
+
+        textKomplain = view.findViewById(R.id.editText_permasalahan);
+        btnKomplain = view.findViewById(R.id.btnAjukan);
+
+        btnKomplain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("userData", Context.MODE_PRIVATE);
+                String userId = sharedPreferences.getString("idUser", "");
+
+                // Mengambil nilai yang dipilih dari Spinner
+                String selectedJenisKomplain = jenisKomplainSpinner.getSelectedItem().toString();
+                String selectedMasalahKomplain = masalahKomplainSpinner.getSelectedItem().toString();
+
+                // Mengambil deskripsi komplain dari EditText
+                String deskripsiKomplain = textKomplain.getText().toString();
+
+                // Melakukan validasi jika userId tidak kosong
+                if (!userId.isEmpty()) {
+                    // Lakukan proses pengiriman data ke API
+                    sendDataToAPI(userId, selectedJenisKomplain, selectedMasalahKomplain, deskripsiKomplain);
+                } else {
+                    // Jika userId kosong, lakukan penanganan sesuai kebutuhan aplikasi
+                }
+
+            }
+        });
 
         ArrayAdapter<CharSequence> jenisKomplainAdapter = ArrayAdapter.createFromResource(getContext(), R.array.TipeKomplain, android.R.layout.simple_spinner_item);
         jenisKomplainAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -65,4 +112,48 @@ public class KomplainFragment extends Fragment {
         });
         return view;
     }
+
+    private void sendDataToAPI(String userId, String jenisKomplain, String masalahKomplain, String deskripsiKomplain) {
+        // Buat request POST ke endpoint API
+        String url = "http://"+NetworkUtils.BASE_URL+"/PHP-MVC/public/InsertDataApi/insertKomplain/" + userId;
+
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                MyPopUp.showSuccessDialog(getContext(), "Komplain Berhasil Dikirim", "Semoga kritik dan saran dari anda akan jadi evaluasi untuk pemilik kost", new OnDialogButtonClickListener() {
+                    @Override
+                    public void onDismissClicked(Dialog dialog) {
+                        super.onDismissClicked(dialog);
+                        dialog.dismiss();
+
+                        masalahKomplainSpinner.setSelection(0);
+                        jenisKomplainSpinner.setSelection(0);
+                        textKomplain.setText("");
+                    }
+                });
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Tangani kesalahan yang terjadi pada saat permintaan gagal dikirim
+                // Tampilkan pesan kesalahan atau lakukan penanganan sesuai kebutuhan
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                // Kumpulkan data untuk dikirim ke server
+                Map<String, String> params = new HashMap<>();
+                params.put("jenis_komplain", jenisKomplain);
+                params.put("tipe_komplain", masalahKomplain);
+                params.put("deskripsi_komplain", deskripsiKomplain);
+                // Tambahkan parameter lainnya jika diperlukan
+
+                return params;
+            }
+        };
+
+        // Tambahkan request ke antrian permintaan
+        Volley.newRequestQueue(getContext()).add(request);
+    }
+
 }
