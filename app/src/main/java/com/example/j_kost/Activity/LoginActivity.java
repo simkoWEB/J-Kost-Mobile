@@ -177,11 +177,12 @@ public class LoginActivity extends AppCompatActivity {
                             dataUser.getInt("harga_bulanan")
                     );
 
+                    MyToast.showToastSuccess(LoginActivity.this, "Login Berhasil");
+
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(i);
                     finish();
 
-                    MyToast.showToastSuccess(LoginActivity.this, "Login Berhasil");
                 } else {
                     MyToast.showToastError(LoginActivity.this, status);
                 }
