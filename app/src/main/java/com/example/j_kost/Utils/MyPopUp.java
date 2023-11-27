@@ -40,7 +40,7 @@ public class MyPopUp {
                 .setHeading(title)
                 .setDescription(desc)
                 .setDismissButtonText("Oke")
-                .setDismissButtonTextColor(R.color.white)
+                .setDismissButtonTextColor(R.color.black)
                 .setCancelable(false)
                 .showDialog(listener);
     }

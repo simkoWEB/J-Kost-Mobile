@@ -233,7 +233,7 @@ public class DetailEditProfile extends AppCompatActivity {
                                     dialog.dismiss();
                                     // Simpan perubahan ke SharedPreferences setelah berhasil mengubah data
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.putString("nama_lengkap", userName);
+                                    editor.putString("namaLengkap", userName);
                                     editor.putString("noHp", userNumber);
                                     editor.putString("alamatUser", userAddress);
                                     editor.putString("jenisKelamin", userGender);
