@@ -29,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.j_kost.Activity.MainActivity;
 import com.example.j_kost.R;
 import com.example.j_kost.Session.SessionManager;
+import com.example.j_kost.Utils.ImageBase64Converter;
 import com.example.j_kost.Utils.MyPopUp;
 import com.example.j_kost.Utils.MyToast;
 import com.example.j_kost.Utils.NetworkUtils;
@@ -47,6 +48,8 @@ public class DetailEditProfile extends AppCompatActivity {
     ImageView btnBack, profilePhoto;
     EditText nama, noHp, jenisKelamin, tglLahir, alamat;
     RadioButton radioBtnMale, radioBtnFemale;
+    private String imageString = "";
+    private String userPhoto = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,6 +163,10 @@ public class DetailEditProfile extends AppCompatActivity {
 
             // Menyetel foto ke ImageView menggunakan Picasso
             Picasso.get().load(uri).into(profilePhoto); // profile adalah ImageView yang ingin ditampilkan foto di dalamnya
+
+            // Mengubah gambar ke Base64
+            userPhoto = ImageBase64Converter.convertImageToBase64(uri, getContentResolver());
+            // Simpan Base64 string ini atau gunakan untuk mengirim ke server bersama data lainnya
         }
     }
 
@@ -250,6 +257,7 @@ public class DetailEditProfile extends AppCompatActivity {
                                     editor.putString("alamatUser", userAddress);
                                     editor.putString("jenisKelamin", userGender);
                                     editor.putString("tglLahir", userBirth);
+                                    editor.putString("fotoUser", userPhoto);
                                     editor.apply();
 
                                     SessionManager.fetchDataAndUpdateSession(DetailEditProfile.this, userId);
@@ -280,6 +288,7 @@ public class DetailEditProfile extends AppCompatActivity {
                     params.put("jenis_kelamin", userGender);
                     params.put("tggl_lahir", userBirth);
                     params.put("id_user", userId);
+                    params.put("foto_user", imageString);
 
                     return params;
                 }
