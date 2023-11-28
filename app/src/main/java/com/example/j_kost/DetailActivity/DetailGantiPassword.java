@@ -79,13 +79,18 @@ public class DetailGantiPassword extends AppCompatActivity {
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
-                                        // Handle respons dari server setelah berhasil mengubah password
-                                        MyToast.showToastSuccess(DetailGantiPassword.this, "Password berhasil diubah");
-                                        // Kembali ke MainActivity (Activity yang meng-host ProfileFragment)
-                                        Intent intent = new Intent(DetailGantiPassword.this, MainActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Hapus semua activity di atasnya
-                                        startActivity(intent);
-                                        finish();
+                                        MyPopUp.showSuccessDialog(DetailGantiPassword.this, "Sukses", "Password berhasil diubah", new OnDialogButtonClickListener() {
+                                            @Override
+                                            public void onDismissClicked(Dialog dialog) {
+                                                super.onDismissClicked(dialog);
+                                                dialog.dismiss();
+
+                                                Intent intent = new Intent(DetailGantiPassword.this, MainActivity.class);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        });
                                     }
                                 },
                                 new Response.ErrorListener() {
