@@ -35,7 +35,6 @@ public class TabProfilUser extends Fragment {
     Button btnDetailProfile, btnLogout, btnChangePass, btnAbout;
     ImageView profilePhoto;
     SharedPreferences sharedPreferences;
-    public String ipLocal = "192.168.1.3";
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
