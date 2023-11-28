@@ -51,23 +51,33 @@ public class KomplainFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("userData", Context.MODE_PRIVATE);
-                String userId = sharedPreferences.getString("idUser", "");
+                if (NetworkUtils.isNetworkConnected(getContext())) {
+                    // Your existing code for button click event
+                    // ... (the code you posted)
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("userData", Context.MODE_PRIVATE);
+                    String userId = sharedPreferences.getString("idUser", "");
 
-                // Mengambil nilai yang dipilih dari Spinner
-                String selectedJenisKomplain = jenisKomplainSpinner.getSelectedItem().toString();
-                String selectedMasalahKomplain = masalahKomplainSpinner.getSelectedItem().toString();
+                    String selectedJenisKomplain = jenisKomplainSpinner.getSelectedItem().toString();
+                    String selectedMasalahKomplain = masalahKomplainSpinner.getSelectedItem().toString();
+                    String deskripsiKomplain = textKomplain.getText().toString();
 
-                // Mengambil deskripsi komplain dari EditText
-                String deskripsiKomplain = textKomplain.getText().toString();
-
-                // Melakukan validasi jika userId tidak kosong
-                if (!userId.isEmpty() && !selectedJenisKomplain.equals("Pilih tipe komplain") && !selectedMasalahKomplain.equals("Pilih tipe terlebih dahulu") && !deskripsiKomplain.isEmpty()) {
-                    // Lakukan proses pengiriman data ke API
-                    sendDataToAPI(userId, selectedJenisKomplain, selectedMasalahKomplain, deskripsiKomplain);
+                    if (!userId.isEmpty() && !selectedJenisKomplain.equals("Pilih tipe komplain") && !selectedMasalahKomplain.equals("Pilih tipe terlebih dahulu") && !deskripsiKomplain.isEmpty()) {
+                        // Data is complete, proceed to send to API
+                        sendDataToAPI(userId, selectedJenisKomplain, selectedMasalahKomplain, deskripsiKomplain);
+                    } else {
+                        // Show error message if any field is empty
+                        MyToast.showToastError(getContext(), "Silahkan lengkapi data sebelum komplain");
+                    }
                 } else {
-                    // Jika terdapat input yang masih kosong, tampilkan pesan kepada pengguna
-                    MyToast.showToastError(getContext(), "Silahkan lengkapi data sebelum komplain");
+                    // Show a pop-up alert indicating no internet connection
+                    MyPopUp.showAlertDialog(getContext(), "Tidak Terkoneksi internet",
+                            "Silahkan cek koneksi internet dan coba lagi.", new OnDialogButtonClickListener() {
+                                @Override
+                                public void onDismissClicked(Dialog dialog) {
+                                    super.onDismissClicked(dialog);
+                                    dialog.dismiss();
+                                }
+                            });
                 }
 
             }
@@ -123,7 +133,7 @@ public class KomplainFragment extends Fragment {
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                MyPopUp.showSuccessDialog(getContext(), "Komplain Berhasil Dikirim", "Semoga kritik dan saran dari anda akan jadi evaluasi untuk pemilik kost", new OnDialogButtonClickListener() {
+                MyPopUp.showSuccessDialog(getContext(), "Komplain Terkirim", "Semoga kritik dan saran dari anda akan jadi evaluasi untuk pemilik kost", new OnDialogButtonClickListener() {
                     @Override
                     public void onDismissClicked(Dialog dialog) {
                         super.onDismissClicked(dialog);

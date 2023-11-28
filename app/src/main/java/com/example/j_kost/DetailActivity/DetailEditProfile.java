@@ -116,24 +116,36 @@ public class DetailEditProfile extends AppCompatActivity {
         Btnedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Check internet connectivity
+                if (NetworkUtils.isNetworkConnected(getApplicationContext())) {
+                    // Ambil nilai dari EditTexts
+                    String enama = nama.getText().toString().trim();
+                    String enotelp = noHp.getText().toString().trim();
+                    String etglLahir = tglLahir.getText().toString().trim();
+                    String ealamat = alamat.getText().toString().trim();
 
-                // Ambil nilai dari EditTexts
-                String enama = nama.getText().toString().trim();
-                String enotelp = noHp.getText().toString().trim();
-                String etglLahir = tglLahir.getText().toString().trim();
-                String ealamat = alamat.getText().toString().trim();
-
-                if (enama.isEmpty() || enotelp.isEmpty() || etglLahir.isEmpty() || ealamat.isEmpty()) {
-                    // Jika ada yang kosong, tampilkan pesan kesalahan
-                    MyPopUp.showErrorDialog(DetailEditProfile.this, "Gagal Update Data!", "Pastikan semua field sudah harus terisi", new OnDialogButtonClickListener() {
-                        @Override
-                        public void onDismissClicked(Dialog dialog) {
-                            super.onDismissClicked(dialog);
-                            dialog.dismiss();
-                        }
-                    });
+                    if (enama.isEmpty() || enotelp.isEmpty() || etglLahir.isEmpty() || ealamat.isEmpty()) {
+                        // Jika ada yang kosong, tampilkan pesan kesalahan
+                        MyPopUp.showErrorDialog(DetailEditProfile.this, "Gagal Update Data!", "Pastikan semua field sudah harus terisi", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                                dialog.dismiss();
+                            }
+                        });
+                    } else {
+                        updateUserData();
+                    }
                 } else {
-                    updateUserData();
+                    // Show a pop-up alert indicating no internet connection
+                    MyPopUp.showAlertDialog(DetailEditProfile.this, "Tidak terkoneksi internet",
+                            "Silahkan cek internet dan coba lagi.", new OnDialogButtonClickListener() {
+                                @Override
+                                public void onDismissClicked(Dialog dialog) {
+                                    super.onDismissClicked(dialog);
+                                    dialog.dismiss();
+                                }
+                            });
                 }
             }
         });
