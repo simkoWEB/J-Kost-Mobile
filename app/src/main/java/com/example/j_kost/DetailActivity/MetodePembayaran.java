@@ -22,12 +22,14 @@ public class MetodePembayaran extends AppCompatActivity {
     private String[] metodePembayaran = {
             "Bank BRI",
             "Bank BCA",
+            "Bank BNI",
             "Bank Jatim",
+            "Bank Mandiri",
+            "Bank BSI",
             "Dana",
-            "Ovo",
             "Shopeepay",
+            "Ovo",
             "Link Aja"
-            // ... tambahkan metode pembayaran lainnya di sini
     };
 
     @Override
