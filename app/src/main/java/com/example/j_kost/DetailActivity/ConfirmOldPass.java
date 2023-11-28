@@ -70,8 +70,6 @@ public class ConfirmOldPass extends AppCompatActivity {
                                 @Override
                                 public void onResponse(String response) {
                                     try {
-                                        Log.d("Hasil Input", passwordToCheck);
-                                        Log.d("ConfirmOldPass", "Respons dari server: " + response); // Letakkan log di sini
                                         JSONObject jsonObject = new JSONObject(response);
                                         int code = jsonObject.getInt("code");
                                         String status = jsonObject.getString("status");
