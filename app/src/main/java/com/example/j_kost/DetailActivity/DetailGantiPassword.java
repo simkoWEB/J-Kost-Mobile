@@ -62,62 +62,7 @@ public class DetailGantiPassword extends AppCompatActivity {
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String newPassword = newPass.getText().toString().trim();
-                String confirmNewPassword = confirmNewPass.getText().toString().trim();
-
-                if (newPassword.isEmpty() || confirmNewPassword.isEmpty()) {
-                    MyToast.showToastWarning(DetailGantiPassword.this, "Data tidak boleh kosong");
-                } else {
-                    if (newPassword.equals(confirmNewPassword)) {
-                        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
-                        String userId = sharedPreferences.getString("idUser", "");
-
-
-                        String url = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/EditDataApi/editPass/" + userId;
-
-                        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                                new Response.Listener<String>() {
-                                    @Override
-                                    public void onResponse(String response) {
-                                        MyPopUp.showSuccessDialog(DetailGantiPassword.this, "Sukses", "Password berhasil diubah", new OnDialogButtonClickListener() {
-                                            @Override
-                                            public void onDismissClicked(Dialog dialog) {
-                                                super.onDismissClicked(dialog);
-                                                dialog.dismiss();
-
-                                                Intent intent = new Intent(DetailGantiPassword.this, MainActivity.class);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                        });
-                                    }
-                                },
-                                new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        // Handle jika terjadi error pada permintaan ke server
-                                        MyToast.showToastError(DetailGantiPassword.this, "Gagal mengubah password");
-                                    }
-                                }) {
-                            @Override
-                            protected Map<String, String> getParams() {
-                                // Masukkan parameter ke dalam body permintaan POST
-                                Map<String, String> params = new HashMap<>();
-                                params.put("password", newPassword);
-                                return params;
-                            }
-                        };
-
-                        // Tambahkan request ke dalam queue Volley
-                        Volley.newRequestQueue(DetailGantiPassword.this).add(stringRequest);
-
-                    } else {
-                        // Jika tidak sama, tampilkan pesan kesalahan bahwa password tidak cocok
-                        MyToast.showToastError(DetailGantiPassword.this, "Password tidak sama");
-                    }
-                }
-
+            handleEditPass();
             }
         });
     }
@@ -149,5 +94,71 @@ public class DetailGantiPassword extends AppCompatActivity {
             }
         });
     }
+
+    private void handleEditPass() {
+        String newPassword = newPass.getText().toString().trim();
+        String confirmNewPassword = confirmNewPass.getText().toString().trim();
+
+        if (newPassword.isEmpty() || confirmNewPassword.isEmpty()) {
+            MyToast.showToastWarning(DetailGantiPassword.this, "Data tidak boleh kosong");
+        } else if (!isValidPassword(newPassword)) {
+            MyToast.showToastError(DetailGantiPassword.this, "Password harus terdiri dari minimal 8 karakter dan mengandung kombinasi angka dan huruf");
+        } else if (!newPassword.equals(confirmNewPassword)) {
+            MyToast.showToastError(DetailGantiPassword.this, "Password tidak sama");
+        } else {
+            // Semua validasi terpenuhi, kirim permintaan ke server
+            sendPasswordToServer(newPassword);
+        }
+    }
+
+    private void sendPasswordToServer(String newPassword) {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
+        String userId = sharedPreferences.getString("idUser", "");
+
+        String url = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/EditDataApi/editPass/" + userId;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        MyPopUp.showSuccessDialog(DetailGantiPassword.this, "Sukses", "Password berhasil diubah", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                                dialog.dismiss();
+
+                                Intent intent = new Intent(DetailGantiPassword.this, MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle jika terjadi error pada permintaan ke server
+                        MyToast.showToastError(DetailGantiPassword.this, "Gagal mengubah password");
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                // Masukkan parameter ke dalam body permintaan POST
+                Map<String, String> params = new HashMap<>();
+                params.put("password", newPassword);
+                return params;
+            }
+        };
+
+        // Tambahkan request ke dalam queue Volley
+        Volley.newRequestQueue(DetailGantiPassword.this).add(stringRequest);
+    }
+
+    private boolean isValidPassword(String password) {
+        return password.length() >= 8 && password.matches(".*\\d.*") && password.matches(".*[a-zA-Z].*");
+    }
+
+
 
 }
