@@ -20,6 +20,9 @@
         android:theme="@style/JkostTheme"
         tools:targetApi="31">
         <activity
+            android:name=".DetailActivity.NotaPembayaran"
+            android:exported="false" />
+        <activity
             android:name=".DetailActivity.MetodePembayaran"
             android:exported="false" />
         <activity
