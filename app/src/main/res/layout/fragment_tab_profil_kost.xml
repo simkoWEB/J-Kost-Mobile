@@ -9,7 +9,8 @@
     <!-- TODO: Update blank fragment layout -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -18,10 +19,10 @@
                 android:id="@+id/text_judulKostProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:text="Kost Bunga Indah"
                 android:textSize="25sp"
                 android:textColor="@color/black"
+                android:layout_marginVertical="10dp"
                 android:fontFamily="@font/poppins_semibold"/>
 
             <HorizontalScrollView
@@ -64,224 +65,147 @@
                         android:background="@drawable/image2" />
                 </LinearLayout>
             </HorizontalScrollView>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-
                 android:layout_marginTop="20dp"
                 android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/place" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Alamat Kost"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="5dp"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+
+                        <TextView
+                            android:id="@+id/alamatKost"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Alamat Kost"
+                            android:textSize="12sp" />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
-                    <LinearLayout
-                        android:layout_width="200dp"
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/iconkasur" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Fasilitas kost"
+                        android:layout_marginStart="5dp"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Alamat Kost"
-                            android:textSize="15sp"
-                            android:textColor="@color/black"
-                            android:fontFamily="@font/poppins_semibold"/>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_marginEnd="20dp">
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:background="@drawable/place"/>
-
-                            <TextView
-                                android:id="@+id/alamatKost"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Jalan Sriwijaya IV No.45B"
-                                android:textSize="12sp"
-                                android:layout_marginLeft="10dp"
-                                android:fontFamily="@font/poppins_medium"/>
-
-                        </LinearLayout>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Fasilitas kost"
-                            android:layout_marginTop="20dp"
-                            android:textSize="15sp"
-                            android:textColor="@color/black"
-                            android:fontFamily="@font/poppins_semibold"/>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-
-                            android:layout_marginEnd="20dp">
-                            <ImageView
-                                android:layout_width="22sp"
-                                android:layout_height="22sp"
-                                android:background="@drawable/iconroom"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Luas 3 x 3 m"
-                                android:textSize="12sp"
-                                android:layout_marginLeft="10dp"
-                                android:fontFamily="@font/poppins_medium"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal"
-                            android:layout_marginEnd="20dp">
-                            <ImageView
-                                android:layout_width="22sp"
-                                android:layout_height="22sp"
-                                android:background="@drawable/iconkasur"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Kasur"
-                                android:textSize="12sp"
-                                android:layout_marginLeft="10dp"
-                                android:fontFamily="@font/poppins_medium"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal"
-                            android:layout_marginEnd="20dp">
-                            <ImageView
-                                android:layout_width="22sp"
-                                android:layout_height="22sp"
-                                android:background="@drawable/iconshower"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Kamar Mandi Dalam"
-                                android:textSize="12sp"
-                                android:layout_marginLeft="10dp"
-                                android:fontFamily="@font/poppins_medium"/>
-                        </LinearLayout>
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="130sp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:text="No. Telepon"
-                            android:textSize="15sp"
-                            android:textColor="@color/black"
-                            android:fontFamily="@font/poppins_semibold"/>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_marginEnd="20dp">
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:background="@drawable/telp"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginLeft="10dp"
-                                android:fontFamily="@font/poppins_medium"
-                                android:text="0998987876542"
-                                android:textSize="12sp" />
-
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="fill"
-                            android:layout_marginTop="40dp"
-                            android:orientation="horizontal"
-                            android:layout_marginEnd="20dp">
-                            <ImageView
-                                android:layout_width="18sp"
-                                android:layout_height="18sp"
-                                android:layout_marginTop="5dp"
-                                android:background="@drawable/iconlemari"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Lemari"
-                                android:textSize="12sp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="5dp"
-                                android:fontFamily="@font/poppins_medium"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginTop="8dp"
-                            android:orientation="horizontal"
-                            android:layout_marginEnd="20dp">
-                            <ImageView
-                                android:layout_width="18sp"
-                                android:layout_height="18sp"
-                                android:background="@drawable/iconmeja"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Meja"
-                                android:textSize="12sp"
-                                android:layout_marginLeft="10dp"
-                                android:fontFamily="@font/poppins_medium"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginTop="8dp"
-                            android:orientation="horizontal"
-                            android:layout_marginEnd="20dp">
-                            <ImageView
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:background="@drawable/iconwifi"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Wifi"
-                                android:textSize="12sp"
-                                android:layout_marginLeft="10dp"
-                                android:fontFamily="@font/poppins_medium"/>
-                        </LinearLayout>
-                    </LinearLayout>
                 </LinearLayout>
+
+
+                        <TextView
+                            android:id="@+id/tvFasilitas"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Fasilitas Kost"
+                            android:inputType="textMultiLine"
+                            android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/iconmeja" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Peraturan kost"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="5dp"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+
+
+                <TextView
+                    android:id="@+id/tvPeraturan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Peraturan Kost"
+                    android:inputType="textMultiLine"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/iconroom" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Kamar kost"
+                        android:layout_marginStart="5dp"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+
+
+                <TextView
+                    android:id="@+id/tvLuasKamar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Peraturan Kost"
+                    android:inputType="textMultiLine"
+                    android:textSize="12sp" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
