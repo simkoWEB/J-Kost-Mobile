@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.j_kost.R;
 
-public class NotaPembayaran extends AppCompatActivity {
+public class RincianPembayaran extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nota_pembayaran);
+        setContentView(R.layout.activity_rincian_pembayaran);
     }
 }
