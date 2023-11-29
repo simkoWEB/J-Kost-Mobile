@@ -62,7 +62,7 @@ public class TabProfilKost extends Fragment {
     }
 
     private void getDataKost(String roomId) {
-        String url = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/GetDataMobile/getUserKost/" + roomId; // URL yang diinginkan
+        String url = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/GetDataMobile/getUserKost/" + roomId;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -88,7 +88,6 @@ public class TabProfilKost extends Fragment {
                             // Memisahkan string menjadi 3 bagian berdasarkan koma
                             String[] fotoArray = fotoKost.split(",");
 
-                            // Mengatur gambar pada ImageView menggunakan Picasso
                             if (fotoArray.length >= 1) {
                                 loadImageToImageView(fotoArray[0], img1);
                             }

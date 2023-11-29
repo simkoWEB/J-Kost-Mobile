@@ -124,10 +124,15 @@ public class TabProfilUser extends Fragment {
 
         if (!photoPath.equals("")) {
 //            ini local
-            Picasso.get().load("http://"+ NetworkUtils.BASE_URL +"/PHP-MVC/public/foto/"+photoPath).into(profilePhoto);
+            loadImageToImageView(photoPath, profilePhoto);
         } else {
             // Jika tidak ada foto yang tersimpan, kamu bisa menampilkan foto placeholder atau pesan lainnya
             profilePhoto.setImageResource(R.drawable.pp);
         }
+    }
+
+    private void loadImageToImageView(String imageUrl, ImageView imageView) {
+        String fullImageUrl = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/foto/" + imageUrl;
+        Picasso.get().load(fullImageUrl).into(imageView);
     }
 }

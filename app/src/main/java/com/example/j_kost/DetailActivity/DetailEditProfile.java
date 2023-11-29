@@ -215,11 +215,17 @@ public class DetailEditProfile extends AppCompatActivity {
 
         if (!photoPath.equals("")) {
 //            ini local
-            Picasso.get().load("http://"+ NetworkUtils.BASE_URL +"/PHP-MVC/public/foto/"+photoPath).into(profilePhoto);
+//            Picasso.get().load("http://"+ NetworkUtils.BASE_URL +"/PHP-MVC/public/foto/"+photoPath).into(profilePhoto);
+            loadImageToImageView(photoPath, profilePhoto);
         } else {
             // Jika tidak ada foto yang tersimpan, kamu bisa menampilkan foto placeholder atau pesan lainnya
             profilePhoto.setImageResource(R.drawable.pp);
         }
+    }
+
+    private void loadImageToImageView(String imageUrl, ImageView imageView) {
+        String fullImageUrl = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/foto/" + imageUrl;
+        Picasso.get().load(fullImageUrl).into(imageView);
     }
 
     private void updateUserData() {
@@ -244,7 +250,7 @@ public class DetailEditProfile extends AppCompatActivity {
                             if (!response.isEmpty()) {
                                 responseMessage = response;
                             }
-//responnya masih error tapi berhasil ubah data
+
                             MyPopUp.showSuccessDialog(DetailEditProfile.this, "Sukses", "Data berhasil di edit", new OnDialogButtonClickListener() {
                                 @Override
                                 public void onDismissClicked(Dialog dialog) {

@@ -261,7 +261,6 @@
                 </LinearLayout>
 
 
-
                 <TextView
                     android:id="@+id/tvLuasKamar"
                     android:layout_width="wrap_content"
@@ -269,7 +268,8 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="_"
                     android:inputType="textMultiLine"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:layout_marginBottom="5dp"/>
 
             </LinearLayout>
         </LinearLayout>

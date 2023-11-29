@@ -23,7 +23,7 @@ import org.json.JSONObject;
 public class SessionManager {
     private static final String USER_DATA = "userData";
     private static final String IS_LOGGED_IN = "isLoggedIn";
-    private static final String SESSION_EXPIRY = "sessionExpiry"; // Tambahkan konstanta untuk waktu kedaluwarsa
+    private static final String SESSION_EXPIRY = "sessionExpiry"; // konstanta untuk waktu kedaluwarsa
 
     public static int getHargaBulanan(Context context) {
         SharedPreferences userPref = context.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE);

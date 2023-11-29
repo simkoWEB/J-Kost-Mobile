@@ -149,10 +149,16 @@ public class HomeFragment extends Fragment {
 
         if (!photoPath.equals("")) {
 //            ini local
-            Picasso.get().load("http://"+ NetworkUtils.BASE_URL +"/PHP-MVC/public/foto/"+photoPath).into(profilePhoto);
+//            Picasso.get().load("http://"+ NetworkUtils.BASE_URL +"/PHP-MVC/public/foto/"+photoPath).into(profilePhoto);
+            loadImageToImageView(photoPath, profilePhoto);
         } else {
             profilePhoto.setImageResource(R.drawable.pp);
         }
+    }
+
+    private void loadImageToImageView(String imageUrl, ImageView imageView) {
+        String fullImageUrl = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/foto/" + imageUrl;
+        Picasso.get().load(fullImageUrl).into(imageView);
     }
 
     private void navigateToTabHistoryFragment() {
