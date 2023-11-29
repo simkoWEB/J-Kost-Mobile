@@ -42,11 +42,7 @@ public class SessionManager {
             String tglLahir,
             String fotoUser,
             String nomorKamar,
-            String fasilitasKost,
-            String peraturanKost,
             String ukuranKamar,
-            String namaKost,
-            String alamatKost,
             int hargaBulanan
     ) {
         SharedPreferences userPref = context.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE);
@@ -62,11 +58,7 @@ public class SessionManager {
         editor.putString("tglLahir", tglLahir);
         editor.putString("fotoUser", fotoUser);
         editor.putString("nomorKamar", nomorKamar);
-        editor.putString("fasilitasKost", fasilitasKost);
-        editor.putString("peraturanKost", peraturanKost);
         editor.putString("ukuranKamar", ukuranKamar);
-        editor.putString("namaKost", namaKost);
-        editor.putString("alamatKost", alamatKost);
         editor.putInt("hargaBulanan", hargaBulanan);
 
         // Tambahkan waktu kedaluwarsa 1 hari dari sekarang
@@ -147,17 +139,11 @@ public class SessionManager {
                                 String tglLahir = dataObject.getString("Tanggal Lahir");
                                 String fotoUser = dataObject.getString("foto_user");
                                 String nomorKamar = dataObject.getString("Nomor Kamar");
-                                String fasilitas = dataObject.getString("fasilitas_kost");
-                                String peraturan = dataObject.getString("peraturan_kost");
                                 String ukuranKamar = dataObject.getString("Ukuran Kamar");
-                                String namaKost = dataObject.getString("nama_kost");
-                                String alamatKost = dataObject.getString("Alamat Kost");
                                 int hargaBulanan = dataObject.getInt("harga_bulanan");
 
-
                                 loginUser(context, idUser, namaPenghuni, email, password, alamatUser, notelpUser,
-                                        jk, tglLahir, fotoUser, nomorKamar, fasilitas, peraturan, ukuranKamar, namaKost,
-                                        alamatKost, hargaBulanan);
+                                        jk, tglLahir, fotoUser, nomorKamar, ukuranKamar, hargaBulanan);
 
                                 // Pastikan untuk menyimpan data terbaru dalam sesi
                             }

@@ -21,11 +21,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.j_kost.Adapter.HistoryAdapter;
 import com.example.j_kost.R;
 import com.example.j_kost.Tab.TabHistory;
 import com.example.j_kost.Utils.NetworkUtils;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,10 +52,13 @@ public class HomeFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     ImageView profilePhoto;
     public TextView namaUser, namaKost, selengkapnya, bulanPembayaran, tvHarga;
+    private RequestQueue requestQueue;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        requestQueue = Volley.newRequestQueue(requireContext());
+
 
         profilePhoto = view.findViewById(R.id.profile);
         namaUser = view.findViewById(R.id.tvUsername);
@@ -56,7 +68,10 @@ public class HomeFragment extends Fragment {
         tvHarga = view.findViewById(R.id.hargaBulanan);
 
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
+        String kamarId = sharedPreferences.getString("nomorKamar", "");
+
         getDataUser();
+        getDataKost(kamarId);
 
         // Mendapatkan bulan saat ini
         Calendar calendar = Calendar.getInstance();
@@ -95,14 +110,39 @@ public class HomeFragment extends Fragment {
 
     }
 
+    private void getDataKost(String roomId){
+        String url = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/GetDataMobile/getUserKost/" + roomId; // URL yang diinginkan
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject data = response.getJSONObject("data");
+                            String kostName = data.getString("nama_kost");
+
+                            namaKost.setText(kostName);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Tangani jika terjadi kesalahan dalam permintaan
+                    }
+                });
+        requestQueue.add(jsonObjectRequest);
+    }
+
     private void getDataUser(){
         String userName = sharedPreferences.getString("namaLengkap", "-");
-        String userKost = sharedPreferences.getString("namaKost", "-");
         int hargaBulanan = sharedPreferences.getInt("hargaBulanan",0);
         String photoPath = sharedPreferences.getString("fotoUser", "");
 
         namaUser.setText(userName);
-        namaKost.setText(userKost);
 
         String formattedHarga = formatDecimal(hargaBulanan);
         tvHarga.setText("Rp. " + formattedHarga);
