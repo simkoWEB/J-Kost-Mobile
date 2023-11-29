@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Tab.TabProfilKost"
@@ -19,7 +20,7 @@
                 android:id="@+id/text_judulKostProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Kost Bunga Indah"
+                android:text="-"
                 android:textSize="25sp"
                 android:textColor="@color/black"
                 android:layout_marginVertical="10dp"
@@ -34,35 +35,48 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="12dp">
+
                     <ImageView
                         android:id="@+id/img1"
+                        android:scaleType="centerCrop"
                         android:layout_width="280dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/image2" />
 
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        app:cardCornerRadius="12dp">
                     <ImageView
                         android:id="@+id/img2"
+                        android:scaleType="centerCrop"
                         android:layout_width="280dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
                         android:background="@drawable/image2" />
+                    </androidx.cardview.widget.CardView>
 
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        app:cardCornerRadius="12dp">
                     <ImageView
                         android:id="@+id/img3"
+                        android:scaleType="centerCrop"
                         android:layout_width="280dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
                         android:background="@drawable/image2" />
+                    </androidx.cardview.widget.CardView>
 
-                    <ImageView
-                        android:id="@+id/img4"
-                        android:layout_width="280dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/image2" />
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -70,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="25dp"
                 android:orientation="vertical">
 
             <LinearLayout
@@ -102,8 +116,59 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="Alamat Kost"
+                            android:text="-"
                             android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/baseline_phone_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Nomor Telepon"
+                        android:layout_marginStart="5dp"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:id="@+id/tvNotelp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="081127875673"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_marginStart="10dp"
+                android:id="@+id/tvNamaPemilik"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Nico Flassy"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -133,7 +198,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="Fasilitas Kost"
+                            android:text="-"
                             android:inputType="textMultiLine"
                             android:textSize="12sp" />
 
@@ -167,7 +232,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Peraturan Kost"
+                    android:text="-"
                     android:inputType="textMultiLine"
                     android:textSize="12sp" />
 
@@ -202,7 +267,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Peraturan Kost"
+                    android:text="_"
                     android:inputType="textMultiLine"
                     android:textSize="12sp" />
 
