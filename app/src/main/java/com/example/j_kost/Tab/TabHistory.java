@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.j_kost.Adapter.HistoryAdapter;
+import com.example.j_kost.Models.Transaksi;
 import com.example.j_kost.R;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class TabHistory extends Fragment {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private HistoryAdapter historyAdapter;
-    private List<String> listData;
+    private List<Transaksi> listData;
 
     // Fragment initialization parameters
     private static final String ARG_PARAM1 = "param1";
@@ -57,9 +58,10 @@ public class TabHistory extends Fragment {
         recyclerView = view.findViewById(R.id.kumpulan_card_history);
         listData = new ArrayList<>();
 
-        for (int i = 0; i < 12; i++) {
-            listData.add("Transaksi bulan ke-" + i);
-        }
+        listData.add(new Transaksi("Transaksi November", "30-11-2023", 350000));
+        listData.add(new Transaksi("Transaksi Oktober", "25-10-2023",350000));
+        listData.add(new Transaksi("Transaksi September", "29-09-2023",350000));
+        listData.add(new Transaksi("Transaksi Agustus", "23-08-2023",350000));
 
         // Set up LinearLayoutManager and HistoryAdapter
         linearLayoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);

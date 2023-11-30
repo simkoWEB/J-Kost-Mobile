@@ -56,14 +56,20 @@
                 android:layout_height="wrap_content"
                 android:text="Transaksi Bulan Oktober"
                 android:textColor="@color/black"
-                android:textSize="13dp"
+                android:textSize="12dp"
                 android:layout_gravity="start"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_regular"
                 android:contentDescription="Bulan Oktober"/>
+
             <TextView
+                android:id="@+id/historyWaktu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="8 menit yang lalu"
+                android:text="2023-11-30"
                 android:textSize="11dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textStyle="bold"
                 android:layout_gravity="start"/>
         </LinearLayout>
         <LinearLayout
@@ -74,14 +80,16 @@
             android:gravity="end"
             >
             <TextView
+                android:id="@+id/hargaBulanan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Rp 800,000"
                 android:layout_marginHorizontal="8dp"
-                android:textSize="14dp"
+                android:textSize="12dp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
                 android:gravity="end"
+                android:fontFamily="@font/poppins_semibold"
                 android:textColor="@color/black"/>
         </LinearLayout>
     </LinearLayout>

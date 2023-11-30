@@ -29,6 +29,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.j_kost.Adapter.HistoryAdapter;
+import com.example.j_kost.Models.Transaksi;
 import com.example.j_kost.R;
 import com.example.j_kost.Tab.TabHistory;
 import com.example.j_kost.Utils.NetworkUtils;
@@ -49,7 +50,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private HistoryAdapter historyAdapter;
-    private List<String> listData;
+    private List<Transaksi> listData;
     private SharedPreferences sharedPreferences;
     ImageView profilePhoto;
     public TextView namaUser, namaKost, selengkapnya, bulanPembayaran, tvHarga;
@@ -94,9 +95,10 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.kumpulan_card_history);
         listData = new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
-            listData.add("Transaksi bulan ke-" + i);
-        }
+        listData.add(new Transaksi("Transaksi November", "30-11-2023", 350000));
+        listData.add(new Transaksi("Transaksi Oktober", "25-10-2023",350000));
+        listData.add(new Transaksi("Transaksi September", "29-09-2023",350000));
+        listData.add(new Transaksi("Transaksi Agustus", "23-08-2023",350000));
 
         // Set up LinearLayoutManager and HistoryAdapter
         linearLayoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);
