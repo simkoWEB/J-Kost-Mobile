@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -37,6 +38,9 @@ import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.textfield.TextInputEditText;
 import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -98,7 +102,8 @@ public class DetailEditProfile extends AppCompatActivity {
 
 
         sharedPreferences = getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
-        getDataUser();
+        String idUser = sharedPreferences.getString("idUser", "");
+        getDataUser(idUser);
 
         BtnUbahProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +142,10 @@ public class DetailEditProfile extends AppCompatActivity {
                             }
                         });
                     } else {
-                        updateUserData();
+                        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
+                        String userId = sharedPreferences.getString("idUser", "");
+
+                        updateUserData(userId);
                     }
                 } else {
                     // Show a pop-up alert indicating no internet connection
@@ -167,6 +175,9 @@ public class DetailEditProfile extends AppCompatActivity {
             // Mengubah gambar ke Base64
             userPhoto = ImageBase64Converter.convertImageToBase64(uri, getContentResolver());
             // Simpan Base64 string ini atau gunakan untuk mengirim ke server bersama data lainnya
+            String urlfoto = uri.toString();
+
+            Log.d("Test Img Picker", urlfoto);
         }
     }
 
@@ -194,43 +205,68 @@ public class DetailEditProfile extends AppCompatActivity {
     }
 
 
-    private void getDataUser(){
-        String userName = sharedPreferences.getString("namaLengkap", "-");
-        String userNumber = sharedPreferences.getString("noHp", "-");
-        String userAddress = sharedPreferences.getString("alamatUser", "-");
-        String userGender = sharedPreferences.getString("jenisKelamin", "-");
-        String userBirth = sharedPreferences.getString("tglLahir", "-");
-        String photoPath = sharedPreferences.getString("fotoUser", "");
+    private void getDataUser(String userId){
+        String apiUrl = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/GetDataMobile/getUserData/" + userId;
 
-        nama.setText(userName);
-        noHp.setText(userNumber);
-        alamat.setText(userAddress);
-        tglLahir.setText(userBirth);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            int code = jsonObject.getInt("code");
+                            String status = jsonObject.getString("status");
 
-        if (userGender.equals("Laki-laki")) {
-            radioBtnMale.setChecked(true);
-        } else if (userGender.equals("Perempuan")) {
-            radioBtnFemale.setChecked(true);
-        }
+                            if (code == 200 && status.equals("success")) {
+                                JSONObject dataObject = jsonObject.getJSONObject("data");
 
-        if (!photoPath.equals("")) {
-//            ini local
-//            Picasso.get().load("http://"+ NetworkUtils.BASE_URL +"/PHP-MVC/public/foto/"+photoPath).into(profilePhoto);
-            loadImageToImageView(photoPath, profilePhoto);
-        } else {
-            // Jika tidak ada foto yang tersimpan, kamu bisa menampilkan foto placeholder atau pesan lainnya
-            profilePhoto.setImageResource(R.drawable.pp);
-        }
+                                String userName = dataObject.getString("Nama Penghuni");
+                                String userNumber = dataObject.getString("Notelp User");
+                                String userAddress = dataObject.getString("Alamat User");
+                                String userGender = dataObject.getString("Jenis Kelamin");
+                                String userBirth = dataObject.getString("Tanggal Lahir");
+                                String photoPath = dataObject.getString("foto_user");
+
+                                nama.setText(userName);
+                                noHp.setText(userNumber);
+                                alamat.setText(userAddress);
+                                tglLahir.setText(userBirth);
+
+                                if (userGender.equals("Laki-laki")) {
+                                    radioBtnMale.setChecked(true);
+                                } else if (userGender.equals("Perempuan")) {
+                                    radioBtnFemale.setChecked(true);
+                                }
+
+                                if (!photoPath.isEmpty()) {
+                                    loadImageToImageView(photoPath, profilePhoto);
+                                } else {
+                                    profilePhoto.setImageResource(R.drawable.pp);
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error jika ada ketika mengambil data dari server
+                    }
+                });
+
+        // Tambahkan request ke queue Volley
+        Volley.newRequestQueue(this).add(stringRequest);
     }
+
 
     private void loadImageToImageView(String imageUrl, ImageView imageView) {
         String fullImageUrl = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/foto/" + imageUrl;
         Picasso.get().load(fullImageUrl).into(imageView);
     }
 
-    private void updateUserData() {
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
-        String userId = sharedPreferences.getString("idUser", "");
+    private void updateUserData(String userId) {
 
         if (!userId.isEmpty()) {
             String apiUrl = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/EditDataApi/editUser/" + userId;
@@ -240,6 +276,7 @@ public class DetailEditProfile extends AppCompatActivity {
             String userAddress = alamat.getText().toString().trim();
             String userGender = radioBtnMale.isChecked() ? "Laki-laki" : "Perempuan";
             String userBirth = tglLahir.getText().toString().trim();
+            String userPhoto = ""; // Kamu perlu menginisialisasi userPhoto sesuai dengan kebutuhan
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, apiUrl,
                     new Response.Listener<String>() {
@@ -294,7 +331,7 @@ public class DetailEditProfile extends AppCompatActivity {
                     params.put("jenis_kelamin", userGender);
                     params.put("tggl_lahir", userBirth);
                     params.put("id_user", userId);
-                    params.put("foto_user", imageString);
+                    params.put("foto_user", userPhoto);
 
                     return params;
                 }
@@ -305,6 +342,7 @@ public class DetailEditProfile extends AppCompatActivity {
             MyToast.showToastError(DetailEditProfile.this, "Id tidak ditemukan");
         }
     }
+
 
 
 }

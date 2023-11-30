@@ -26,6 +26,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.j_kost.Adapter.HistoryAdapter;
 import com.example.j_kost.R;
@@ -68,9 +69,10 @@ public class HomeFragment extends Fragment {
         tvHarga = view.findViewById(R.id.hargaBulanan);
 
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
+        String idUser = sharedPreferences.getString("idUser", "");
         String kamarId = sharedPreferences.getString("nomorKamar", "");
 
-        getDataUser();
+        getDataUser(idUser);
         getDataKost(kamarId);
 
         // Mendapatkan bulan saat ini
@@ -137,24 +139,52 @@ public class HomeFragment extends Fragment {
         requestQueue.add(jsonObjectRequest);
     }
 
-    private void getDataUser(){
-        String userName = sharedPreferences.getString("namaLengkap", "-");
-        int hargaBulanan = sharedPreferences.getInt("hargaBulanan",0);
-        String photoPath = sharedPreferences.getString("fotoUser", "");
+    private void getDataUser(String idUser){
+        String apiUrl = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/GetDataMobile/getUserData/" + idUser;
 
-        namaUser.setText(userName);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            int code = jsonObject.getInt("code");
+                            String status = jsonObject.getString("status");
 
-        String formattedHarga = formatDecimal(hargaBulanan);
-        tvHarga.setText("Rp. " + formattedHarga);
+                            if (code == 200 && status.equals("success")) {
+                                JSONObject dataObject = jsonObject.getJSONObject("data");
 
-        if (!photoPath.equals("")) {
-//            ini local
-//            Picasso.get().load("http://"+ NetworkUtils.BASE_URL +"/PHP-MVC/public/foto/"+photoPath).into(profilePhoto);
-            loadImageToImageView(photoPath, profilePhoto);
-        } else {
-            profilePhoto.setImageResource(R.drawable.pp);
-        }
+                                String userName = dataObject.getString("Nama Penghuni");
+                                int hargaBulanan = dataObject.getInt("harga_bulanan");
+                                String photoPath = dataObject.getString("foto_user");
+
+                                namaUser.setText(userName);
+
+                                String formattedHarga = formatDecimal(hargaBulanan);
+                                tvHarga.setText("Rp. " + formattedHarga);
+
+                                if (!photoPath.isEmpty()) {
+                                    loadImageToImageView(photoPath, profilePhoto);
+                                } else {
+                                    profilePhoto.setImageResource(R.drawable.pp);
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error jika ada ketika mengambil data dari server
+                    }
+                });
+
+        // Tambahkan request ke queue Volley
+        Volley.newRequestQueue(getContext()).add(stringRequest);
     }
+
 
     private void loadImageToImageView(String imageUrl, ImageView imageView) {
         String fullImageUrl = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/foto/" + imageUrl;

@@ -19,6 +19,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.j_kost.DetailActivity.AboutApps;
 import com.example.j_kost.DetailActivity.ConfirmOldPass;
 import com.example.j_kost.DetailActivity.DetailEditProfile;
@@ -29,6 +34,9 @@ import com.example.j_kost.Utils.MyPopUp;
 import com.example.j_kost.Utils.NetworkUtils;
 import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class TabProfilUser extends Fragment {
     TextView nama, email, notelp;
@@ -51,7 +59,8 @@ public class TabProfilUser extends Fragment {
         btnAbout = view.findViewById(R.id.btnAbout);
 
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
-        getDataUser();
+        String idUser = sharedPreferences.getString("idUser", "");
+        getDataUser(idUser);
 
         btnAbout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,24 +121,52 @@ public class TabProfilUser extends Fragment {
         startActivity(intent);
         getActivity().finish(); // Tutup aktivitas saat ini setelah logout
     }
-    private void getDataUser(){
-        String userName = sharedPreferences.getString("namaLengkap", "-");
-        String userEmail = sharedPreferences.getString("emailUser", "-");
-        String userTelp = sharedPreferences.getString("noHp", "-");
-        String photoPath = sharedPreferences.getString("fotoUser", "");
+    private void getDataUser(String userId){
+        String apiUrl = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/GetDataMobile/getUserData/" + userId;
 
-        nama.setText(userName);
-        email.setText(userEmail);
-        notelp.setText(userTelp);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            int code = jsonObject.getInt("code");
+                            String status = jsonObject.getString("status");
 
-        if (!photoPath.equals("")) {
-//            ini local
-            loadImageToImageView(photoPath, profilePhoto);
-        } else {
-            // Jika tidak ada foto yang tersimpan, kamu bisa menampilkan foto placeholder atau pesan lainnya
-            profilePhoto.setImageResource(R.drawable.pp);
-        }
+                            if (code == 200 && status.equals("success")) {
+                                JSONObject dataObject = jsonObject.getJSONObject("data");
+
+                                String userName = dataObject.getString("Nama Penghuni");
+                                String userEmail = dataObject.getString("email");
+                                String userTelp = dataObject.getString("Notelp User");
+                                String photoPath = dataObject.getString("foto_user");
+
+                                nama.setText(userName);
+                                email.setText(userEmail);
+                                notelp.setText(userTelp);
+
+                                if (!photoPath.isEmpty()) {
+                                    loadImageToImageView(photoPath, profilePhoto);
+                                } else {
+                                    profilePhoto.setImageResource(R.drawable.pp);
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error jika ada ketika mengambil data dari server
+                    }
+                });
+
+        // Tambahkan request ke queue Volley
+        Volley.newRequestQueue(getContext()).add(stringRequest);
     }
+
 
     private void loadImageToImageView(String imageUrl, ImageView imageView) {
         String fullImageUrl = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/foto/" + imageUrl;
