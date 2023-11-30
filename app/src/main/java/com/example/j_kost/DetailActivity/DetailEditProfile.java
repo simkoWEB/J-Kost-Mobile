@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -42,6 +43,8 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,8 +55,8 @@ public class DetailEditProfile extends AppCompatActivity {
     ImageView btnBack, profilePhoto;
     EditText nama, noHp, jenisKelamin, tglLahir, alamat;
     RadioButton radioBtnMale, radioBtnFemale;
-    private String imageString = "";
-    private String userPhoto = "";
+    private String selectedImageUri = "";
+    private String previousUserPhoto = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,17 +172,26 @@ public class DetailEditProfile extends AppCompatActivity {
         if (requestCode == ImagePicker.REQUEST_CODE && resultCode == RESULT_OK) {
             Uri uri = data.getData();
 
-            // Menyetel foto ke ImageView menggunakan Picasso
-            Picasso.get().load(uri).into(profilePhoto); // profile adalah ImageView yang ingin ditampilkan foto di dalamnya
+            if (uri != null) {
+                // Menyetel foto ke ImageView menggunakan Picasso
+                Picasso.get().load(uri).into(profilePhoto); // profile adalah ImageView yang ingin ditampilkan foto di dalamnya
 
-            // Mengubah gambar ke Base64
-            userPhoto = ImageBase64Converter.convertImageToBase64(uri, getContentResolver());
-            // Simpan Base64 string ini atau gunakan untuk mengirim ke server bersama data lainnya
-            String urlfoto = uri.toString();
+                // Mendapatkan hanya nama file dari URI
+                String fileName = uri.getLastPathSegment();
 
-            Log.d("Test Img Picker", urlfoto);
+                // Jika tidak ada gambar yang dipilih, gunakan foto sebelumnya
+                if (fileName == null || fileName.isEmpty()) {
+                    selectedImageUri = previousUserPhoto;
+                } else {
+                    // Jika ada gambar yang dipilih, simpan URL gambar baru
+                    selectedImageUri = fileName;
+                }
+
+                Log.d("Test Img Picker", selectedImageUri);
+            }
         }
     }
+
 
     @SuppressLint("MissingSuperCall")
     @Override
@@ -240,8 +252,12 @@ public class DetailEditProfile extends AppCompatActivity {
 
                                 if (!photoPath.isEmpty()) {
                                     loadImageToImageView(photoPath, profilePhoto);
+                                    previousUserPhoto = photoPath;
+
+                                    String getPhotoPath = photoPath.toString();
+                                    Log.d("Get img path", getPhotoPath);
                                 } else {
-                                    profilePhoto.setImageResource(R.drawable.pp);
+                                    profilePhoto.setImageResource(R.drawable.default_profilepng);
                                 }
                             }
                         } catch (JSONException e) {
@@ -276,7 +292,18 @@ public class DetailEditProfile extends AppCompatActivity {
             String userAddress = alamat.getText().toString().trim();
             String userGender = radioBtnMale.isChecked() ? "Laki-laki" : "Perempuan";
             String userBirth = tglLahir.getText().toString().trim();
-            String userPhoto = ""; // Kamu perlu menginisialisasi userPhoto sesuai dengan kebutuhan
+
+            // Simpan URL foto sebelumnya
+            String previousPhoto = previousUserPhoto;
+
+            // Jika foto baru dipilih, perbarui URL foto baru
+            if (selectedImageUri != null && !selectedImageUri.isEmpty()) {
+                previousPhoto = selectedImageUri;
+            }
+
+            String finalUserPhoto = previousPhoto;
+
+            Log.d("Foto fun update", finalUserPhoto);
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, apiUrl,
                     new Response.Listener<String>() {
@@ -300,7 +327,7 @@ public class DetailEditProfile extends AppCompatActivity {
                                     editor.putString("alamatUser", userAddress);
                                     editor.putString("jenisKelamin", userGender);
                                     editor.putString("tglLahir", userBirth);
-                                    editor.putString("fotoUser", userPhoto);
+                                    editor.putString("fotoUser", finalUserPhoto);
                                     editor.apply();
 
                                     SessionManager.fetchDataAndUpdateSession(DetailEditProfile.this, userId);
@@ -331,7 +358,7 @@ public class DetailEditProfile extends AppCompatActivity {
                     params.put("jenis_kelamin", userGender);
                     params.put("tggl_lahir", userBirth);
                     params.put("id_user", userId);
-                    params.put("foto_user", userPhoto);
+                    params.put("foto_user", finalUserPhoto);
 
                     return params;
                 }
