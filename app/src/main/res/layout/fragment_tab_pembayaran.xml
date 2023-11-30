@@ -50,10 +50,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Informasi Pembayaran"
-                    android:layout_marginVertical="5dp"
+                    android:layout_marginVertical="7dp"
                     android:fontFamily="@font/poppins_semibold"
                     android:textColor="@color/white"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:textAlignment="center"
                     />
 
@@ -73,8 +73,9 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:padding="10dp"
-                        android:textSize="14sp"
                         android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/poppins_regular"
                         />
 
                     <!-- TextView untuk Nomor Rekening itu sendiri -->
@@ -87,8 +88,9 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:padding="10dp"
-                        android:textSize="14sp"
                         android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/poppins_regular"
                         />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -108,8 +110,9 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:padding="10dp"
-                        android:textSize="14sp"
                         android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/poppins_regular"
                         />
 
                     <!-- TextView untuk Nomor Rekening itu sendiri -->
@@ -122,8 +125,9 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:padding="10dp"
-                        android:textSize="14sp"
                         android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/poppins_regular"
                         />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -143,8 +147,9 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:padding="10dp"
-                        android:textSize="14sp"
                         android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/poppins_regular"
                         />
 
                     <!-- TextView untuk Nomor Rekening itu sendiri -->
@@ -157,8 +162,9 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:padding="10dp"
-                        android:textSize="14sp"
                         android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/poppins_regular"
                         />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

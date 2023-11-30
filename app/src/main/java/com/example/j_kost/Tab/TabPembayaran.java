@@ -3,9 +3,11 @@ package com.example.j_kost.Tab;
 import static android.app.Activity.RESULT_OK;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -33,8 +35,11 @@ import com.example.j_kost.DetailActivity.DetailEditProfile;
 import com.example.j_kost.DetailActivity.MetodePembayaran;
 import com.example.j_kost.R;
 import com.example.j_kost.Session.SessionManager;
+import com.example.j_kost.Utils.MyPopUp;
+import com.example.j_kost.Utils.MyToast;
 import com.example.j_kost.Utils.NetworkUtils;
 import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -48,7 +53,7 @@ public class TabPembayaran extends Fragment {
     TextView tvBayar, tvSisa, tvHargaTotal, noRek, jenisBayar, namaPemilik;
     EditText nominalBayar, btnMetodePembayaran;
     ImageView buktiPembayaran;
-    Button btnPilihFoto;
+    Button btnPilihFoto, btnKonfirmasi;
     RequestQueue requestQueue;
     SharedPreferences sharedPreferences;
 
@@ -74,6 +79,7 @@ public class TabPembayaran extends Fragment {
         namaPemilik = view.findViewById(R.id.tvNamaPemilik);
         noRek = view.findViewById(R.id.tvNoRekPemilik);
         jenisBayar = view.findViewById(R.id.tvJenisBank);
+        btnKonfirmasi = view.findViewById(R.id.konfirmasiPembayaran);
 
         int hargaBulanan = SessionManager.getHargaBulanan(getContext()); // Mengambil hargaBulanan dari SharedPreferences
         tvHargaTotal = view.findViewById(R.id.tvhragaTotal);
@@ -82,8 +88,6 @@ public class TabPembayaran extends Fragment {
             String formattedTotal = formatDec(hargaBulanan); // Format nilai jika diperlukan
             tvHargaTotal.setText(formattedTotal); // Mengatur nilai ke tvHargaTotal
         } else {
-            // Lakukan sesuatu jika hargaBulanan kosong atau tidak ada
-            // Contoh:
             tvHargaTotal.setText("Default Value");
         }
 
@@ -140,6 +144,49 @@ public class TabPembayaran extends Fragment {
                 tvSisa.setText(formatDec(sisa));
             }
         });
+
+        btnKonfirmasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Mengambil nilai dari field-field yang perlu divalidasi
+                String nominal = nominalBayar.getText().toString().trim();
+                String metodePembayaran = btnMetodePembayaran.getText().toString().trim();
+                Drawable buktiPembayaranDrawable = buktiPembayaran.getDrawable();
+
+                // Mengambil total yang harus dibayarkan
+                int total = Integer.parseInt(tvHargaTotal.getText().toString().replaceAll("[,.]", ""));
+
+                // Melakukan pengecekan apakah semua field telah diisi
+                if (nominal.isEmpty() || metodePembayaran.isEmpty() || buktiPembayaranDrawable == null) {
+                    // Jika ada field yang kosong, tampilkan pesan kesalahan kepada pengguna
+                    // Misalnya menggunakan Toast atau dialog error
+                    // Contoh menggunakan Toast:
+                    MyToast.showToastError(getContext(),"Harap isi semua data terlebih dahulu");
+                } else {
+                    // Jika semua field telah diisi, cek apakah nominal yang dibayarkan kurang dari total yang harus dibayarkan
+                    int bayar = Integer.parseInt(reFormat(nominal));
+
+                    if (bayar < total) {
+                        // Jika nominal yang dibayarkan kurang dari total, tampilkan pesan kesalahan
+                        MyToast.showToastError(getContext(), "Nominal pembayaran kurang dari total yang harus dibayarkan");
+                    } else {
+                        // Jika semua validasi terpenuhi, tampilkan dialog sukses dan lakukan reset field
+                        MyPopUp.showSuccessDialog(getContext(), "Sukses", "Pembayaran berhasil dilakukan", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                                dialog.dismiss();
+
+                                nominalBayar.setText("");
+                                btnMetodePembayaran.setText("");
+                                buktiPembayaran.setImageResource(R.drawable.place_holder_img);
+                            }
+                        });
+                    }
+                }
+            }
+        });
+
 
 
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
