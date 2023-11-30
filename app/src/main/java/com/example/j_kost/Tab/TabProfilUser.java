@@ -148,7 +148,7 @@ public class TabProfilUser extends Fragment {
                                 if (!photoPath.isEmpty()) {
                                     loadImageToImageView(photoPath, profilePhoto);
                                 } else {
-                                    profilePhoto.setImageResource(R.drawable.pp);
+                                    profilePhoto.setImageResource(R.drawable.default_profilepng);
                                 }
                             }
                         } catch (JSONException e) {

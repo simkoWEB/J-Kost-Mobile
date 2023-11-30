@@ -34,7 +34,7 @@
                 android:layout_width="45dp"
                 android:scaleType="centerCrop"
                 android:layout_height="45dp"
-                android:src="@drawable/pp"
+                android:src="@drawable/default_profilepng"
                 android:background="@drawable/rounded_profile"/>
 
         </androidx.cardview.widget.CardView>
