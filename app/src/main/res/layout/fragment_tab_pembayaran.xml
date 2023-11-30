@@ -24,6 +24,151 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/allContainerCardPembayaran"
+            app:cardCornerRadius="8dp"
+            android:elevation="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/headerCardPembayaran"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Informasi Pembayaran"
+                    android:layout_marginVertical="5dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textAlignment="center"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- TextView untuk Nomor Rekening -->
+                    <TextView
+                        android:id="@+id/textNomorRekening"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nomor Rekening"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        />
+
+                    <!-- TextView untuk Nomor Rekening itu sendiri -->
+                    <TextView
+                        android:id="@+id/tvNoRekPemilik"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="098888763765"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- TextView untuk Nomor Rekening -->
+                    <TextView
+                        android:id="@+id/textBank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bank / E-Wallet"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        />
+
+                    <!-- TextView untuk Nomor Rekening itu sendiri -->
+                    <TextView
+                        android:id="@+id/tvJenisBank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="BCA"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- TextView untuk Nomor Rekening -->
+                    <TextView
+                        android:id="@+id/textNama"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nama Pemilik"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        />
+
+                    <!-- TextView untuk Nomor Rekening itu sendiri -->
+                    <TextView
+                        android:id="@+id/tvNamaPemilik"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nico Flassy"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,66 +195,6 @@
             android:cursorVisible="false"
             android:fontFamily="@font/poppins_regular"
             />
-
-<!--            <RadioGroup-->
-<!--                android:id="@+id/radioGroupMetodePembayaran"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical"-->
-<!--                android:layout_marginTop="5dp">-->
-
-<!--                <RadioButton-->
-<!--                    android:id="@+id/danaRadioButton"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Dana"-->
-<!--                    android:textSize="13dp"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:fontFamily="@font/poppins_regular"-->
-<!--                    android:layout_margin="4dp"/>-->
-
-<!--                <RadioButton-->
-<!--                    android:id="@+id/briRadioButton"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Bank BRI"-->
-<!--                    android:textSize="13dp"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:fontFamily="@font/poppins_regular"-->
-<!--                    android:layout_margin="4dp"/>-->
-
-<!--                <RadioButton-->
-<!--                    android:id="@+id/jatimRadioButton"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Bank Jatim"-->
-<!--                    android:textSize="13dp"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:fontFamily="@font/poppins_regular"-->
-<!--                    android:layout_margin="4dp"/>-->
-
-<!--                <RadioButton-->
-<!--                    android:id="@+id/bcaRadioButton"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Bank BCA"-->
-<!--                    android:textSize="13dp"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:fontFamily="@font/poppins_regular"-->
-<!--                    android:layout_margin="4dp"/>-->
-<!--            </RadioGroup>-->
-
-<!--            <Spinner-->
-<!--                android:id="@+id/metode_pembayaran"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/bg_spinner"-->
-<!--                android:paddingVertical="10dp"-->
-<!--                android:paddingHorizontal="5dp"-->
-<!--                android:entries="@array/metodePembayaran"-->
-<!--                android:spinnerMode="dropdown"-->
-<!--                android:dropDownVerticalOffset="44dp"/>-->
-
 
         <TextView
             android:layout_width="wrap_content"
