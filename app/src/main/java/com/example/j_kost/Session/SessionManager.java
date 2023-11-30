@@ -33,42 +33,28 @@ public class SessionManager {
     public static void loginUser(
             Context context,
             String idUser,
-            String namaLengkap,
             String email,
             String password,
-            String alamatUser,
-            String noHp,
-            String jenisKelamin,
-            String tglLahir,
-            String fotoUser,
             String nomorKamar,
-            String ukuranKamar,
             int hargaBulanan
     ) {
         SharedPreferences userPref = context.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = userPref.edit();
 
         editor.putString("idUser", idUser);
-        editor.putString("namaLengkap", namaLengkap);
         editor.putString("emailUser", email);
         editor.putString("passwordUser", password);
-        editor.putString("alamatUser", alamatUser);
-        editor.putString("noHp", noHp);
-        editor.putString("jenisKelamin", jenisKelamin);
-        editor.putString("tglLahir", tglLahir);
-        editor.putString("fotoUser", fotoUser);
         editor.putString("nomorKamar", nomorKamar);
-        editor.putString("ukuranKamar", ukuranKamar);
         editor.putInt("hargaBulanan", hargaBulanan);
 
         // Tambahkan waktu kedaluwarsa 1 hari dari sekarang
         long expiryTimeMillis = System.currentTimeMillis() + (1 * 24 * 60 * 60 * 1000); // 1 hari dalam milidetik
-//        long expiryTimeMillis = System.currentTimeMillis() + (1 * 60 * 1000); // 1 menit dalam milidetik
         editor.putLong(SESSION_EXPIRY, expiryTimeMillis);
 
         editor.putBoolean(IS_LOGGED_IN, true); // Set logged-in state to true
         editor.apply();
     }
+
 
     public static void logoutUser(Context context) {
         SharedPreferences userPref = context.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE);
@@ -112,7 +98,7 @@ public class SessionManager {
     }
 
     public static void fetchDataAndUpdateSession(Context context, String userId) {
-        String apiUrl = "http://"+ NetworkUtils.BASE_URL +"/PHP-MVC/public/GetDataMobile/getUserData/" + userId;
+        String apiUrl = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/GetDataMobile/getUserData/" + userId;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,
                 new Response.Listener<String>() {
@@ -128,22 +114,29 @@ public class SessionManager {
                             if (code == 200 && status.equals("success")) {
                                 JSONObject dataObject = jsonObject.getJSONObject("data");
 
-                                // Mendapatkan nilai dari setiap kunci di dalam objek data
+                                // Mendapatkan nilai dari setiap kunci yang diperlukan dari objek data
                                 String idUser = dataObject.getString("id_user");
-                                String namaPenghuni = dataObject.getString("Nama Penghuni");
                                 String email = dataObject.getString("email");
                                 String password = dataObject.getString("password");
-                                String alamatUser = dataObject.getString("Alamat User");
-                                String notelpUser = dataObject.getString("Notelp User");
-                                String jk = dataObject.getString("Jenis Kelamin");
-                                String tglLahir = dataObject.getString("Tanggal Lahir");
-                                String fotoUser = dataObject.getString("foto_user");
                                 String nomorKamar = dataObject.getString("Nomor Kamar");
-                                String ukuranKamar = dataObject.getString("Ukuran Kamar");
                                 int hargaBulanan = dataObject.getInt("harga_bulanan");
 
-                                loginUser(context, idUser, namaPenghuni, email, password, alamatUser, notelpUser,
-                                        jk, tglLahir, fotoUser, nomorKamar, ukuranKamar, hargaBulanan);
+                                // Simpan nilai-nilai yang diperoleh dalam sesi
+                                SharedPreferences userPref = context.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = userPref.edit();
+
+                                editor.putString("idUser", idUser);
+                                editor.putString("emailUser", email);
+                                editor.putString("passwordUser", password);
+                                editor.putString("nomorKamar", nomorKamar);
+                                editor.putInt("hargaBulanan", hargaBulanan);
+
+                                // Tambahkan waktu kedaluwarsa 1 hari dari sekarang
+                                long expiryTimeMillis = System.currentTimeMillis() + (1 * 24 * 60 * 60 * 1000); // 1 hari dalam milidetik
+                                editor.putLong(SESSION_EXPIRY, expiryTimeMillis);
+
+                                editor.putBoolean(IS_LOGGED_IN, true); // Set logged-in state to true
+                                editor.apply();
 
                                 // Pastikan untuk menyimpan data terbaru dalam sesi
                             }
@@ -162,6 +155,7 @@ public class SessionManager {
         // Tambahkan request ke queue Volley
         Volley.newRequestQueue(context).add(stringRequest);
     }
+
 
 
 }
