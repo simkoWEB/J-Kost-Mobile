@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,8 @@ public class TabProfilKost extends Fragment {
 
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
         String kamarId = sharedPreferences.getString("nomorKamar", "");
+
+        Log.d("Get kamar id", kamarId);
 
         getDataKamar();
         getDataKost(kamarId);

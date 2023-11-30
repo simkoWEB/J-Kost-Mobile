@@ -160,9 +160,9 @@ public class LoginActivity extends AppCompatActivity {
                     SessionManager.loginUser(
                             this,
                             dataUser.getString("id_user"),
-                            dataUser.getString("Nama Penghuni"),
                             dataUser.getString("email"),
                             dataUser.getString("password"),
+                            dataUser.getString("Nomor Kamar"),
                             dataUser.getInt("harga_bulanan")
                     );
 
@@ -178,6 +178,8 @@ public class LoginActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
                 MyToast.showToastError(LoginActivity.this, "Terjadi kesalahan dalam pemrosesan data");
+                String err = e.toString();
+                Log.d("error proses data", err);
             }
         } else {
             MyToast.showToastError(LoginActivity.this, "Gagal terhubung ke server");
