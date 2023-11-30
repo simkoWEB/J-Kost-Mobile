@@ -243,7 +243,14 @@ public class TabPembayaran extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Tangani jika terjadi kesalahan dalam permintaan
+                        MyPopUp.showErrorDialog(getContext(), "Gagal menampilkan data", "Silahkan cek kembali koneksi anda", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                                dialog.dismiss();
+                                requireActivity().finishAffinity();
+                            }
+                        });
                     }
                 });
 

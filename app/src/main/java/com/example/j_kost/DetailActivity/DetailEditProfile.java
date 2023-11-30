@@ -268,7 +268,14 @@ public class DetailEditProfile extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Handle error jika ada ketika mengambil data dari server
+                        MyPopUp.showErrorDialog(DetailEditProfile.this, "Gagal menampilkan data", "Silahkan cek kembali koneksi anda", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                                dialog.dismiss();
+                                finish();
+                            }
+                        });
                     }
                 });
 

@@ -3,6 +3,7 @@ package com.example.j_kost.Fragment;
 import static android.content.Intent.getIntent;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,7 +33,9 @@ import com.example.j_kost.Adapter.HistoryAdapter;
 import com.example.j_kost.Models.Transaksi;
 import com.example.j_kost.R;
 import com.example.j_kost.Tab.TabHistory;
+import com.example.j_kost.Utils.MyPopUp;
 import com.example.j_kost.Utils.NetworkUtils;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -135,7 +138,14 @@ public class HomeFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Tangani jika terjadi kesalahan dalam permintaan
+                        MyPopUp.showErrorDialog(getContext(), "Gagal menampilkan data", "Silahkan cek kembali koneksi anda", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                                dialog.dismiss();
+                                requireActivity().finishAffinity();
+                            }
+                        });
                     }
                 });
         requestQueue.add(jsonObjectRequest);

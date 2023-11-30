@@ -1,6 +1,7 @@
 package com.example.j_kost.Tab;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,7 +22,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.j_kost.R;
+import com.example.j_kost.Utils.MyPopUp;
 import com.example.j_kost.Utils.NetworkUtils;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -55,10 +58,11 @@ public class TabProfilKost extends Fragment {
 
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
         String kamarId = sharedPreferences.getString("nomorKamar", "");
+        String userId = sharedPreferences.getString("idUser", "");
 
         Log.d("Get kamar id", kamarId);
 
-        getDataKamar();
+        getDataKamar(userId);
         getDataKost(kamarId);
 
         return view;
@@ -109,7 +113,14 @@ public class TabProfilKost extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Tangani jika terjadi kesalahan dalam permintaan
+                        MyPopUp.showErrorDialog(getContext(), "Gagal menampilkan data", "Silahkan cek kembali koneksi anda", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                                dialog.dismiss();
+                                requireActivity().finishAffinity();
+                            }
+                        });
                     }
                 });
 
@@ -122,9 +133,39 @@ public class TabProfilKost extends Fragment {
     }
 
 
-    private void getDataKamar(){
-        String roomSize = sharedPreferences.getString("ukuranKamar", "-");
-        ukuranKamar.setText("Ukuran kamar : "+roomSize+" m");
+    private void getDataKamar(String userId){
+        String url = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/GetDataMobile/getUserData/" + userId;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject data = response.getJSONObject("data");
+                            String roomSize = data.getString("Ukuran Kamar");
+
+                            ukuranKamar.setText(roomSize+" m");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        MyPopUp.showErrorDialog(getContext(), "Gagal menampilkan data", "Silahkan cek kembali koneksi anda", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                                dialog.dismiss();
+                                requireActivity().finishAffinity();
+                            }
+                        });
+                    }
+                });
+
+        requestQueue.add(jsonObjectRequest);
     }
 
 }
