@@ -23,22 +23,33 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.j_kost.DetailActivity.DetailEditProfile;
 import com.example.j_kost.DetailActivity.MetodePembayaran;
 import com.example.j_kost.R;
 import com.example.j_kost.Session.SessionManager;
+import com.example.j_kost.Utils.NetworkUtils;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.NumberFormat;
 import java.util.Locale;
 
 public class TabPembayaran extends Fragment {
 
-    TextView tvBayar, tvSisa, tvHargaTotal;
+    TextView tvBayar, tvSisa, tvHargaTotal, noRek, jenisBayar, namaPemilik;
     EditText nominalBayar, btnMetodePembayaran;
     ImageView buktiPembayaran;
     Button btnPilihFoto;
+    RequestQueue requestQueue;
     SharedPreferences sharedPreferences;
 
     public static String formatDec(int val) {
@@ -53,11 +64,16 @@ public class TabPembayaran extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_tab_pembayaran, container, false);
+        requestQueue = Volley.newRequestQueue(requireContext());
 
         btnMetodePembayaran = view.findViewById(R.id.BtnMetodePembayaran);
 
         tvBayar = view.findViewById(R.id.tvBayar);
         tvSisa = view.findViewById(R.id.tvKembali);
+
+        namaPemilik = view.findViewById(R.id.tvNamaPemilik);
+        noRek = view.findViewById(R.id.tvNoRekPemilik);
+        jenisBayar = view.findViewById(R.id.tvJenisBank);
 
         int hargaBulanan = SessionManager.getHargaBulanan(getContext()); // Mengambil hargaBulanan dari SharedPreferences
         tvHargaTotal = view.findViewById(R.id.tvhragaTotal);
@@ -126,6 +142,11 @@ public class TabPembayaran extends Fragment {
         });
 
 
+        sharedPreferences = getContext().getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
+        String kamarId = sharedPreferences.getString("nomorKamar", "");
+
+        getDataKost(kamarId);
+
         return view;
     }
     @Override
@@ -148,4 +169,38 @@ public class TabPembayaran extends Fragment {
             Picasso.get().load(uri).into(buktiPembayaran); // profile adalah ImageView yang ingin ditampilkan foto di dalamnya
         }
     }
+
+    private void getDataKost(String roomId) {
+        String url = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/GetDataMobile/getUserKost/" + roomId;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject data = response.getJSONObject("data");
+                            String namaOwner = data.getString("nama_rekening");
+                            String jenisBank = data.getString("jenis_bank");
+                            String norek = data.getString("no_rekening");
+
+                            namaPemilik.setText(namaOwner);
+                            jenisBayar.setText(jenisBank);
+                            noRek.setText(norek);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Tangani jika terjadi kesalahan dalam permintaan
+                    }
+                });
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
 }
