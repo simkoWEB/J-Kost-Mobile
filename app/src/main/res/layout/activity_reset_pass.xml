@@ -62,6 +62,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etNewPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Masukkan Kata Sandi"
@@ -80,6 +81,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etConfirmPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Konfirmasi Kata Sandi"
