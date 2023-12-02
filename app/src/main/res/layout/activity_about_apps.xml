@@ -158,7 +158,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kontak : info@jkostapp.com"
+                    android:text="Kontak : infojkost@gmail.com"
+                    android:textColorLink="@color/colorBlue"
+                    android:autoLink="email"
                     android:fontFamily="@font/poppins_regular"
                     android:textColor="@color/black"
                     android:textSize="13dp"
@@ -185,6 +187,8 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="Situs Web : https://j-kost.tifd.myhost.id/jkost/public/"
                     android:textColor="@color/black"
+                    android:textColorLink="@color/colorBlue"
+                    android:autoLink="web"
                     android:textSize="13dp" />
 
             </LinearLayout>
@@ -217,7 +221,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Android : 8.0 ke atas"
+                    android:text="Android Versi 9.0 ke atas"
                     android:textColor="@color/black"
                     android:textSize="13dp" />
 
