@@ -7,9 +7,9 @@ import java.util.Properties;
 
 public class EmailSender {
 
-    private static final String SENDER_EMAIL = "otpstayclean@gmail.com"; // Email pengirim (statik)
-    private static final String SENDER_PASSWORD = "fefybsmxlxeefimy"; // Sandi email pengirim (statik)
-    private static final String EMAIL_SUBJECT = "Kode OTP J-Kost"; // Subject email (statik)
+    private static final String SENDER_EMAIL = "otpstayclean@gmail.com"; // Email masih belum menggunakan punya j-kost
+    private static final String SENDER_PASSWORD = "fefybsmxlxeefimy"; 
+    private static final String EMAIL_SUBJECT = "Kode OTP J-Kost";
 
     private static Properties properties;
 
