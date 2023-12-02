@@ -23,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.j_kost.ForgetPass.EnterEmail;
 import com.example.j_kost.ForgetPass.VerificationActivity;
 import com.example.j_kost.R;
 import com.example.j_kost.Session.SessionManager;
@@ -90,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
         tvForgetPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(LoginActivity.this, VerificationActivity.class);
+                Intent i = new Intent(LoginActivity.this, EnterEmail.class);
                 startActivity(i);
             }
         });
