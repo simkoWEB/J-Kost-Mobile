@@ -46,9 +46,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Masukkan digit 4 kode yang anda terima dari email yang anda daftarkan sebelumnya"
+            android:text="Masukkan digit 4 kode yang anda terima sebelumnya sebelum kadaluarsa"
             android:textAlignment="center"
             android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/timerTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:text="00:00"
+            android:visibility="visible"
+            android:textAlignment="center"
+            android:textSize="15sp" />
 
         <com.chaos.view.PinView
             android:id="@+id/firstPinView"
@@ -75,7 +85,7 @@
 
 
         <Button
-            android:id="@+id/continueBtn"
+            android:id="@+id/btnSelanjutnya"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
