@@ -1,8 +1,10 @@
 package com.example.j_kost.ForgetPass;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -24,11 +26,14 @@ import com.android.volley.toolbox.Volley;
 import com.example.j_kost.Activity.LoginActivity;
 import com.example.j_kost.DetailActivity.ConfirmOldPass;
 import com.example.j_kost.DetailActivity.DetailGantiPassword;
+import com.example.j_kost.ForgetPass.OTP.EmailSender;
 import com.example.j_kost.ForgetPass.OTP.OTPGenerator;
 import com.example.j_kost.R;
+import com.example.j_kost.Utils.MyPopUp;
 import com.example.j_kost.Utils.MyToast;
 import com.example.j_kost.Utils.NetworkUtils;
 import com.google.android.material.textfield.TextInputEditText;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,6 +55,7 @@ public class EnterEmail extends AppCompatActivity {
     TextInputEditText etEmail;
     Button btnConfirm;
     ProgressDialog progressDialog;
+    String EmailRecipient = "";
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -98,16 +104,26 @@ public class EnterEmail extends AppCompatActivity {
                             String status = jsonObject.getString("status");
 
                             if (code == 200) {
-                                MyToast.showToastSuccess(EnterEmail.this, "Email tersedia");
-
                                 JSONObject userData = jsonObject.getJSONObject("user_data");
                                 String userId = userData.getString("id_user");
+                                String nama = userData.getString("nama_lengkap");
 
+                                OTPGenerator otpGenerator = new OTPGenerator();
+                                String generatedOTP = otpGenerator.generateOTP(4);
 
-                                Intent i = new Intent(EnterEmail.this, VerificationActivity.class);
-                                i.putExtra("userId", userId);
-                                startActivity(i);
-                                finish();
+                                MyPopUp.showSuccessDialog(EnterEmail.this, generatedOTP, nama + ", mohon ingat kode diatas, karena kode tersebut akan digunakan untuk verifikasi", new OnDialogButtonClickListener() {
+                                    @Override
+                                    public void onDismissClicked(Dialog dialog) {
+                                        super.onDismissClicked(dialog);
+                                        dialog.dismiss();
+                                        Intent i = new Intent(EnterEmail.this, VerificationActivity.class);
+                                        i.putExtra("userId", userId);
+                                        i.putExtra("otp", generatedOTP);
+                                        startActivity(i);
+                                        finish();
+                                    }
+                                });
+
 
                             } else {
                                 MyToast.showToastError(EnterEmail.this, "Email tidak tersedia");
@@ -136,58 +152,4 @@ public class EnterEmail extends AppCompatActivity {
         // Tambahkan permintaan ke queue
         queue.add(stringRequest);
     }
-
-    // Method untuk mengirim email dengan kode OTP
-//    private void sendOTPEmail(String email, String otp) {
-//        String username = "your_email@gmail.com"; // Ganti dengan email pengirim
-//        String password = "your_password"; // Ganti dengan kata sandi email pengirim
-//
-//        // Konfigurasi properti untuk email
-//        Properties properties = new Properties();
-//        properties.put("mail.smtp.auth", "true");
-//        properties.put("mail.smtp.starttls.enable", "true");
-//        properties.put("mail.smtp.host", "smtp.gmail.com");
-//        properties.put("mail.smtp.port", "587");
-//
-//        Session session = Session.getInstance(properties, new Authenticator() {
-//            protected PasswordAuthentication getPasswordAuthentication() {
-//                return new PasswordAuthentication(username, password);
-//            }
-//        });
-//
-//        try {
-//            Message message = new MimeMessage(session);
-//            message.setFrom(new InternetAddress(username));
-//            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-//            message.setSubject("Your OTP for password reset");
-//            message.setText("Your OTP is: " + otp);
-//
-//            Transport.send(message);
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    private void sendOTP(){
-//        String emailUser = email.getText().toString().trim();
-//
-//        // Memeriksa apakah alamat email tidak kosong
-//        if (!TextUtils.isEmpty(email)) {
-//            // Menghasilkan kode OTP (misalnya, dengan menggunakan class OTPGenerator)
-//            OTPGenerator otpGenerator = new OTPGenerator();
-//            String otp = otpGenerator.generateOTP(4); // Ganti dengan panjang yang diinginkan
-//
-//            // Mengirimkan email dengan kode OTP
-//            sendOTPEmail(email, otp);
-//
-//            // Setelah pengiriman email, lanjutkan ke aktivitas verifikasi kode OTP
-//            Intent intent = new Intent(EnterEmail.this, VerificationActivity.class);
-//            intent.putExtra("EMAIL", email); // Mengirim email untuk verifikasi selanjutnya
-//            intent.putExtra("OTP", otp); // Mengirim kode OTP yang dihasilkan ke aktivitas verifikasi
-//            startActivity(intent);
-//        } else {
-//            // Menampilkan pesan bahwa alamat email tidak boleh kosong
-//            Toast.makeText(this, "Masukkan alamat email terlebih dahulu", Toast.LENGTH_SHORT).show();
-//        }
-//    }
 }

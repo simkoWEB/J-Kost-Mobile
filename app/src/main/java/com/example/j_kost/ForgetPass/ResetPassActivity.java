@@ -45,7 +45,6 @@ public class ResetPassActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reset_pass);
 
         userId = getIntent().getStringExtra("userId");
-        Log.d("id Intent", userId);
 
         newPass = findViewById(R.id.etNewPass);
         confirmNewPass = findViewById(R.id.etConfirmPass);
@@ -55,21 +54,7 @@ public class ResetPassActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyPopUp.showConfirmDialog(ResetPassActivity.this, "Konfirmasi", "Apakah yakin ingin membatalkan ubah passowrd", new OnDialogButtonClickListener() {
-                    @Override
-                    public void onPositiveClicked(Dialog dialog) {
-                        super.onPositiveClicked(dialog);
-                        Intent i = new Intent(ResetPassActivity.this, LoginActivity.class);
-                        startActivity(i);
-                        finish();
-                    }
-
-                    @Override
-                    public void onNegativeClicked(Dialog dialog) {
-                        super.onNegativeClicked(dialog);
-                        dialog.dismiss();
-                    }
-                });
+                showCancelConfirm();
             }
         });
 
@@ -80,6 +65,12 @@ public class ResetPassActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        showCancelConfirm();
     }
 
     private void handleEditPass() {
@@ -141,5 +132,23 @@ public class ResetPassActivity extends AppCompatActivity {
 
     private boolean isValidPassword(String password) {
         return password.length() >= 8 && password.matches(".*\\d.*") && password.matches(".*[a-zA-Z].*");
+    }
+
+    private void showCancelConfirm(){
+        MyPopUp.showConfirmDialog(ResetPassActivity.this, "Konfirmasi", "Apakah yakin ingin membatalkan ubah passowrd", new OnDialogButtonClickListener() {
+            @Override
+            public void onPositiveClicked(Dialog dialog) {
+                super.onPositiveClicked(dialog);
+                Intent i = new Intent(ResetPassActivity.this, LoginActivity.class);
+                startActivity(i);
+                finish();
+            }
+
+            @Override
+            public void onNegativeClicked(Dialog dialog) {
+                super.onNegativeClicked(dialog);
+                dialog.dismiss();
+            }
+        });
     }
 }
