@@ -29,6 +29,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    packagingOptions{
+        exclude("META-INF/NOTICE.md")
+        exclude("META-INF/LICENSE.md")
+    }
+
     buildFeatures{
         viewBinding = true
     }
@@ -54,4 +60,6 @@ dependencies {
     implementation ("io.github.chaosleung:pinview:1.4.4")
 
     implementation ("com.github.dhaval2404:imagepicker:2.1")
+    implementation("com.sun.mail:android-mail:1.6.7")
+    implementation("com.sun.mail:android-activation:1.6.7")
 }

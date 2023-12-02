@@ -81,7 +81,7 @@ public class VerificationActivity extends AppCompatActivity {
             }
         });
 
-        long timerDuration = 30000;
+        long timerDuration = 90000;
         countDownTimer = new CountDownTimer(timerDuration, 1000) {
             public void onTick(long millisUntilFinished) {
                 // Update tampilan timer setiap detik

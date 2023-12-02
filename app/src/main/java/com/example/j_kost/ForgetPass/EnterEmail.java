@@ -111,22 +111,18 @@ public class EnterEmail extends AppCompatActivity {
                                 OTPGenerator otpGenerator = new OTPGenerator();
                                 String generatedOTP = otpGenerator.generateOTP(4);
 
-                                MyPopUp.showSuccessDialog(EnterEmail.this, generatedOTP, nama + ", mohon ingat kode diatas, karena kode tersebut akan digunakan untuk verifikasi", new OnDialogButtonClickListener() {
-                                    @Override
-                                    public void onDismissClicked(Dialog dialog) {
-                                        super.onDismissClicked(dialog);
-                                        dialog.dismiss();
-                                        Intent i = new Intent(EnterEmail.this, VerificationActivity.class);
-                                        i.putExtra("userId", userId);
-                                        i.putExtra("otp", generatedOTP);
-                                        startActivity(i);
-                                        finish();
-                                    }
-                                });
+                                EmailSender.sendEmail(email, nama, generatedOTP);
 
+                                Intent i = new Intent(EnterEmail.this, VerificationActivity.class);
+                                i.putExtra("userId", userId);
+                                i.putExtra("otp", generatedOTP);
+                                startActivity(i);
+                                finish();
+
+                                MyToast.showToastSuccess(EnterEmail.this, "Email berhasil dikirim");
 
                             } else {
-                                MyToast.showToastError(EnterEmail.this, "Email tidak tersedia");
+                                MyToast.showToastError(EnterEmail.this, "Email tidak valid");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
