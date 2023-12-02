@@ -37,12 +37,37 @@ public class EmailSender {
             mimeMessage.setSubject(EMAIL_SUBJECT);
 
             // Masukkan OTP ke dalam pesan email dengan format HTML
-            String emailMessageWithOTP = "<html><body><h4>Kepada "+ name + ",</h4><br>"
-                    + "<p>Untuk menyelesaikan proses reset password, kami memerlukan verifikasi email Anda dengan memasukkan kode verifikasi berikut:</p><br>"
-                    + "<h2>Kode Verifikasi anda : " + otp + "</h2><br>"
-                    + "<p>Silakan masukkan kode ini pada halaman verifikasi email. Jika Anda tidak melakukan pengaturan ulang password pada aplikasi Stay Clean, mohon abaikan email ini dan jangan berikan kode verifikasi ini pada pihak manapun.</p><br>"
-                    + "<p>Kami mohon untuk tidak memberikan kode verifikasi ini pada orang lain untuk menjaga keamanan akun Anda. Jangan ragu untuk menghubungi kami jika Anda mengalami kesulitan atau memiliki pertanyaan lebih lanjut.</p><br>"
-                    + "<p>Terima kasih atas perhatiannya.</p><p>Hormat Kami, J-Kost</p></body></html>";
+            String emailMessageWithOTP = "<!DOCTYPE html>" +
+                    "<html>" +
+                    "<head>" +
+                    "    <style>" +
+                    "        .verification-box {" +
+                    "            display: inline-block;" +
+                    "            padding: 5px 10px;" +
+                    "            background-color: #3B46F1;" +
+                    "            color: white;" +
+                    "            border-radius: 5px;" +
+                    "            transition: background-color 0.5s ease-in-out;" +
+                    "        }" +
+                    "        .verification-code {" +
+                    "            font-size: 1.2em;" +
+                    "            font-weight: bold;" +
+                    "        }" +
+                    "        .verification-box:hover {" +
+                    "            background-color: #32BA7C;" +
+                    "        }" +
+                    "    </style>" +
+                    "</head>" +
+                    "<body>" +
+                    "    <h3>Kepada " + name + ",</h3>" +
+                    "    <p>Untuk menyelesaikan proses reset password, kami memerlukan verifikasi email Anda dengan memasukkan kode verifikasi berikut:</p>" +
+                    "    <p>Kode Verifikasi Anda : <span class=\"verification-box\"><span class=\"verification-code\">" + otp + "</span></span></p>" +
+                    "    <p>Kami mohon untuk tidak memberikan kode verifikasi ini pada orang lain untuk menjaga keamanan akun Anda. Jangan ragu untuk menghubungi kami jika Anda mengalami kesulitan atau memiliki pertanyaan lebih lanjut.</p>" +
+                    "    <p>Terima kasih atas perhatiannya.</p>" +
+                    "    <p>Hormat Kami, J-Kost</p>" +
+                    "</body>" +
+                    "</html>";
+
             mimeMessage.setContent(emailMessageWithOTP, "text/html");
 
             Thread thread = new Thread(new Runnable() {

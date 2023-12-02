@@ -14,6 +14,7 @@
     <string name="desc_about_apps">J-KOST adalah aplikasi pembayaran kos yang memudahkan pembayaran harian atau bulanan dengan cepat dan aman. Bayar kos, terima pemberitahuan, dan lacak riwayat transaksi di satu tempat.
 
 </string>
+    <string name="verif_desc">Masukkan digit 4 kode yang anda terima dari email yang dimasukkan sebelumnya. Kode hanya berlaku hingga : </string>
 
     <string-array name="defaultArray">
         <item>Pilih tipe terlebih dahulu</item>

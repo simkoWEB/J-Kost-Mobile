@@ -113,13 +113,14 @@ public class EnterEmail extends AppCompatActivity {
 
                                 EmailSender.sendEmail(email, nama, generatedOTP);
 
+                                MyToast.showToastSuccess(EnterEmail.this, "OTP berhasil dikirim ke email");
+
                                 Intent i = new Intent(EnterEmail.this, VerificationActivity.class);
                                 i.putExtra("userId", userId);
                                 i.putExtra("otp", generatedOTP);
                                 startActivity(i);
                                 finish();
 
-                                MyToast.showToastSuccess(EnterEmail.this, "Email berhasil dikirim");
 
                             } else {
                                 MyToast.showToastError(EnterEmail.this, "Email tidak valid");
