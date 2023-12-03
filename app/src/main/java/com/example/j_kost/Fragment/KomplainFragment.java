@@ -18,8 +18,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.j_kost.R;
@@ -27,6 +29,9 @@ import com.example.j_kost.Utils.MyPopUp;
 import com.example.j_kost.Utils.MyToast;
 import com.example.j_kost.Utils.NetworkUtils;
 import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +41,8 @@ public class KomplainFragment extends Fragment {
     Button btnKomplain;
     EditText textKomplain;
     Spinner jenisKomplainSpinner, masalahKomplainSpinner;
+    private RequestQueue requestQueue;
+    SharedPreferences sharedPreferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,6 +63,7 @@ public class KomplainFragment extends Fragment {
                     // ... (the code you posted)
                     SharedPreferences sharedPreferences = getActivity().getSharedPreferences("userData", Context.MODE_PRIVATE);
                     String userId = sharedPreferences.getString("idUser", "");
+                    String kostId = sharedPreferences.getString("idKost", "");
 
                     String selectedJenisKomplain = jenisKomplainSpinner.getSelectedItem().toString();
                     String selectedMasalahKomplain = masalahKomplainSpinner.getSelectedItem().toString();
@@ -63,7 +71,7 @@ public class KomplainFragment extends Fragment {
 
                     if (!userId.isEmpty() && !selectedJenisKomplain.equals("Pilih tipe komplain") && !selectedMasalahKomplain.equals("Pilih tipe terlebih dahulu") && !deskripsiKomplain.isEmpty()) {
                         // Data is complete, proceed to send to API
-                        sendDataToAPI(userId, selectedJenisKomplain, selectedMasalahKomplain, deskripsiKomplain);
+                        sendDataToAPI(userId, kostId, selectedJenisKomplain, selectedMasalahKomplain, deskripsiKomplain);
                     } else {
                         // Show error message if any field is empty
                         MyToast.showToastError(getContext(), "Silahkan lengkapi data sebelum komplain");
@@ -126,7 +134,7 @@ public class KomplainFragment extends Fragment {
         return view;
     }
 
-    private void sendDataToAPI(String userId, String jenisKomplain, String masalahKomplain, String deskripsiKomplain) {
+    private void sendDataToAPI(String userId, String idKost, String jenisKomplain, String masalahKomplain, String deskripsiKomplain) {
         // Buat request POST ke endpoint API
         String url = "http://"+NetworkUtils.BASE_URL+"/PHP-MVC/public/InsertDataApi/insertKomplain/" + userId;
 
@@ -161,6 +169,7 @@ public class KomplainFragment extends Fragment {
             protected Map<String, String> getParams() {
                 // Kumpulkan data untuk dikirim ke server
                 Map<String, String> params = new HashMap<>();
+                params.put("id_kost", idKost);
                 params.put("jenis_komplain", jenisKomplain);
                 params.put("tipe_komplain", masalahKomplain);
                 params.put("deskripsi_komplain", deskripsiKomplain);
