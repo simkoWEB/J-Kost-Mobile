@@ -37,7 +37,8 @@ public class SessionManager {
             String password,
             String nomorKamar,
             int hargaBulanan,
-            String idPemesanan
+            String idPemesanan,
+            String idKost
     ) {
         SharedPreferences userPref = context.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = userPref.edit();
@@ -48,6 +49,7 @@ public class SessionManager {
         editor.putString("nomorKamar", nomorKamar);
         editor.putInt("hargaBulanan", hargaBulanan);
         editor.putString("idPemesanan", idPemesanan);
+        editor.putString("idKost", idKost);
 
         // Tambahkan waktu kedaluwarsa 1 hari dari sekarang
         long expiryTimeMillis = System.currentTimeMillis() + (1 * 24 * 60 * 60 * 1000); // 1 hari dalam milidetik
@@ -123,6 +125,7 @@ public class SessionManager {
                                 String nomorKamar = dataObject.getString("Nomor Kamar");
                                 int hargaBulanan = dataObject.getInt("harga_bulanan");
                                 String idPemesanan = dataObject.getString("id_pemesanan");
+                                String idKost = dataObject.getString("id_kost");
 
                                 // Simpan nilai-nilai yang diperoleh dalam sesi
                                 SharedPreferences userPref = context.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE);
@@ -134,6 +137,7 @@ public class SessionManager {
                                 editor.putString("nomorKamar", nomorKamar);
                                 editor.putInt("hargaBulanan", hargaBulanan);
                                 editor.putString("idPemesanan", idPemesanan);
+                                editor.putString("idKost", idKost);
 
                                 // Tambahkan waktu kedaluwarsa 1 hari dari sekarang
                                 long expiryTimeMillis = System.currentTimeMillis() + (1 * 24 * 60 * 60 * 1000); // 1 hari dalam milidetik
