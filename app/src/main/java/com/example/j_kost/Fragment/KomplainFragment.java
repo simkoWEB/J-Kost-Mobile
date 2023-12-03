@@ -148,8 +148,13 @@ public class KomplainFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                // Tangani kesalahan yang terjadi pada saat permintaan gagal dikirim
-                // Tampilkan pesan kesalahan atau lakukan penanganan sesuai kebutuhan
+                MyPopUp.showErrorDialog(getContext(), "Error", "Gagal mengirim data. Silahkan cek kembali koneksi anda", new OnDialogButtonClickListener() {
+                    @Override
+                    public void onDismissClicked(Dialog dialog) {
+                        super.onDismissClicked(dialog);
+                        dialog.dismiss();
+                    }
+                });
             }
         }) {
             @Override
