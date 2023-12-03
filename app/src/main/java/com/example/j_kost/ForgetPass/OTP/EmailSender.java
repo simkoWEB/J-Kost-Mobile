@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class EmailSender {
 
-    private static final String SENDER_EMAIL = "otpjkost@gmail.com"; // Email masih belum menggunakan punya j-kost
+    private static final String SENDER_EMAIL = "otpjkost@gmail.com";
     private static final String SENDER_PASSWORD = "gordoreypusvvpbs";
     private static final String EMAIL_SUBJECT = "Kode Verifikasi J-Kost";
 
@@ -59,9 +59,9 @@ public class EmailSender {
                     "    </style>" +
                     "</head>" +
                     "<body>" +
-                    "    <h3>Kepada " + name + ",</h3>" +
+                    "    <p>Kepada " + name + ",</p>"+
                     "    <p>Untuk menyelesaikan proses reset password, kami memerlukan verifikasi email Anda dengan memasukkan kode verifikasi berikut:</p>" +
-                    "    <p>Kode Verifikasi Anda : <span class=\"verification-box\"><span class=\"verification-code\">" + otp + "</span></span></p>" +
+                    "    <h3>Kode Verifikasi Anda : <span class=\"verification-box\"><span class=\"verification-code\">" + otp + "</span></span></h3>" +
                     "    <p>Kami mohon untuk tidak memberikan kode verifikasi ini pada orang lain untuk menjaga keamanan akun Anda. Jangan ragu untuk menghubungi kami jika Anda mengalami kesulitan atau memiliki pertanyaan lebih lanjut.</p>" +
                     "    <p>Terima kasih atas perhatiannya.</p>" +
                     "    <p>Hormat Kami, J-Kost</p>" +

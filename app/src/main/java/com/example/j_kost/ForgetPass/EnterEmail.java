@@ -66,6 +66,8 @@ public class EnterEmail extends AppCompatActivity {
         etEmail = findViewById(R.id.tvEmail);
         btnConfirm = findViewById(R.id.confirmBtn);
 
+        etEmail.requestFocus();
+
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,7 +111,7 @@ public class EnterEmail extends AppCompatActivity {
                                 String nama = userData.getString("nama_lengkap");
 
                                 OTPGenerator otpGenerator = new OTPGenerator();
-                                String generatedOTP = otpGenerator.generateOTP(4);
+                                String generatedOTP = otpGenerator.generateOTP(5);
 
                                 EmailSender.sendEmail(email, nama, generatedOTP);
 
