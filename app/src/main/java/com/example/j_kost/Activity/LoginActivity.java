@@ -164,7 +164,8 @@ public class LoginActivity extends AppCompatActivity {
                             dataUser.getString("email"),
                             dataUser.getString("password"),
                             dataUser.getString("Nomor Kamar"),
-                            dataUser.getInt("harga_bulanan")
+                            dataUser.getInt("harga_bulanan"),
+                            dataUser.getString("id_pemesanan")
                     );
 
                     MyToast.showToastSuccess(LoginActivity.this, "Login Berhasil");
