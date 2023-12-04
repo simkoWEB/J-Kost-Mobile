@@ -167,14 +167,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="10dp"
-            android:backgroundTint="@color/redDanger"
             >
 
             <TextView
-                android:id="@+id/setStatus"
+                android:id="@+id/statusText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Belum Bayar"
+                android:text=""
                 android:textColor="@color/white"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginVertical="5dp"

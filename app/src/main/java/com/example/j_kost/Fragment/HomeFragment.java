@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -34,6 +35,7 @@ import com.example.j_kost.Adapter.HistoryAdapter;
 import com.example.j_kost.Models.Transaksi;
 import com.example.j_kost.R;
 import com.example.j_kost.Tab.TabHistory;
+import com.example.j_kost.Tab.TabTransaksi;
 import com.example.j_kost.Utils.MyPopUp;
 import com.example.j_kost.Utils.NetworkUtils;
 import com.example.j_kost.Utils.ProgressLoading;
@@ -61,7 +63,8 @@ public class HomeFragment extends Fragment {
     private List<Transaksi> listData;
     private SharedPreferences sharedPreferences;
     ImageView profilePhoto;
-    public TextView namaUser, namaKost, selengkapnya, bulanPembayaran, tvHarga;
+    CardView cardStatus;
+    public TextView namaUser, namaKost, selengkapnya, bulanPembayaran, tvHarga, txtStatus;
     private RequestQueue requestQueue;
     ImageView imgNoData;
     private ProgressLoading progressLoading;
@@ -81,6 +84,8 @@ public class HomeFragment extends Fragment {
         bulanPembayaran = view.findViewById(R.id.bulanPembayaran);
         tvHarga = view.findViewById(R.id.hargaBulanan);
         imgNoData = view.findViewById(R.id.imgNoData);
+        txtStatus = view.findViewById(R.id.statusText);
+        cardStatus = view.findViewById(R.id.statusCard);
 
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
         String idUser = sharedPreferences.getString("idUser", "");
@@ -88,6 +93,7 @@ public class HomeFragment extends Fragment {
 
         getDataUser(idUser);
         getDataKost(kamarId);
+        getStatus(idUser);
 
         // Mendapatkan bulan saat ini
         Calendar calendar = Calendar.getInstance();
@@ -123,6 +129,42 @@ public class HomeFragment extends Fragment {
 
         return view;
 
+    }
+
+    private void getStatus(String roomId){
+        String url = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/GetDataMobile/getStatus/" + roomId;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject data = response.getJSONObject("data");
+                            String statusBayar = data.getString("status");
+
+                            txtStatus.setText(statusBayar);
+
+                            if (statusBayar.equals("Proses")){
+                                cardStatus.setCardBackgroundColor(getContext().getResources().getColor(R.color.orangeProses));
+                            } else if(statusBayar.equals("Belum Bayar")){
+                                cardStatus.setCardBackgroundColor(getContext().getResources().getColor(R.color.redDanger));
+                            }else{
+                                txtStatus.setText("Lunas");
+                                cardStatus.setCardBackgroundColor(getContext().getResources().getColor(R.color.greenSuccess));
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+        requestQueue.add(jsonObjectRequest);
     }
 
     private void getDataKost(String roomId){
