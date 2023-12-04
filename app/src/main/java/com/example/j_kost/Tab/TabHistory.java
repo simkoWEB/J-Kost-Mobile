@@ -127,6 +127,4 @@ public class TabHistory extends Fragment {
         // Tambahkan request ke dalam queue untuk dieksekusi
         requestQueue.add(jsonObjectRequest);
     }
-
-
 }
