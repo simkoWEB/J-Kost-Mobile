@@ -13,4 +13,12 @@ android:background="#FAFBFF">
         android:layout_height="wrap_content"
         />
 
+    <ImageView
+        android:id="@+id/img_no_data"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/no_data_transaksi"
+        android:layout_centerInParent="true"
+        />
+
 </RelativeLayout>

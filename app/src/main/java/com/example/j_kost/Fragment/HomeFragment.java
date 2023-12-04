@@ -61,7 +61,9 @@ public class HomeFragment extends Fragment {
     ImageView profilePhoto;
     public TextView namaUser, namaKost, selengkapnya, bulanPembayaran, tvHarga;
     private RequestQueue requestQueue;
+    ImageView imgNoData;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -74,6 +76,7 @@ public class HomeFragment extends Fragment {
         selengkapnya = view.findViewById(R.id.selengkapnya);
         bulanPembayaran = view.findViewById(R.id.bulanPembayaran);
         tvHarga = view.findViewById(R.id.hargaBulanan);
+        imgNoData = view.findViewById(R.id.imgNoData);
 
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
         String idUser = sharedPreferences.getString("idUser", "");
@@ -270,6 +273,13 @@ public class HomeFragment extends Fragment {
                                 }
 
                                 historyAdapter.notifyDataSetChanged();
+
+                                if (listData.isEmpty()) {
+                                    imgNoData.setVisibility(View.VISIBLE);
+                                } else {
+                                    imgNoData.setVisibility(View.GONE);
+                                }
+
                             }
 
                         } catch (JSONException e) {

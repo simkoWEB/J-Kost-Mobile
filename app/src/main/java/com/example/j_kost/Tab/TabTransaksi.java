@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -48,6 +49,7 @@ public class TabTransaksi extends Fragment {
     private List<Pembayaran> listData;
     SharedPreferences sharedPreferences;
     RequestQueue requestQueue;
+    ImageView imgNoData;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -57,6 +59,8 @@ public class TabTransaksi extends Fragment {
         // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.kumpulan_card_pembayaran);
         listData = new ArrayList<>();
+
+        imgNoData = view.findViewById(R.id.image_no_data);
 
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
         String idUser = sharedPreferences.getString("idUser", "");
@@ -89,7 +93,7 @@ public class TabTransaksi extends Fragment {
                             int code = response.getInt("code");
                             if (code == 200) {
                                 JSONArray dataArray = response.getJSONArray("data");
-                                Log.d("DataArrayLength", "Data array length: " + dataArray.length()); // Tambahkan log ini
+                                Log.d("DataArrayLength", "Data array length: " + dataArray.length());
 
                                 for (int i = 0; i < dataArray.length(); i++) {
                                     JSONObject data = dataArray.getJSONObject(i);
@@ -115,6 +119,12 @@ public class TabTransaksi extends Fragment {
                                 }
 
                                 historyAdapter.notifyDataSetChanged();
+
+                                if (listData.isEmpty()) {
+                                    imgNoData.setVisibility(View.VISIBLE);
+                                } else {
+                                    imgNoData.setVisibility(View.GONE);
+                                }
                             }
 
                         } catch (JSONException e) {

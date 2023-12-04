@@ -1,5 +1,6 @@
 package com.example.j_kost.Tab;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -43,7 +45,9 @@ public class TabHistory extends Fragment {
     private HistoryAdapter historyAdapter;
     private List<Transaksi> listData;
     SharedPreferences sharedPreferences;
+    ImageView imgNoData;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab_history, container, false);
@@ -54,6 +58,8 @@ public class TabHistory extends Fragment {
 
         sharedPreferences = getContext().getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
         String idUser = sharedPreferences.getString("idUser", "");
+
+        imgNoData = view.findViewById(R.id.img_no_data);
 
         RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
 
@@ -108,6 +114,12 @@ public class TabHistory extends Fragment {
                                 }
 
                                 historyAdapter.notifyDataSetChanged();
+
+                                if (listData.isEmpty()) {
+                                    imgNoData.setVisibility(View.VISIBLE);
+                                } else {
+                                    imgNoData.setVisibility(View.GONE);
+                                }
                             }
 
                         } catch (JSONException e) {
