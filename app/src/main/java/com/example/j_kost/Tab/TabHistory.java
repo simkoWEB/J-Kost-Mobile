@@ -102,7 +102,7 @@ public class TabHistory extends Fragment {
                                     String namaBulan = new DateFormatSymbols().getMonths()[month];
 
                                     // Membuat nama transaksi sesuai dengan bulan dari tanggal
-                                    String namaTransaksi = "Pembayaran Bulan " + namaBulan;
+                                    String namaTransaksi = namaBulan;
 
                                     listData.add(new Transaksi(idTransaksi, namaTransaksi, tanggal, harga));
                                 }

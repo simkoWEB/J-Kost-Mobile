@@ -7,5 +7,7 @@
     <color name="colorPrimaryDark">#232D84</color>
     <color name="colorAccent">#3A86FF</color>
     <color name="colorSecondary">#f8bb18</color>
-    <color name="red">#F15249</color>
+    <color name="redDanger">#F15249</color>
+    <color name="orangeProses">#ffa918</color>
+    <color name="greenSuccess">#32ba7c</color>
 </resources>
