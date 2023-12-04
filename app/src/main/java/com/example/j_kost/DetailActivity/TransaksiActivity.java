@@ -20,20 +20,28 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.j_kost.R;
 import com.example.j_kost.Session.SessionManager;
 import com.example.j_kost.Tab.TabPembayaran;
 import com.example.j_kost.Utils.MyPopUp;
 import com.example.j_kost.Utils.MyToast;
+import com.example.j_kost.Utils.NetworkUtils;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class TransaksiActivity extends AppCompatActivity {
 
-    TextView tvBayar, tvSisa, tvHargaTotal, noRek, jenisBayar, namaPemilik;
+    TextView tvBayar, tvSisa, tvHargaTotal, noRek, jenisBayar, namaPemilik, judul;
     EditText nominalBayar, btnMetodePembayaran;
     ImageView buktiPembayaran;
     Button btnPilihFoto, btnKonfirmasi;
@@ -66,6 +74,7 @@ public class TransaksiActivity extends AppCompatActivity {
         noRek = findViewById(R.id.NoRekPemilik);
         jenisBayar = findViewById(R.id.JenisBank);
         btnKonfirmasi = findViewById(R.id.btnConfirm);
+        judul = findViewById(R.id.tittleHead);
 
         int hargaBulanan = SessionManager.getHargaBulanan(TransaksiActivity.this); // Mengambil hargaBulanan dari SharedPreferences
         tvHargaTotal = findViewById(R.id.tvhragaTotal);
@@ -178,7 +187,7 @@ public class TransaksiActivity extends AppCompatActivity {
         sharedPreferences = TransaksiActivity.this.getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
         String kamarId = sharedPreferences.getString("nomorKamar", "");
 
-//        getDataKost(kamarId);
+        getDataKost(kamarId);
 
 
     }
@@ -202,5 +211,45 @@ public class TransaksiActivity extends AppCompatActivity {
             // Menyetel foto ke ImageView menggunakan Picasso
             Picasso.get().load(uri).into(buktiPembayaran); // profile adalah ImageView yang ingin ditampilkan foto di dalamnya
         }
+    }
+
+    private void getDataKost(String roomId) {
+        String url = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/GetDataMobile/getUserKost/" + roomId;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject data = response.getJSONObject("data");
+                            String namaOwner = data.getString("nama_rekening");
+                            String jenisBank = data.getString("jenis_bank");
+                            String norek = data.getString("no_rekening");
+
+                            namaPemilik.setText(namaOwner);
+                            jenisBayar.setText(jenisBank);
+                            noRek.setText(norek);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        MyPopUp.showErrorDialog(TransaksiActivity.this, "Gagal menampilkan data", "Silahkan cek kembali koneksi anda", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                                dialog.dismiss();
+                                finish();
+                            }
+                        });
+                    }
+                });
+
+        requestQueue.add(jsonObjectRequest);
     }
 }

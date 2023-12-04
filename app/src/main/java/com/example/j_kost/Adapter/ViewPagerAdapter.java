@@ -10,6 +10,7 @@ import com.example.j_kost.Tab.TabPembayaran;
 import com.example.j_kost.Tab.TabProfilKost;
 import com.example.j_kost.Tab.TabProfilUser;
 import com.example.j_kost.Fragment.TransaksiFragment;
+import com.example.j_kost.Tab.TabTransaksi;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
     private Fragment parentFragment;
@@ -26,11 +27,11 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
             // Ketika digunakan di TransaksiFragment
             switch (position) {
                 case 0:
-                    return new TabPembayaran();
+                    return new TabTransaksi();
                 case 1:
                     return new TabHistory();
                 default:
-                    return new TabPembayaran();
+                    return new TabTransaksi();
             }
         } else if (parentFragment instanceof ProfileFragment) {
             // Ketika digunakan di ProfileFragment

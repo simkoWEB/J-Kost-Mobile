@@ -1,30 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    android:id="@+id/cardPembayaranFull"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    android:layout_marginVertical="8dp"
+    android:layout_marginHorizontal="6dp"
+    android:elevation="2dp"
+    app:cardCornerRadius="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="13dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:background="@drawable/rounded_card_full"
-        android:layout_marginVertical="5dp"
         android:orientation="vertical"
         >
 
-        <TextView
-            android:id="@+id/judulPembayaran"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_semibold"
-            android:textColor="@color/black"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            android:text="Pembayaran Bulan Desember"
-            />
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:textSize="15sp"
+                android:text="Pembayaran Bulan"
+                />
+
+            <TextView
+                android:id="@+id/judulPembayaran"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:textSize="15sp"
+                android:text="Desember"
+                android:layout_marginLeft="2dp"
+                />
+
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
@@ -35,14 +61,38 @@
             android:background="@drawable/dashed_line"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/poppins_regular"
-            android:textAlignment="textStart"
-            android:text="Total"
-            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textAlignment="textStart"
+                android:text="Total"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/idTransaksi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textAlignment="textStart"
+                android:text="TR001"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -51,13 +101,14 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:ignore="MissingConstraints">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semibold"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     android:textColor="@color/black"
                     android:layout_marginRight="2dp"
                     android:text="Rp."
@@ -71,7 +122,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semibold"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     android:textColor="@color/black"
                     android:text="800,000"
                     app:layout_constraintStart_toStartOf="parent"
@@ -82,38 +133,31 @@
 
             </LinearLayout>
 
-
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardStatus"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/orangeProses"
-                app:cardCornerRadius="8dp"
-                >
+                app:cardCornerRadius="8dp">
 
                 <TextView
+                    android:id="@+id/status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/medium"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="5dp"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textColor="@color/white"
-                    android:text="Proses"
+                    android:text="Belum Bayar"
                     tools:ignore="MissingConstraints" />
-
 
             </androidx.cardview.widget.CardView>
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-
-
     </LinearLayout>
-
-</RelativeLayout>
+        </RelativeLayout>
+</androidx.cardview.widget.CardView>
