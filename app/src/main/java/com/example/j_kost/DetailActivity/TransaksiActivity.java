@@ -49,7 +49,7 @@ public class TransaksiActivity extends AppCompatActivity {
 
     TextView tvBayar, tvSisa, tvHargaTotal, noRek, jenisBayar, namaPemilik, judul;
     EditText nominalBayar, btnMetodePembayaran;
-    ImageView buktiPembayaran;
+    ImageView buktiPembayaran, btnBack;
     Button btnPilihFoto, btnKonfirmasi;
     RequestQueue requestQueue;
     SharedPreferences sharedPreferences;
@@ -81,6 +81,7 @@ public class TransaksiActivity extends AppCompatActivity {
         jenisBayar = findViewById(R.id.JenisBank);
         btnKonfirmasi = findViewById(R.id.btnConfirm);
         judul = findViewById(R.id.tittleHead);
+        btnBack = findViewById(R.id.btnKembali);
 
         int hargaBulanan = SessionManager.getHargaBulanan(TransaksiActivity.this); // Mengambil hargaBulanan dari SharedPreferences
         tvHargaTotal = findViewById(R.id.tvhragaTotal);
@@ -107,6 +108,13 @@ public class TransaksiActivity extends AppCompatActivity {
                         .crop()
                         .compress(5120)
                         .start();
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
@@ -298,6 +306,7 @@ public class TransaksiActivity extends AppCompatActivity {
                 super.onDismissClicked(dialog);
                 dialog.dismiss();
                 resetFields();
+                finish();
             }
         });
     }
