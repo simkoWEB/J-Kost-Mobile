@@ -242,7 +242,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void getDataHistory(String idUser, RequestQueue requestQueue) {
-        progressLoading.show(getContext(), "Memuat data...");
+//        progressLoading.show(getContext(), "Memuat data...");
         String url = "http://"+NetworkUtils.BASE_URL+"/PHP-MVC/public/GetDataMobile/getHistory/" + idUser;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,

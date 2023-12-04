@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.j_kost.R;
 import com.example.j_kost.Session.SessionManager;
@@ -38,6 +40,10 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TransaksiActivity extends AppCompatActivity {
 
@@ -64,7 +70,7 @@ public class TransaksiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_transaksi);
 
         requestQueue = Volley.newRequestQueue(TransaksiActivity.this);
-
+        String idTransaksi = getIntent().getStringExtra("idTransaksi");
         btnMetodePembayaran = findViewById(R.id.MetodePembayaran);
 
         tvBayar = findViewById(R.id.tvbayar);
@@ -143,40 +149,21 @@ public class TransaksiActivity extends AppCompatActivity {
         btnKonfirmasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Mengambil nilai dari field-field yang perlu divalidasi
                 String nominal = nominalBayar.getText().toString().trim();
                 String metodePembayaran = btnMetodePembayaran.getText().toString().trim();
                 Drawable buktiPembayaranDrawable = buktiPembayaran.getDrawable();
-
-                // Mengambil total yang harus dibayarkan
                 int total = Integer.parseInt(tvHargaTotal.getText().toString().replaceAll("[,.]", ""));
 
-                // Melakukan pengecekan apakah semua field telah diisi
                 if (nominal.isEmpty() || metodePembayaran.isEmpty() || buktiPembayaranDrawable == null) {
-                    // Jika ada field yang kosong, tampilkan pesan kesalahan kepada pengguna
-                    // Misalnya menggunakan Toast atau dialog error
-                    // Contoh menggunakan Toast:
                     MyToast.showToastError(TransaksiActivity.this,"Harap isi semua data terlebih dahulu");
                 } else {
                     // Jika semua field telah diisi, cek apakah nominal yang dibayarkan kurang dari total yang harus dibayarkan
                     int bayar = Integer.parseInt(reFormat(nominal));
 
                     if (bayar < total) {
-                        // Jika nominal yang dibayarkan kurang dari total, tampilkan pesan kesalahan
                         MyToast.showToastError(TransaksiActivity.this, "Nominal pembayaran kurang dari total yang harus dibayarkan");
                     } else {
-                        // Jika semua validasi terpenuhi, tampilkan dialog sukses dan lakukan reset field
-                        MyPopUp.showSuccessDialog(TransaksiActivity.this, "Sukses", "Pembayaran berhasil dilakukan", new OnDialogButtonClickListener() {
-                            @Override
-                            public void onDismissClicked(Dialog dialog) {
-                                super.onDismissClicked(dialog);
-                                dialog.dismiss();
-
-                                nominalBayar.setText("");
-                                btnMetodePembayaran.setText("");
-                                buktiPembayaran.setImageResource(R.drawable.place_holder_img);
-                            }
-                        });
+                        editTransaction(idTransaksi, String.valueOf(bayar), metodePembayaran);
                     }
                 }
             }
@@ -186,7 +173,6 @@ public class TransaksiActivity extends AppCompatActivity {
 
         sharedPreferences = TransaksiActivity.this.getApplicationContext().getSharedPreferences("userData", Context.MODE_PRIVATE);
         String kamarId = sharedPreferences.getString("nomorKamar", "");
-
         getDataKost(kamarId);
 
 
@@ -211,6 +197,58 @@ public class TransaksiActivity extends AppCompatActivity {
             // Menyetel foto ke ImageView menggunakan Picasso
             Picasso.get().load(uri).into(buktiPembayaran); // profile adalah ImageView yang ingin ditampilkan foto di dalamnya
         }
+    }
+
+    private void editTransaction(String idTransaksi, String bayar, String metode) {
+        String url = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/EditDataApi/editTransaction/" + idTransaksi;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Handle response if the request is successful
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            int code = jsonResponse.getInt("code");
+                            if (code == 200) {
+                                showPaymentSuccessDialog();
+                            } else {
+                                MyToast.showToastError(TransaksiActivity.this, "Transaksi gagal dilakukan");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        String e = error.toString();
+                        // Handle error response
+                        MyPopUp.showErrorDialog(TransaksiActivity.this, "Error", e, new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                                dialog.dismiss();
+                            }
+                        });
+                    }
+                }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded";
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("bayar", bayar);
+                params.put("metode_pembayaran", metode);
+                return params;
+            }
+        };
+
+        requestQueue.add(stringRequest);
     }
 
     private void getDataKost(String roomId) {
@@ -251,5 +289,22 @@ public class TransaksiActivity extends AppCompatActivity {
                 });
 
         requestQueue.add(jsonObjectRequest);
+    }
+
+    private void showPaymentSuccessDialog() {
+        MyPopUp.showSuccessDialog(TransaksiActivity.this, "Sukses", "Pembayaran berhasil dilakukan", new OnDialogButtonClickListener() {
+            @Override
+            public void onDismissClicked(Dialog dialog) {
+                super.onDismissClicked(dialog);
+                dialog.dismiss();
+                resetFields();
+            }
+        });
+    }
+
+    private void resetFields() {
+        nominalBayar.setText("");
+        btnMetodePembayaran.setText("");
+        buktiPembayaran.setImageResource(R.drawable.place_holder_img);
     }
 }

@@ -128,7 +128,7 @@ public class TabProfilUser extends Fragment {
         getActivity().finish(); // Tutup aktivitas saat ini setelah logout
     }
     private void getDataUser(String userId){
-        progressLoading.show(requireContext(), "Memuat data...");
+//        progressLoading.show(requireContext(), "Memuat data...");
         String apiUrl = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/GetDataMobile/getUserData/" + userId;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,
