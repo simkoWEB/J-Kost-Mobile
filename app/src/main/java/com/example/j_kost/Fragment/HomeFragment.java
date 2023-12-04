@@ -4,6 +4,7 @@ import static android.content.Intent.getIntent;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,6 +36,7 @@ import com.example.j_kost.R;
 import com.example.j_kost.Tab.TabHistory;
 import com.example.j_kost.Utils.MyPopUp;
 import com.example.j_kost.Utils.NetworkUtils;
+import com.example.j_kost.Utils.ProgressLoading;
 import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.squareup.picasso.Picasso;
 
@@ -62,6 +64,7 @@ public class HomeFragment extends Fragment {
     public TextView namaUser, namaKost, selengkapnya, bulanPembayaran, tvHarga;
     private RequestQueue requestQueue;
     ImageView imgNoData;
+    private ProgressLoading progressLoading;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -69,6 +72,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         requestQueue = Volley.newRequestQueue(requireContext());
 
+        progressLoading = new ProgressLoading();
 
         profilePhoto = view.findViewById(R.id.profile);
         namaUser = view.findViewById(R.id.tvUsername);
@@ -238,6 +242,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void getDataHistory(String idUser, RequestQueue requestQueue) {
+        progressLoading.show(getContext(), "Memuat data...");
         String url = "http://"+NetworkUtils.BASE_URL+"/PHP-MVC/public/GetDataMobile/getHistory/" + idUser;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -281,9 +286,10 @@ public class HomeFragment extends Fragment {
                                 }
 
                             }
-
+                            progressLoading.hide();
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            progressLoading.hide();
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
@@ -292,7 +298,15 @@ public class HomeFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Handle error
+                        progressLoading.hide();
+                        MyPopUp.showErrorDialog(getContext(), "Gagal menampilkan data", "Silahkan cek kembali koneksi anda", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                                dialog.dismiss();
+                                requireActivity().finishAffinity();
+                            }
+                        });
                     }
                 });
 

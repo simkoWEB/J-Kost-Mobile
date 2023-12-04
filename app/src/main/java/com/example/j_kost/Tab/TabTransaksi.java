@@ -1,6 +1,8 @@
 package com.example.j_kost.Tab;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -26,7 +28,10 @@ import com.example.j_kost.Adapter.PembayaranAdapter;
 import com.example.j_kost.Models.Pembayaran;
 import com.example.j_kost.Models.Transaksi;
 import com.example.j_kost.R;
+import com.example.j_kost.Utils.MyPopUp;
 import com.example.j_kost.Utils.NetworkUtils;
+import com.example.j_kost.Utils.ProgressLoading;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,12 +55,14 @@ public class TabTransaksi extends Fragment {
     SharedPreferences sharedPreferences;
     RequestQueue requestQueue;
     ImageView imgNoData;
+    private ProgressLoading progressLoading;
 
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_tab_transaksi, container, false);
 
+        progressLoading = new ProgressLoading();
         // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.kumpulan_card_pembayaran);
         listData = new ArrayList<>();
@@ -83,6 +90,7 @@ public class TabTransaksi extends Fragment {
     }
 
     private void getDataPembayaran(String idUser){
+        progressLoading.show(requireContext(), "Memuat data...");
         String url = "http://"+NetworkUtils.BASE_URL+"/PHP-MVC/public/GetDataMobile/getPembayaran/"+idUser;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -126,8 +134,9 @@ public class TabTransaksi extends Fragment {
                                     imgNoData.setVisibility(View.GONE);
                                 }
                             }
-
+                            progressLoading.hide();
                         } catch (JSONException e) {
+                            progressLoading.hide();
                             e.printStackTrace();
                         } catch (ParseException e) {
                             e.printStackTrace();
@@ -137,7 +146,15 @@ public class TabTransaksi extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Handle error
+                        progressLoading.hide();
+                        MyPopUp.showErrorDialog(requireContext(), "Gagal menampilkan data", "Silahkan cek kembali koneksi anda", new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                                dialog.dismiss();
+                                requireActivity().finishAffinity();
+                            }
+                        });
                     }
                 });
 

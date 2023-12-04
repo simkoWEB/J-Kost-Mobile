@@ -3,6 +3,7 @@ package com.example.j_kost.Tab;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,6 +33,7 @@ import com.example.j_kost.DetailActivity.DetailGantiPassword;
 import com.example.j_kost.R;
 import com.example.j_kost.Utils.MyPopUp;
 import com.example.j_kost.Utils.NetworkUtils;
+import com.example.j_kost.Utils.ProgressLoading;
 import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.squareup.picasso.Picasso;
 
@@ -43,10 +45,14 @@ public class TabProfilUser extends Fragment {
     Button btnDetailProfile, btnLogout, btnChangePass, btnAbout;
     ImageView profilePhoto;
     SharedPreferences sharedPreferences;
+    private ProgressLoading progressLoading;
+
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_tab_profil_user, container, false);
+
+        progressLoading = new ProgressLoading();
 
         nama = view.findViewById(R.id.tvName);
         email = view.findViewById(R.id.tvEmail);
@@ -122,6 +128,7 @@ public class TabProfilUser extends Fragment {
         getActivity().finish(); // Tutup aktivitas saat ini setelah logout
     }
     private void getDataUser(String userId){
+        progressLoading.show(requireContext(), "Memuat data...");
         String apiUrl = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/GetDataMobile/getUserData/" + userId;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,
@@ -150,8 +157,10 @@ public class TabProfilUser extends Fragment {
                                 } else {
                                     profilePhoto.setImageResource(R.drawable.default_profilepng);
                                 }
+                                progressLoading.hide();
                             }
                         } catch (JSONException e) {
+                            progressLoading.hide();
                             e.printStackTrace();
                         }
                     }
@@ -159,6 +168,7 @@ public class TabProfilUser extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressLoading.hide();
                         MyPopUp.showErrorDialog(getContext(), "Gagal menampilkan data", "Silahkan cek kembali koneksi anda", new OnDialogButtonClickListener() {
                             @Override
                             public void onDismissClicked(Dialog dialog) {
