@@ -23,7 +23,7 @@
                 android:id="@+id/bulanCalendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="OKT"
+                android:text="-"
                 android:textSize="12dp"
                 android:textStyle="bold"
                 android:paddingHorizontal="8dp"
@@ -36,7 +36,7 @@
                 android:id="@+id/tglCalendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="22"
+                android:text="-"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:paddingHorizontal="16dp"
@@ -51,11 +51,12 @@
             android:layout_marginHorizontal="8dp"
             android:gravity="center"
             >
+
             <TextView
                 android:id="@+id/judulhistory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Transaksi Bulan Oktober"
+                android:text="-"
                 android:textColor="@color/black"
                 android:textSize="12dp"
                 android:layout_gravity="start"
@@ -67,24 +68,37 @@
                 android:id="@+id/tanggalTransaksi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2023-11-30"
+                android:text="-"
                 android:textSize="11dp"
                 android:fontFamily="@font/poppins_regular"
                 android:textStyle="bold"
                 android:layout_gravity="start"/>
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_marginHorizontal="8dp"
-            android:gravity="end"
+            android:gravity="center_vertical"
             >
+
+            <TextView
+                android:id="@+id/idTransaksi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="11dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textStyle="bold"
+                android:layout_gravity="end"
+                />
+
             <TextView
                 android:id="@+id/hargaBulanan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Rp 800,000"
+                android:text="-"
                 android:layout_marginHorizontal="8dp"
                 android:textSize="12dp"
                 android:textStyle="bold"
@@ -92,6 +106,7 @@
                 android:gravity="end"
                 android:fontFamily="@font/poppins_semibold"
                 android:textColor="@color/black"/>
+
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -47,6 +47,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HolderDa
         } else {
             // Jika ada transaksi, tampilkan data normal
             Transaksi data = listData.get(position);
+            holder.transactionId.setText(data.getIdTransaksi());
             holder.judulHistory.setText(data.getNamaTransaksi());
             int harga = data.getHarga();
             holder.hargaBulanan.setText(Transaksi.formatDec(harga));
@@ -74,8 +75,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HolderDa
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Transaksi data = listData.get(position);
                 Intent intent = new Intent(context, RincianPembayaran.class);
-                // Pass data to the RincianPembayaran activity if needed
+                intent.putExtra("idTransaksi", data.getIdTransaksi());
                 context.startActivity(intent);
             }
         });
@@ -88,11 +90,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HolderDa
     }
 
     public class HolderData extends RecyclerView.ViewHolder {
-        TextView judulHistory, hargaBulanan, historyWaktu, bulanCalendar, tglCalendar;
+        TextView transactionId, judulHistory, hargaBulanan, historyWaktu, bulanCalendar, tglCalendar;
 
         public HolderData(@NonNull View itemView) {
             super(itemView);
 
+            transactionId = itemView.findViewById(R.id.idTransaksi);
             judulHistory = itemView.findViewById(R.id.judulhistory);
             hargaBulanan = itemView.findViewById(R.id.hargaBulanan);
             historyWaktu = itemView.findViewById(R.id.tanggalTransaksi);

@@ -87,6 +87,7 @@ public class TabHistory extends Fragment {
 
                                 for (int i = 0; i < dataArray.length(); i++) {
                                     JSONObject data = dataArray.getJSONObject(i);
+                                    String idTransaksi = data.getString("id_transaksi");
                                     String tanggal = data.getString("tggl_transaksi");
                                     int harga = data.getInt("bayar");
 
@@ -103,7 +104,7 @@ public class TabHistory extends Fragment {
                                     // Membuat nama transaksi sesuai dengan bulan dari tanggal
                                     String namaTransaksi = "Pembayaran Bulan " + namaBulan;
 
-                                    listData.add(new Transaksi(namaTransaksi, tanggal, harga));
+                                    listData.add(new Transaksi(idTransaksi, namaTransaksi, tanggal, harga));
                                 }
 
                                 historyAdapter.notifyDataSetChanged();
