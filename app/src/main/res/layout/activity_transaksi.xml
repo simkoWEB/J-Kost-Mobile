@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailActivity.TransaksiActivity"
+    style="@style/MyParentLayout">
+
+    <FrameLayout
+        android:id="@+id/containerHead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/ic_arrow_back_ios"/>
+
+        <TextView
+            android:id="@+id/tittleHead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Pembayaran"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:fontFamily="@font/poppins_semibold"
+            tools:ignore="RtlCompat" />
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_below="@id/containerHead"
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_marginTop="13dp"
+                android:id="@+id/form_pembayaran"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/allContainerCardPembayaran"
+                    app:cardCornerRadius="8dp"
+                    android:elevation="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/headerCardPembayaran"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorPrimary"
+                            >
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Informasi Pembayaran"
+                                android:layout_marginVertical="7dp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textAlignment="center"
+                                />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <!-- TextView untuk Nomor Rekening -->
+                            <TextView
+                                android:id="@+id/textNomorRekening"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nomor Rekening"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:padding="10dp"
+                                android:textColor="@color/black"
+                                android:textSize="13sp"
+                                android:fontFamily="@font/poppins_regular"
+                                />
+
+                            <!-- TextView untuk Nomor Rekening itu sendiri -->
+                            <TextView
+                                android:id="@+id/NoRekPemilik"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="-"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:padding="10dp"
+                                android:textColor="@color/black"
+                                android:textSize="13sp"
+                                android:fontFamily="@font/poppins_regular"
+                                />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <!-- TextView untuk Nomor Rekening -->
+                            <TextView
+                                android:id="@+id/textBank"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Bank / E-Wallet"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:padding="10dp"
+                                android:textColor="@color/black"
+                                android:textSize="13sp"
+                                android:fontFamily="@font/poppins_regular"
+                                />
+
+                            <!-- TextView untuk Nomor Rekening itu sendiri -->
+                            <TextView
+                                android:id="@+id/JenisBank"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="-"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:padding="10dp"
+                                android:textColor="@color/black"
+                                android:textSize="13sp"
+                                android:fontFamily="@font/poppins_regular"
+                                />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <!-- TextView untuk Nomor Rekening -->
+                            <TextView
+                                android:id="@+id/textNama"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nama Pemilik"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:padding="10dp"
+                                android:textColor="@color/black"
+                                android:textSize="13sp"
+                                android:fontFamily="@font/poppins_regular"
+                                />
+
+                            <!-- TextView untuk Nomor Rekening itu sendiri -->
+                            <TextView
+                                android:id="@+id/NamaPemilik"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="-"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:padding="10dp"
+                                android:textColor="@color/black"
+                                android:textSize="13sp"
+                                android:fontFamily="@font/poppins_regular"
+                                />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Metode Pembayaran"
+                    android:textSize="13dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_margin="4dp"/>
+
+                <EditText
+                    android:id="@+id/MetodePembayaran"
+                    android:layout_marginTop="5dp"
+                    android:textAlignment="textStart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Pilih Metode Pembayaran"
+                    android:textSize="13dp"
+                    android:background="@drawable/edit_text_border"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="14dp"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:cursorVisible="false"
+                    android:fontFamily="@font/poppins_regular"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Nominal Pembayaran"
+                    android:textColor="@color/black"
+                    android:textSize="13dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/Nominal"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Masukan Nominal Pembayaran"
+                    android:textSize="13dp"
+                    android:background="@drawable/edit_text_border"
+                    android:height="40dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="14dp"
+                    android:inputType="number"
+                    android:fontFamily="@font/poppins_regular"
+                    />
+
+                <!-- Bagian Upload Bukti Pembayaran -->
+                <LinearLayout
+                    android:id="@+id/container_bukti_pembayaran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/container_nominal_pembayaran">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Upload Bukti Pembayaran"
+                        android:textSize="13dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/poppins_regular"
+                        android:layout_margin="4dp"/>
+
+                    <ImageView
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/ivBuktiPembayaran"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/place_holder_img"/>
+
+                    <Button
+                        android:id="@+id/btnChoseFoto"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_primary"
+                        android:text="Upload Foto"
+                        android:textSize="14dp"
+                        android:drawableStart="@drawable/baseline_upload_24"
+                        android:drawableTint="@color/white"
+                        android:textColor="@color/white"
+                        android:drawablePadding="8dp"
+                        android:paddingHorizontal="20dp"
+                        android:gravity="start|center_vertical"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textAllCaps="false"
+                        android:layout_marginTop="12dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="8dp">
+
+                <LinearLayout
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#BDBDBD"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total"
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:layout_margin="4dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp."
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/poppins_regular"
+                            android:layout_margin="4dp"/>
+
+                        <TextView
+                            android:id="@+id/tvhragaTotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/poppins_regular"
+                            android:layout_margin="4dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bayar"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"
+                            android:layout_margin="4dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp."
+                            android:textSize="16dp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/poppins_regular"
+                            android:layout_margin="4dp"/>
+
+                        <TextView
+                            android:id="@+id/tvbayar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/poppins_regular"
+                            android:layout_margin="4dp"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_marginHorizontal="7dp"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@android:color/darker_gray" />
+                    <LinearLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sisa"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"
+                            android:layout_margin="4dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp."
+                            android:textSize="16dp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/poppins_regular"
+                            android:layout_margin="4dp"/>
+
+                        <TextView
+                            android:id="@+id/tvSisa"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/poppins_regular"
+                            android:layout_margin="4dp"/>
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <Button
+                android:id="@+id/btnConfirm"
+                android:layout_width="match_parent"
+                android:layout_marginVertical="13dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_button_green"
+                android:text="Konfirmasi Pembayaran"
+                android:textColor="@color/white"
+                android:fontFamily="@font/poppins_semibold"
+                android:textAllCaps="false"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
