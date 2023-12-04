@@ -18,8 +18,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginHorizontal="8dp">
+
             <TextView
-                android:id="@+id/bulan"
+                android:id="@+id/bulanCalendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="OKT"
@@ -32,7 +33,7 @@
                 android:gravity="center"
                 android:contentDescription="Bulan Oktober"/>
             <TextView
-                android:id="@+id/tanggal"
+                android:id="@+id/tglCalendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="22"
@@ -63,7 +64,7 @@
                 android:contentDescription="Bulan Oktober"/>
 
             <TextView
-                android:id="@+id/historyWaktu"
+                android:id="@+id/tanggalTransaksi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2023-11-30"

@@ -14,6 +14,10 @@ import com.example.j_kost.DetailActivity.RincianPembayaran;
 import com.example.j_kost.Models.Transaksi;
 import com.example.j_kost.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HolderData> {
@@ -36,22 +40,47 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HolderDa
 
     @Override
     public void onBindViewHolder(@NonNull HolderData holder, int position) {
-        Transaksi data = listData.get(position);
 
-        holder.txtBulan.setText(listData.get(position).getBulan()); // Mengatur teks berdasarkan objek Transaksi
-        int harga = listData.get(position).getHarga();
-        holder.txtHarga.setText(Transaksi.formatDec(harga));
-        holder.txtWaktu.setText(listData.get(position).getWaktu());
+
+        if (getItemCount() == 0) {
+
+        } else {
+            // Jika ada transaksi, tampilkan data normal
+            Transaksi data = listData.get(position);
+            holder.judulHistory.setText(data.getNamaTransaksi());
+            int harga = data.getHarga();
+            holder.hargaBulanan.setText(Transaksi.formatDec(harga));
+            holder.historyWaktu.setText(data.getTanggal());
+        }
+
+
+
+        String tanggal = listData.get(position).getTanggal();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date date = dateFormat.parse(tanggal);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+
+            int month = calendar.get(Calendar.MONTH);
+            String[] namaBulanSingkat = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
+
+            holder.bulanCalendar.setText(namaBulanSingkat[month]);
+            holder.tglCalendar.setText(String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, RincianPembayaran.class);
-                // You might want to pass some data to the RincianPembayaran activity here
+                // Pass data to the RincianPembayaran activity if needed
                 context.startActivity(intent);
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -59,16 +88,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HolderDa
     }
 
     public class HolderData extends RecyclerView.ViewHolder {
-        TextView txtBulan;
-        TextView txtHarga;
-        TextView txtWaktu;
+        TextView judulHistory, hargaBulanan, historyWaktu, bulanCalendar, tglCalendar;
 
         public HolderData(@NonNull View itemView) {
             super(itemView);
 
-            txtBulan = itemView.findViewById(R.id.judulhistory);
-            txtHarga = itemView.findViewById(R.id.hargaBulanan);
-            txtWaktu = itemView.findViewById(R.id.historyWaktu);
+            judulHistory = itemView.findViewById(R.id.judulhistory);
+            hargaBulanan = itemView.findViewById(R.id.hargaBulanan);
+            historyWaktu = itemView.findViewById(R.id.tanggalTransaksi);
+            bulanCalendar = itemView.findViewById(R.id.bulanCalendar);
+            tglCalendar = itemView.findViewById(R.id.tglCalendar);
         }
     }
 }

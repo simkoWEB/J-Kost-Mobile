@@ -38,9 +38,12 @@ import com.example.j_kost.Utils.NetworkUtils;
 import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormatSymbols;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -98,10 +101,8 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.kumpulan_card_history);
         listData = new ArrayList<>();
 
-        listData.add(new Transaksi("Transaksi November", "30-11-2023", 350000));
-        listData.add(new Transaksi("Transaksi Oktober", "25-10-2023",350000));
-        listData.add(new Transaksi("Transaksi September", "29-09-2023",350000));
-        listData.add(new Transaksi("Transaksi Agustus", "23-08-2023",350000));
+        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
+        getDataHistory(idUser, requestQueue);
 
         // Set up LinearLayoutManager and HistoryAdapter
         linearLayoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);
@@ -231,6 +232,61 @@ public class HomeFragment extends Fragment {
 
     private String formatDecimal(int value) {
         return String.format(Locale.getDefault(), "%,d", value).replace('.', ',');
+    }
+
+    private void getDataHistory(String idUser, RequestQueue requestQueue) {
+        String url = "http://"+NetworkUtils.BASE_URL+"/PHP-MVC/public/GetDataMobile/getHistory/" + idUser;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            int code = response.getInt("code");
+                            if (code == 200) {
+                                JSONArray dataArray = response.getJSONArray("data");
+                                Log.d("DataArrayLength", "Data array length: " + dataArray.length()); // Tambahkan log ini
+
+                                for (int i = 0; i < dataArray.length(); i++) {
+                                    JSONObject data = dataArray.getJSONObject(i);
+                                    String tanggal = data.getString("tggl_transaksi");
+                                    int harga = data.getInt("bayar");
+
+                                    // Mengonversi format tanggal ke nama bulan
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                    Date date = dateFormat.parse(tanggal);
+                                    Calendar calendar = Calendar.getInstance();
+                                    calendar.setTime(date);
+
+                                    // Mendapatkan nama bulan sesuai dengan tanggal
+                                    int month = calendar.get(Calendar.MONTH);
+                                    String namaBulan = new DateFormatSymbols().getMonths()[month];
+
+                                    // Membuat nama transaksi sesuai dengan bulan dari tanggal
+                                    String namaTransaksi = "Pembayaran Bulan " + namaBulan;
+
+                                    listData.add(new Transaksi(namaTransaksi, tanggal, harga));
+                                }
+
+                                historyAdapter.notifyDataSetChanged();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error
+                    }
+                });
+
+        // Tambahkan request ke dalam queue untuk dieksekusi
+        requestQueue.add(jsonObjectRequest);
     }
 
 }

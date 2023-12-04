@@ -1,29 +1,41 @@
 package com.example.j_kost.Models;
 
 public class Transaksi {
-
-    public static String formatDec(int val) {
-        return String.format("Rp. %,d", val).replace('.', ',');
-    }
-    private String bulan;
+    private String namaTransaksi;
+    private String tanggal;
     private int harga;
-    private String waktu;
 
-    public Transaksi(String bulan, String waktu, int harga) {
-        this.bulan = bulan;
+    public Transaksi(String namaTransaksi, String tanggal, int harga) {
+        this.namaTransaksi = namaTransaksi;
+        this.tanggal = tanggal;
         this.harga = harga;
-        this.waktu = waktu;
     }
 
-    public String getBulan() {
-        return bulan;
+    public String getNamaTransaksi() {
+        return namaTransaksi;
+    }
+
+    public void setNamaTransaksi(String namaTransaksi) {
+        this.namaTransaksi = namaTransaksi;
+    }
+
+    public String getTanggal() {
+        return tanggal;
+    }
+
+    public void setTanggal(String tanggal) {
+        this.tanggal = tanggal;
     }
 
     public int getHarga() {
         return harga;
     }
 
-    public String getWaktu(){
-        return waktu;
+    public void setHarga(int harga) {
+        this.harga = harga;
+    }
+    public static String formatDec(int val) {
+        return String.format("%,d", val).replace('.', ',');
     }
 }
+
