@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HolderData> {
     List<Transaksi> listData;
@@ -51,7 +52,22 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HolderDa
             holder.judulHistory.setText(data.getNamaTransaksi());
             int harga = data.getHarga();
             holder.hargaBulanan.setText(Transaksi.formatDec(harga));
-            holder.historyWaktu.setText(data.getTanggal());
+
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
+            String tanggalData = data.getTanggal();
+
+            try {
+                Date date = inputFormat.parse(tanggalData);
+                String formattedDate = outputFormat.format(date);
+
+                holder.tglTransaksi.setText(formattedDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                holder.tglTransaksi.setText("Invalid Date");
+            }
+
         }
 
 
@@ -90,7 +106,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HolderDa
     }
 
     public class HolderData extends RecyclerView.ViewHolder {
-        TextView transactionId, judulHistory, hargaBulanan, historyWaktu, bulanCalendar, tglCalendar;
+        TextView transactionId, judulHistory, hargaBulanan, tglTransaksi, bulanCalendar, tglCalendar;
 
         public HolderData(@NonNull View itemView) {
             super(itemView);
@@ -98,7 +114,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HolderDa
             transactionId = itemView.findViewById(R.id.idTransaksi);
             judulHistory = itemView.findViewById(R.id.judulhistory);
             hargaBulanan = itemView.findViewById(R.id.hargaBulanan);
-            historyWaktu = itemView.findViewById(R.id.tanggalTransaksi);
+            tglTransaksi = itemView.findViewById(R.id.tanggalTransaksi);
             bulanCalendar = itemView.findViewById(R.id.bulanCalendar);
             tglCalendar = itemView.findViewById(R.id.tglCalendar);
         }
