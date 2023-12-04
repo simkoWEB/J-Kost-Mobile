@@ -63,7 +63,7 @@ public class KomplainFragment extends Fragment {
                     // ... (the code you posted)
                     SharedPreferences sharedPreferences = getActivity().getSharedPreferences("userData", Context.MODE_PRIVATE);
                     String userId = sharedPreferences.getString("idUser", "");
-                    String kostId = sharedPreferences.getString("idKost", "");
+                    String kamarId = sharedPreferences.getString("nomorKamar", "");
 
                     String selectedJenisKomplain = jenisKomplainSpinner.getSelectedItem().toString();
                     String selectedMasalahKomplain = masalahKomplainSpinner.getSelectedItem().toString();
@@ -71,7 +71,7 @@ public class KomplainFragment extends Fragment {
 
                     if (!userId.isEmpty() && !selectedJenisKomplain.equals("Pilih tipe komplain") && !selectedMasalahKomplain.equals("Pilih tipe terlebih dahulu") && !deskripsiKomplain.isEmpty()) {
                         // Data is complete, proceed to send to API
-                        sendDataToAPI(userId, kostId, selectedJenisKomplain, selectedMasalahKomplain, deskripsiKomplain);
+                        sendDataToAPI(userId, kamarId, selectedJenisKomplain, selectedMasalahKomplain, deskripsiKomplain);
                     } else {
                         // Show error message if any field is empty
                         MyToast.showToastError(getContext(), "Silahkan lengkapi data sebelum komplain");
@@ -134,7 +134,7 @@ public class KomplainFragment extends Fragment {
         return view;
     }
 
-    private void sendDataToAPI(String userId, String idKost, String jenisKomplain, String masalahKomplain, String deskripsiKomplain) {
+    private void sendDataToAPI(String userId, String idKamar, String jenisKomplain, String masalahKomplain, String deskripsiKomplain) {
         // Buat request POST ke endpoint API
         String url = "http://"+NetworkUtils.BASE_URL+"/PHP-MVC/public/InsertDataApi/insertKomplain/" + userId;
 
@@ -169,7 +169,7 @@ public class KomplainFragment extends Fragment {
             protected Map<String, String> getParams() {
                 // Kumpulkan data untuk dikirim ke server
                 Map<String, String> params = new HashMap<>();
-                params.put("id_kost", idKost);
+                params.put("id_kamar", idKamar);
                 params.put("jenis_komplain", jenisKomplain);
                 params.put("tipe_komplain", masalahKomplain);
                 params.put("deskripsi_komplain", deskripsiKomplain);
