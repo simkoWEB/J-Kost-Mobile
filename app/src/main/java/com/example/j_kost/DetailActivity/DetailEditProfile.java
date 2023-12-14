@@ -294,11 +294,6 @@ public class DetailEditProfile extends AppCompatActivity {
             // Simpan URL foto sebelumnya
             String previousPhoto = previousUserPhoto;
 
-            // Jika foto baru dipilih, perbarui URL foto baru
-//            if (selectedImageUri != null && !selectedImageUri.isEmpty()) {
-//                previousPhoto = selectedImageUri;
-//            }
-
             if (selectedImageUri != null) {
                 try {
                     // Ubah gambar yang dipilih menjadi base64
