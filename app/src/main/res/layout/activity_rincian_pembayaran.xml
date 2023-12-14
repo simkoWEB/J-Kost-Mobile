@@ -417,7 +417,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:text="Bukti Pembayaran"
-                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:paddingStart="10dp"
                 android:textSize="17sp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/poppins_semibold"
@@ -427,7 +428,7 @@
                 android:id="@+id/ivBukti"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="15dp"/>
 
         </LinearLayout>
 

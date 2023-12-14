@@ -129,12 +129,8 @@ public class RincianPembayaran extends AppCompatActivity {
                             total.setText("Rp. "+formattedHargaTotal);
                             bayar.setText("Rp. "+formattedBayarTransaksi);
 
-                            // Mengambil endpoint dari URL gambar
-                            String endpoint = getEndpointFromUrl(buktiPembayaran);
+                                loadImageToImageView(buktiPembayaran, imageViewBukti);
 
-                            if (endpoint != null) {
-                                loadImageToImageView(endpoint, imageViewBukti);
-                            }
 
                             // Mengonversi format tanggal ke objek Calendar
                             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -187,7 +183,7 @@ public class RincianPembayaran extends AppCompatActivity {
     }
 
     private void loadImageToImageView(String imageUrl, ImageView imageView) {
-        String fullImageUrl = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/foto/" + imageUrl;
+        String fullImageUrl = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/bukti_transfer/" + imageUrl;
         Picasso.get().load(fullImageUrl).into(imageView);
     }
 

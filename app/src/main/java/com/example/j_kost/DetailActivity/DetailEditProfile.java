@@ -55,8 +55,9 @@ public class DetailEditProfile extends AppCompatActivity {
     ImageView btnBack, profilePhoto;
     EditText nama, noHp, jenisKelamin, tglLahir, alamat;
     RadioButton radioBtnMale, radioBtnFemale;
-    private String selectedImageUri = "";
+//    private String selectedImageUri = "";
     private String previousUserPhoto = "";
+    private Uri selectedImageUri = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,25 +174,16 @@ public class DetailEditProfile extends AppCompatActivity {
             Uri uri = data.getData();
 
             if (uri != null) {
-                // Menyetel foto ke ImageView menggunakan Picasso
-                Picasso.get().load(uri).into(profilePhoto); // profile adalah ImageView yang ingin ditampilkan foto di dalamnya
+                // Assign the selected image URI to the class-level variable
+                selectedImageUri = uri;
 
-                // Mendapatkan hanya nama file dari URI
-                String fileName = uri.getLastPathSegment();
+                // Display image using Picasso
+                Picasso.get().load(uri).into(profilePhoto);
 
-                // Jika tidak ada gambar yang dipilih, gunakan foto sebelumnya
-                if (fileName == null || fileName.isEmpty()) {
-                    selectedImageUri = previousUserPhoto;
-                } else {
-                    // Jika ada gambar yang dipilih, simpan URL gambar baru
-                    selectedImageUri = fileName;
-                }
-
-                Log.d("Test Img Picker", selectedImageUri);
+                Log.d("Test Img Picker", selectedImageUri.toString());
             }
         }
     }
-
 
     @SuppressLint("MissingSuperCall")
     @Override
@@ -290,7 +282,6 @@ public class DetailEditProfile extends AppCompatActivity {
     }
 
     private void updateUserData(String userId) {
-
         if (!userId.isEmpty()) {
             String apiUrl = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/EditDataApi/editUser/" + userId;
 
@@ -304,13 +295,24 @@ public class DetailEditProfile extends AppCompatActivity {
             String previousPhoto = previousUserPhoto;
 
             // Jika foto baru dipilih, perbarui URL foto baru
-            if (selectedImageUri != null && !selectedImageUri.isEmpty()) {
-                previousPhoto = selectedImageUri;
+//            if (selectedImageUri != null && !selectedImageUri.isEmpty()) {
+//                previousPhoto = selectedImageUri;
+//            }
+
+            if (selectedImageUri != null) {
+                try {
+                    // Ubah gambar yang dipilih menjadi base64
+                    InputStream imageStream = getContentResolver().openInputStream(selectedImageUri);
+                    String base64Image = ImageBase64Converter.convert(imageStream);
+
+                    // Simpan gambar dalam format base64
+                    previousPhoto = base64Image;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             String finalUserPhoto = previousPhoto;
-
-            Log.d("Foto fun update", finalUserPhoto);
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, apiUrl,
                     new Response.Listener<String>() {
@@ -322,11 +324,13 @@ public class DetailEditProfile extends AppCompatActivity {
                                 responseMessage = response;
                             }
 
+                            // Tampilkan dialog sukses
                             MyPopUp.showSuccessDialog(DetailEditProfile.this, "Sukses", "Data berhasil di edit", new OnDialogButtonClickListener() {
                                 @Override
                                 public void onDismissClicked(Dialog dialog) {
                                     super.onDismissClicked(dialog);
                                     dialog.dismiss();
+
                                     // Simpan perubahan ke SharedPreferences setelah berhasil mengubah data
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("namaLengkap", userName);
@@ -346,6 +350,7 @@ public class DetailEditProfile extends AppCompatActivity {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            // Tampilkan pesan kesalahan
                             MyPopUp.showErrorDialog(DetailEditProfile.this, "Error", "Data gagal di edit", new OnDialogButtonClickListener() {
                                 @Override
                                 public void onDismissClicked(Dialog dialog) {
@@ -373,10 +378,8 @@ public class DetailEditProfile extends AppCompatActivity {
 
             Volley.newRequestQueue(this).add(stringRequest);
         } else {
+            // Jika ID kosong, tampilkan pesan kesalahan
             MyToast.showToastError(DetailEditProfile.this, "Id tidak ditemukan");
         }
     }
-
-
-
 }

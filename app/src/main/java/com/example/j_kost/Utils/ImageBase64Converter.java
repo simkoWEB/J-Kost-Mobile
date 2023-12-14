@@ -1,31 +1,28 @@
 package com.example.j_kost.Utils;
 
 import android.content.ContentResolver;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 public class ImageBase64Converter {
-    public static String convertImageToBase64(Uri imageUri, ContentResolver contentResolver) {
-        try (InputStream inputStream = contentResolver.openInputStream(imageUri)) {
-            if (inputStream != null) {
-                byte[] buffer = new byte[8192];
-                int bytesRead;
-                ByteArrayOutputStream output = new ByteArrayOutputStream();
+    public static String convert(InputStream inputStream) throws IOException {
+        // Ubah InputStream menjadi Bitmap
+        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+        inputStream.close();
 
-                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                    output.write(buffer, 0, bytesRead);
-                }
+        // Konversi Bitmap menjadi array byte
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
 
-                byte[] bytes = output.toByteArray();
-                return Base64.encodeToString(bytes, Base64.DEFAULT);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        // Konversi array byte menjadi format Base64
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 }
 
