@@ -161,7 +161,7 @@ public class TransaksiActivity extends AppCompatActivity {
         btnKonfirmasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String nominal = nominalBayar.getText().toString().trim();
+                String nominal = tvBayar.getText().toString().trim();
                 String metodePembayaran = btnMetodePembayaran.getText().toString().trim();
                 Drawable buktiPembayaranDrawable = buktiPembayaran.getDrawable();
                 int total = Integer.parseInt(tvHargaTotal.getText().toString().replaceAll("[,.]", ""));
@@ -211,14 +211,14 @@ public class TransaksiActivity extends AppCompatActivity {
         }
     }
 
-    private void editTransaction(String idTransaksi, String bayar, String metode, Drawable photoBitmap) {
+    private void editTransaction(String idTransaksi, String bayar, String metode, Drawable photoDrawable) {
         String url = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/EditDataApi/editTransaction/" + idTransaksi;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Handle response if the request is successful
+                        Log.d("Response", response);
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
                             int code = jsonResponse.getInt("code");
@@ -247,20 +247,19 @@ public class TransaksiActivity extends AppCompatActivity {
                     }
                 }) {
             @Override
-            public String getBodyContentType() {
-                return "application/x-www-form-urlencoded";
-            }
-
-            @Override
             protected Map<String, String> getParams() {
+                // Mendapatkan gambar dari ImageView buktiPembayaran
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) photoDrawable;
+                Bitmap bitmap = bitmapDrawable.getBitmap();
+
+                // Mengubah gambar menjadi base64
+                String encodedImage = encodeImageToBase64(bitmap);
+
+                // Membuat map untuk menyimpan data yang akan dikirim ke server
                 Map<String, String> params = new HashMap<>();
                 params.put("bayar", bayar);
                 params.put("metode_pembayaran", metode);
-
-                // Encode gambar ke dalam format base64
-                String encodedImage = encodeImage(photoBitmap);
                 params.put("foto_bukti_bayar", encodedImage);
-
 
                 return params;
             }
@@ -269,14 +268,11 @@ public class TransaksiActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private String encodeImage(Drawable drawable) {
-        BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-        Bitmap bitmap = bitmapDrawable.getBitmap();
-
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-        byte[] imageBytes = byteArrayOutputStream.toByteArray();
-
+    // Metode untuk mengubah gambar menjadi base64
+    private String encodeImageToBase64(Bitmap imageBitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
     private void getDataKost(String roomId) {

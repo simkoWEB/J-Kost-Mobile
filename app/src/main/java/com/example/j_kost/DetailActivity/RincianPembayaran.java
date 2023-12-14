@@ -23,10 +23,13 @@ import com.example.j_kost.R;
 import com.example.j_kost.Utils.MyPopUp;
 import com.example.j_kost.Utils.NetworkUtils;
 import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -53,6 +56,7 @@ public class RincianPembayaran extends AppCompatActivity {
     TextView bayar, sisa;
     SharedPreferences sharedPreferences;
     private RequestQueue requestQueue;
+    ImageView imageViewBukti;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -70,6 +74,7 @@ public class RincianPembayaran extends AppCompatActivity {
         namaUser = findViewById(R.id.namaUser);
         methodePembayaran = findViewById(R.id.metodePembayaran);
         bulanPembayaran = findViewById(R.id.bulanPembayaran);
+        imageViewBukti = findViewById(R.id.ivBukti);
         total = findViewById(R.id.total);
         bayar = findViewById(R.id.bayar);
         sisa = findViewById(R.id.sisa);
@@ -110,6 +115,7 @@ public class RincianPembayaran extends AppCompatActivity {
                             String id = data.getString("id_transaksi");
                             String metodeBayar = data.getString("metode_pembayaran");
                             String tglBayar = data.getString("tggl_transaksi");
+                            String buktiPembayaran = data.getString("foto_bukti_bayar");
                             int hargaTotal = data.getInt("harga");
                             int bayarTransaksi = data.getInt("bayar");
 
@@ -122,6 +128,13 @@ public class RincianPembayaran extends AppCompatActivity {
 
                             total.setText("Rp. "+formattedHargaTotal);
                             bayar.setText("Rp. "+formattedBayarTransaksi);
+
+                            // Mengambil endpoint dari URL gambar
+                            String endpoint = getEndpointFromUrl(buktiPembayaran);
+
+                            if (endpoint != null) {
+                                loadImageToImageView(endpoint, imageViewBukti);
+                            }
 
                             // Mengonversi format tanggal ke objek Calendar
                             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -159,6 +172,23 @@ public class RincianPembayaran extends AppCompatActivity {
                 });
 
         requestQueue.add(jsonObjectRequest);
+    }
+
+    public static String getEndpointFromUrl(String url) {
+        try {
+            URI uri = new URI(url);
+            String path = uri.getPath();
+            String[] segments = path.split("/");
+            return segments[segments.length - 1];
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private void loadImageToImageView(String imageUrl, ImageView imageView) {
+        String fullImageUrl = "http://" + NetworkUtils.BASE_URL + "/PHP-MVC/public/foto/" + imageUrl;
+        Picasso.get().load(fullImageUrl).into(imageView);
     }
 
     private void getRekening(String roomId){

@@ -53,6 +53,10 @@
         android:elevation="10dp"
         android:padding="10dp">
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -400,10 +404,35 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_height="1dp"
+                android:backgroundTint="@color/disableColor"
+                android:background="@drawable/dashed_line"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="Bukti Pembayaran"
+                android:padding="10dp"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_semibold"
+                />
+
+            <ImageView
+                android:id="@+id/ivBukti"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="20dp"/>
+
         </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
-
+        </ScrollView>
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

@@ -292,7 +292,7 @@
                         android:layout_gravity="center"
                         android:layout_height="wrap_content"
                         android:background="@drawable/button_primary"
-                        android:text="Upload Foto"
+                        android:text="Upload Foto Bukti"
                         android:textSize="14dp"
                         android:drawableStart="@drawable/baseline_upload_24"
                         android:drawableTint="@color/white"
