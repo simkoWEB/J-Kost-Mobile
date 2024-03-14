@@ -188,7 +188,6 @@ public class LoginActivity extends AppCompatActivity {
             MyToast.showToastError(LoginActivity.this, "Gagal terhubung ke server");
         }
     }
-
     private void showNoInternetDialog() {
         MyPopUp.showAlertDialog(LoginActivity.this, "Peringatan!", "Perangkat anda tidak terhubung dengan internet, silahkan coba lagi", new OnDialogButtonClickListener() {
             @Override
