@@ -90,7 +90,7 @@ public class TabTransaksi extends Fragment {
     }
 
     private void getDataPembayaran(String idUser){
-//        progressLoading.show(requireContext(), "Memuat data...");
+
         String url = "http://"+NetworkUtils.BASE_URL+"/PHP-MVC/public/GetDataMobile/getPembayaran/"+idUser;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
